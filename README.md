@@ -1,16 +1,19 @@
-# asoscijacije_nove
+![](designs/banner.png)
+# Asocijacije.
 
-A new Flutter project.
+Popularna društvena igra, ali sa 3 vrste rundi - Normalna, Jedna reč i Pantomima.
 
-## Getting Started
+Igra se u timovima od po dvoje ljudi. Originalno se igra na papirićima gde svaki igrač piše određeni broj pojmova. Pojmovi se stavljaju u zajednički koš, izvlače i objašnjavaju. U aplikaciji se po igraču dobija 8 nasumičmnih pojmova.
 
-This project is a starting point for a Flutter application.
+## Runde
+### Normalna runda 1️⃣
+Traje 45 sekundi i treba rečima objasniti pojam bez korišćenja te reči ili korena iste.
 
-A few resources to get you started if this is your first Flutter project:
+### Jedna reč runda 2️⃣
+Traje 45 sekundi i treba jednom rečju objasniti pojmove iz prethodne runde.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Pantomima runda 3️⃣
+Traje 60 sekundi i treba pantomimom objasniti pojmove iz prethodnih rundi.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Na kraju svih rundi, tim sa najviše objašnjenih pojmova je pobedio.
+
