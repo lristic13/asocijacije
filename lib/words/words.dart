@@ -60,7 +60,7 @@ List<String> words = [
   'Sendvič', 'Kupus', 'Paradajz', 'Lazanje', 'Pire krompir', 'Gulaš',
   'Čorba', 'Pomfrit', 'Šnicle', 'Krastavac', 'Pasulj', 'Kelj', 'Brokoli',
   'Sarma', 'Prasetina', 'Ren', 'Beli luk', 'Boranija', 'Grašak', 'Pljeskavica',
-  'Ćevapi', 'Rakija', 'Vino', 'Pivo', 'Špricer',
+  'Ćevapi', 'Rakija', 'Vino', 'Pivo', 'Špricer', 'Džin-tonik',
   // Predmeti
   'Lampa', 'Polica', 'Fioka', 'Ormar', 'Novčanik', 'Torbica', 'Pernica',
   'Slušalice', 'Privezak',
@@ -71,5 +71,13 @@ List<String> words = [
   'Didaskalija', 'Hiperbola', 'Novajlija', 'Koherentno', 'Koreografija',
   'Somelijer',
   'Repertoar', 'Municija', 'Arsenal', 'Astrounaut', 'Ambiciozan', 'Biskup',
-  'Garnišna', 'Letimično', 'Vakcina'
+  'Garnišna', 'Letimično', 'Vakcina', 'Sramota', 'Ljubomora', 'Anksioznost',
+  'Postavka', 'Zadatak', 'Ostatak', 'Povratak', 'Svitanje', 'Zalazak',
+  'Vikendica',
+  'Trava', 'Komisija', 'Zaostavština', 'Poslanik', 'Prezir', 'Lift', 'Ekipa',
+  'Poslodavac', 'Ovacije', 'Hvalospev', 'Dostava', 'Tribine', 'Stadion',
+  'Poraz', 'Pobeda', 'Automobil', 'Baraka', 'Volan', 'Gradski', 'Domet',
+  'Đumbir', 'Evakuacija', 'Žalba', 'Zaspati', 'Indikacija', 'Jorgan', 'Kostim',
+  'Lobotomija', 'Ljubavnik', 'Momentalno', 'Novina', 'Njuška', 'Oporavak',
+  'Prednost', 'Rustičan', 'Stav', 'Toster',
 ];

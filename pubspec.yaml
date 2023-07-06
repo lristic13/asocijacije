@@ -27,7 +27,6 @@ dependencies:
   flip_card: ^0.7.0
   circular_countdown_timer: ^0.2.3
   flutter_form_builder: ^9.0.0
-  assets_audio_player: ^3.0.6
   just_audio: ^0.9.34
   
   
