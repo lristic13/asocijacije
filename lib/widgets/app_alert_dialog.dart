@@ -1,0 +1,51 @@
+import 'package:flutter/material.dart';
+
+import '../constants/app_colors.dart';
+import '../constants/app_strings.dart';
+import 'buttons/app_button_empty.dart';
+import 'buttons/app_button_full.dart';
+
+class AppAlertDialog extends StatelessWidget {
+  const AppAlertDialog(
+      {required this.title,
+      required this.content,
+      required this.onPressedNo,
+      required this.onPressedYes,
+      super.key});
+
+  final String title;
+  final String content;
+  final void Function() onPressedNo;
+  final void Function() onPressedYes;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      backgroundColor: AppColors.englishVioletLighter,
+      title: Text(
+        title,
+        style: const TextStyle(
+          color: AppColors.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: Text(
+        content,
+        style: const TextStyle(color: AppColors.white),
+      ),
+      actions: [
+        AppButtonEmpty(
+          borderColor: AppColors.white,
+          textColor: AppColors.white,
+          buttonText: AppStrings.ne,
+          onPressed: onPressedNo,
+        ),
+        AppButtonFull(
+            fillColor: AppColors.englishVioletDarker,
+            textColor: AppColors.white,
+            buttonText: AppStrings.da,
+            onPressed: onPressedYes),
+      ],
+    );
+  }
+}
