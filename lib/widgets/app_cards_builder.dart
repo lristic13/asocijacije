@@ -8,15 +8,19 @@ import '../constants/app_styles.dart';
 import '../providers/all_providers.dart';
 
 class AppCardsBuilder extends ConsumerWidget {
-  const AppCardsBuilder({required this.pageViewController, super.key});
+  const AppCardsBuilder({
+    required this.cardKey,
+    super.key,
+  });
 
-  final PageController pageViewController;
+  final GlobalKey<FlipCardState> cardKey;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: ref.watch(wordsProvider).wordsToPlay.isNotEmpty
           ? FlipCard(
+              key: cardKey,
               speed: 300,
               fill: Fill.fillBack,
               direction: FlipDirection.HORIZONTAL,

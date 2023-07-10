@@ -11,6 +11,7 @@ import 'package:asoscijacije_nove/widgets/app_final_score.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_empty.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -29,10 +30,9 @@ class GamePage extends ConsumerStatefulWidget {
 }
 
 class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
-  final PageController _controller = PageController(viewportFraction: 0.8);
-
   final AudioPlayer audio = AudioPlayer();
   final CountDownController _controllerTimer = CountDownController();
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
   int indexToScroll = 1;
 
@@ -56,7 +56,6 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
   }
 
   @override
@@ -169,8 +168,9 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         const SizedBox(height: 20),
                         Expanded(
                           flex: 3,
-                          child:
-                              AppCardsBuilder(pageViewController: _controller),
+                          child: AppCardsBuilder(
+                            cardKey: cardKey,
+                          ),
                         ),
                         Expanded(
                           flex: 1,
@@ -187,7 +187,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                           width: double.infinity,
                           height: 60,
                           child: _showButton(wordsToPlay, usedWords,
-                              indexToScroll, _controller, _controllerTimer),
+                              indexToScroll, _controllerTimer),
                         ),
                         const SizedBox(height: 10),
                         Visibility(
@@ -232,12 +232,8 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
         ));
   }
 
-  Widget _showButton(
-      List<String> wordsToPlay,
-      List<String> usedWords,
-      int indexToScroll,
-      PageController pageController,
-      CountDownController timerController) {
+  Widget _showButton(List<String> wordsToPlay, List<String> usedWords,
+      int indexToScroll, CountDownController timerController) {
     if (timerController.getTime() != '0' &&
         timerController.getTime() != '' &&
         !timerController.isPaused &&
@@ -278,6 +274,8 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           } else {
             timerController.start();
           }
+          cardKey.currentState?.toggleCard();
+
           setState(() {});
         },
       );
