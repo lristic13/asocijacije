@@ -65,7 +65,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                   const Center(
                     child: Text(
                       AppStrings.izaberiteBrojIgraca,
-                      style: AppStyles.text20WhiteDarkerNormal,
+                      style: AppStyles.text20WhiteNormal,
                     ),
                   ),
                   FormBuilderChoiceChip(

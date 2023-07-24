@@ -32,7 +32,7 @@ class AppFinalScore extends ConsumerWidget {
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
               child: Text(
                 'Pobenik je Tim ${Boxes.getWinnerTeam(box).substring(Boxes.getWinnerTeam(box).length - 1)}',
-                style: AppStyles.text20WhiteDarkerNormal,
+                style: AppStyles.text20WhiteNormal,
               ),
             ),
           ),

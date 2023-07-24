@@ -37,7 +37,7 @@ class MenuCard extends StatelessWidget {
               ],
             ),
           ),
-          height: 130,
+          height: 100,
           width: double.infinity,
           child: Column(
             crossAxisAlignment: alignment!,
@@ -55,11 +55,11 @@ class MenuCard extends StatelessWidget {
                     children: [
                       Text(
                         title ?? '',
-                        style: AppStyles.text25VioletBold,
+                        style: AppStyles.text20VioletBold,
                       ),
                       const Text(
                         '.',
-                        style: AppStyles.text25CoralBold,
+                        style: AppStyles.text20CoralBold,
                       ),
                     ],
                   ),

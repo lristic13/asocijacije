@@ -84,7 +84,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                 Center(
                   child: Text(
                     '${AppStrings.sledeciIgraTim} ${ref.read(gameAdminProvider).teamPlaying}',
-                    style: AppStyles.text20WhiteDarkerBold,
+                    style: AppStyles.text20WhiteBold,
                   ),
                 ),
                 const Spacer(),

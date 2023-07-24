@@ -13,6 +13,9 @@ class AppStrings {
       'Treba objasniti zadatu reč korišćenjem samo jedne reči koja je slična zadatoj, ili će asocirati na zadatu reč. Traje 45 sekundi.';
   static const String krajIgre = 'Kraj igre';
   static const String nazad = 'Nazad';
+  static const String napomena = 'Napomena: ';
+  static const String napomenaTekst =
+      'U novu rundu se ne prelazi dok se ne pogode sve reči iz trenutne runde!';
   static const String ne = 'Ne';
   static const String novaIgra = 'Nova igra';
   static const String normalnaRunda = 'Normalna Runda';
@@ -23,7 +26,7 @@ class AppStrings {
   static const String odustaniAlertContent =
       'Ako odustanete, prenosite bodove i na redu je sledeci tim.';
   static const String odustajanjeUput =
-      'Ukoliko ne možete da objasnite reč, možete odustati od trenutne runde i preneti do sad osvojene bodove.';
+      'Ukoliko ne možete da objasnite reč, možete odustati od objašnjavanja i preneti do sad osvojene bodove.';
   static const String pantomimaRunda = 'Pantomima Runda';
   static const String pantomimaRundaUput =
       'Treba objasniti zadatu reč pantomimom. Traje 60 sekundi.';

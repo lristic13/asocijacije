@@ -40,27 +40,24 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Spacer(),
               const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     AppStrings.asocijacije,
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.white,
-                    ),
+                    style: AppStyles.text50WhiteBold,
                   ),
                   Text(
                     '.',
-                    style: TextStyle(
-                      fontSize: 35,
-                      fontWeight: FontWeight.w900,
-                      color: AppColors.coral,
-                    ),
+                    style: AppStyles.text50CoralBold,
                   ),
                 ],
               ),
-              Spacer(),
+              const Center(
+                  child: Text('sa papirića u aplikaciju!',
+                      style: AppStyles.text20CoralBold)),
+              const Spacer(),
               Stack(
                 children: [
                   MenuCard(
@@ -71,7 +68,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                     icon: const Icon(
                       Icons.play_arrow_rounded,
-                      size: 60,
+                      size: 45,
                       color: AppColors.englishViolet,
                     ),
                     alignment: CrossAxisAlignment.start,
@@ -105,21 +102,21 @@ class _HomePageState extends State<HomePage> {
                         ).createShader(bounds),
                         child: const Icon(
                           Icons.question_answer_rounded,
-                          size: 120,
+                          size: 100,
                         ),
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 30),
               Stack(
                 children: [
                   MenuCard(
                     title: AppStrings.uputstva,
                     icon: const Icon(
                       Icons.rule_sharp,
-                      size: 60,
+                      size: 45,
                       color: AppColors.englishViolet,
                     ),
                     colors: const [
@@ -138,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                     },
                   ),
                   Container(
-                    transform: Matrix4.translationValues(15.0, -45.0, 0.0),
+                    transform: Matrix4.translationValues(15.0, -35.0, 0.0),
                     child: ShaderMask(
                       blendMode: BlendMode.srcIn,
                       shaderCallback: (Rect bounds) => const RadialGradient(
@@ -157,12 +154,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 60),
+              const SizedBox(height: 30),
               MenuCard(
                 title: AppStrings.izlaz,
                 icon: const Icon(
                   Icons.exit_to_app_rounded,
-                  size: 55,
+                  size: 40,
                   color: AppColors.englishViolet,
                 ),
                 colors: const [

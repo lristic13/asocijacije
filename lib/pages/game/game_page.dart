@@ -128,7 +128,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             child: CircularCountDownTimer(
                               controller: _controllerTimer,
                               autoStart: false,
-                              textStyle: AppStyles.text35WhiteDarkerBold,
+                              textStyle: AppStyles.text35WhiteBold,
                               strokeWidth: 10,
                               isReverse: true,
                               isReverseAnimation: true,
@@ -179,7 +179,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                               valueListenable: box.listenable(),
                               builder: (context, Box<Team> box, _) => Text(
                                   '${AppStrings.poeni}: ${Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}').points.toString()}',
-                                  style: AppStyles.text30WhiteDarkerbold),
+                                  style: AppStyles.text30WhiteBold),
                             ),
                           ),
                         ),

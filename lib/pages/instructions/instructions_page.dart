@@ -20,9 +20,19 @@ class InstructionsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                AppStrings.uputstvaZaIgru,
-                style: AppStyles.text25WhiteBold,
+              Spacer(),
+              const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppStrings.uputstvaZaIgru,
+                    style: AppStyles.text30WhiteBold,
+                  ),
+                  Text(
+                    '.',
+                    style: AppStyles.text30CoralBold,
+                  ),
+                ],
               ),
               const SizedBox(height: 30),
               const Spacer(),
@@ -49,6 +59,14 @@ class InstructionsPage extends StatelessWidget {
               const Text(
                 AppStrings.odustajanjeUput,
                 style: TextStyle(color: AppColors.white),
+              ),
+              const SizedBox(height: 10),
+              const Wrap(
+                children: [
+                  Text(AppStrings.napomena, style: AppStyles.text15CoralBold),
+                  Text(AppStrings.napomenaTekst,
+                      style: AppStyles.text15WhiteBold),
+                ],
               ),
               const Spacer(flex: 3),
               SizedBox(
