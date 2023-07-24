@@ -11,7 +11,6 @@ import 'package:asoscijacije_nove/widgets/app_final_score.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_empty.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
