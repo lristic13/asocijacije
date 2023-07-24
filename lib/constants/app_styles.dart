@@ -13,6 +13,11 @@ class AppStyles {
       fontWeight: FontWeight.w900,
       color: AppColors.englishVioletDarker);
 
+  static const TextStyle text30VioletBold = TextStyle(
+    fontSize: 30,
+    color: AppColors.englishViolet,
+    fontWeight: FontWeight.bold,
+  );
   static const TextStyle text25VioletBold = TextStyle(
     fontSize: 25,
     color: AppColors.englishViolet,
@@ -117,5 +122,13 @@ class AppStyles {
           colors: [
         AppColors.englishVioletDarker,
         AppColors.englishVioletLighter,
+      ]));
+  static const BoxDecoration containerGradientWhite = BoxDecoration(
+      gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+        AppColors.whiteDarker,
+        AppColors.white,
       ]));
 }

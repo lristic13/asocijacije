@@ -21,65 +21,69 @@ class _TeamCardState extends State<TeamCard> {
     return SizedBox(
       height: 150,
       child: Card(
-        color: AppColors.white,
-        child: FormBuilder(
-          onChanged: () {
-            widget.formKey.currentState!.save();
-          },
-          key: widget.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                child: Text(
-                  'Tim ${widget.index + 1}',
-                  style: AppStyles.text25VioletBold,
+        child: Container(
+          decoration: AppStyles.containerGradientWhite
+              .copyWith(borderRadius: BorderRadius.circular(12)),
+          child: FormBuilder(
+            onChanged: () {
+              widget.formKey.currentState!.save();
+            },
+            key: widget.formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  child: Text(
+                    'Tim ${widget.index + 1}',
+                    style: AppStyles.text25VioletBold,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Expanded(
-                        child: FormBuilderTextField(
-                      name: 'player1',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppStrings.unesiteImeIgraca;
-                        }
+                const Spacer(),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Expanded(
+                          child: FormBuilderTextField(
+                        name: 'player1',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppStrings.unesiteImeIgraca;
+                          }
 
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          hintText: AppStrings.imeIgraca,
-                          hintStyle: TextStyle(fontSize: 15)),
-                    )),
-                    const SizedBox(width: 20),
-                    Expanded(
-                        child: FormBuilderTextField(
-                      name: 'player2',
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return AppStrings.unesiteImeIgraca;
-                        }
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            hintText: AppStrings.imeIgraca,
+                            hintStyle: TextStyle(fontSize: 15)),
+                      )),
+                      const SizedBox(width: 20),
+                      Expanded(
+                          child: FormBuilderTextField(
+                        name: 'player2',
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return AppStrings.unesiteImeIgraca;
+                          }
 
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                          contentPadding: EdgeInsets.zero,
-                          hintText: AppStrings.imeIgraca,
-                          hintStyle: TextStyle(fontSize: 15)),
-                    )),
-                  ],
+                          return null;
+                        },
+                        decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.zero,
+                            hintText: AppStrings.imeIgraca,
+                            hintStyle: TextStyle(fontSize: 15)),
+                      )),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

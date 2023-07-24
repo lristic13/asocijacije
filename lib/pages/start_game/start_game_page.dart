@@ -57,7 +57,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -71,7 +71,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 10),
                   FormBuilderChoiceChip(
                     backgroundColor: AppColors.white,
                     onChanged: (value) {

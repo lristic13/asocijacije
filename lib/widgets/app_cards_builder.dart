@@ -23,7 +23,7 @@ class AppCardsBuilder extends ConsumerWidget {
           ? CardSwiper(
               controller: swiperController,
               isDisabled: true,
-              cardsCount: ref.read(wordsProvider).wordsToPlay.length + 1,
+              cardsCount: ref.read(wordsProvider).wordsToPlay.length + 2,
               cardBuilder: (context, index, horizontalOffsetPercentage,
                       verticalOffsetPercentage) =>
                   Center(
@@ -39,7 +39,7 @@ class AppCardsBuilder extends ConsumerWidget {
                         child: Center(
                             child: Text(
                           ref.watch(wordsProvider).wordsToPlay[0],
-                          style: AppStyles.text25VioletBold,
+                          style: AppStyles.text30VioletBold,
                         )),
                       ),
                     ),

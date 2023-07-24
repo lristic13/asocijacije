@@ -38,8 +38,12 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(AppStrings.rezultat,
-                    style: AppStyles.text25WhiteBold),
+                const Row(
+                  children: [
+                    Text(AppStrings.rezultat, style: AppStyles.text25WhiteBold),
+                    Text('.', style: AppStyles.text25CoralBold),
+                  ],
+                ),
                 const AppSeparator(color: AppColors.coral),
                 const Spacer(),
                 Center(

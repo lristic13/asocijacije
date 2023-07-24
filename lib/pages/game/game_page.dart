@@ -99,8 +99,14 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                       children: [
                         Row(
                           children: [
-                            Text(getRoundTitle(ref),
-                                style: AppStyles.text25WhiteBold),
+                            Row(
+                              children: [
+                                Text(getRoundTitle(ref),
+                                    style: AppStyles.text25WhiteBold),
+                                const Text('.',
+                                    style: AppStyles.text25CoralBold),
+                              ],
+                            ),
                             const Spacer(),
                             IconButton(
                               onPressed: () {
@@ -142,6 +148,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                                       : 45,
                               ringColor: AppColors.englishVioletDarker,
                               fillColor: AppColors.coral,
+                              textFormat: CountdownTextFormat.S,
                               onComplete: () {
                                 setState(() {
                                   timerCompleted = true;
@@ -166,7 +173,6 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             )
                           ],
                         ),
-                        const SizedBox(height: 20),
                         Expanded(
                           flex: 3,
                           child: AppCardsBuilder(
@@ -267,7 +273,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
     } else {
       return AppButtonFull(
         fillColor: AppColors.englishVioletDarker,
-        textColor: AppColors.whiteDarker,
+        textColor: AppColors.white,
         buttonText: AppStrings.start,
         onPressed: () {
           if (timerController.isPaused) {
