@@ -21,19 +21,25 @@ class AppFinalScore extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
-        const Text(
-          AppStrings.krajIgre,
-          style: AppStyles.text25WhiteDarkerBold,
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              AppStrings.krajIgre,
+              style: AppStyles.text50WhiteBold,
+            ),
+            Text(
+              '.',
+              style: AppStyles.text50CoralBold,
+            ),
+          ],
         ),
         Center(
-          child: Card(
-            color: AppColors.englishVioletLighter,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-              child: Text(
-                'Pobenik je Tim ${Boxes.getWinnerTeam(box).substring(Boxes.getWinnerTeam(box).length - 1)}',
-                style: AppStyles.text20WhiteNormal,
-              ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+            child: Text(
+              'Pobenik je Tim ${Boxes.getWinnerTeam(box).substring(Boxes.getWinnerTeam(box).length - 1)}!',
+              style: AppStyles.text25CoralBold,
             ),
           ),
         ),

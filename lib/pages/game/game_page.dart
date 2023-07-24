@@ -13,6 +13,7 @@ import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
@@ -32,7 +33,7 @@ class GamePage extends ConsumerStatefulWidget {
 class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
   final AudioPlayer audio = AudioPlayer();
   final CountDownController _controllerTimer = CountDownController();
-  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  final CardSwiperController _cardSwiperController = CardSwiperController();
 
   int indexToScroll = 1;
 
@@ -169,7 +170,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         Expanded(
                           flex: 3,
                           child: AppCardsBuilder(
-                            cardKey: cardKey,
+                            swiperController: _cardSwiperController,
                           ),
                         ),
                         Expanded(
@@ -249,7 +250,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
               box, 'tim-${ref.read(gameAdminProvider).teamPlaying}');
           ref.read(wordsProvider).addWord(wordsToPlay[0]);
           ref.read(wordsProvider).removeWord(wordsToPlay[0]);
-
+          _cardSwiperController.swipeLeft();
           // animateToIndex(indexToScroll++, pageController);
         },
       );
@@ -274,7 +275,6 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           } else {
             timerController.start();
           }
-          cardKey.currentState?.toggleCard();
 
           setState(() {});
         },

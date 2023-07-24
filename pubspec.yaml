@@ -28,6 +28,7 @@ dependencies:
   circular_countdown_timer: ^0.2.3
   flutter_form_builder: ^9.0.0
   just_audio: ^0.9.34
+  flutter_card_swiper: ^6.0.0
   
   
 

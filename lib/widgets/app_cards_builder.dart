@@ -1,5 +1,6 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants/app_colors.dart';
@@ -9,53 +10,40 @@ import '../providers/all_providers.dart';
 
 class AppCardsBuilder extends ConsumerWidget {
   const AppCardsBuilder({
-    required this.cardKey,
+    required this.swiperController,
     super.key,
   });
 
-  final GlobalKey<FlipCardState> cardKey;
+  final CardSwiperController swiperController;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
       child: ref.watch(wordsProvider).wordsToPlay.isNotEmpty
-          ? FlipCard(
-              key: cardKey,
-              speed: 300,
-              fill: Fill.fillBack,
-              direction: FlipDirection.HORIZONTAL,
-              side: CardSide.BACK,
-              front: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(13),
-                  color: AppColors.white,
-                ),
-                margin: const EdgeInsets.only(right: 25, left: 25),
-                height: 300,
-                width: 250,
-                child: Center(
-                    child: Text(
-                  ref.watch(wordsProvider).wordsToPlay[0],
-                  style: AppStyles.text25VioletBold,
-                )),
-              ),
-              back: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.englishVioletLighter,
-                  borderRadius: BorderRadius.circular(13),
-                  border: Border.all(color: AppColors.white, width: 15),
-                ),
-                margin: const EdgeInsets.only(right: 25, left: 25),
-                height: 300,
-                width: 200,
-                child: const Center(
-                  child: Text(
-                    '${AppStrings.asocijacije}.',
-                    style: AppStyles.text25Violet900,
-                  ),
-                ),
-              ),
-            )
+          ? CardSwiper(
+              controller: swiperController,
+              isDisabled: true,
+              cardsCount: ref.read(wordsProvider).wordsToPlay.length + 1,
+              cardBuilder: (context, index, horizontalOffsetPercentage,
+                      verticalOffsetPercentage) =>
+                  Center(
+                    child: Card(
+                      elevation: 10,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(13),
+                          color: AppColors.white,
+                        ),
+                        height: 300,
+                        width: 250,
+                        child: Center(
+                            child: Text(
+                          ref.watch(wordsProvider).wordsToPlay[0],
+                          style: AppStyles.text25VioletBold,
+                        )),
+                      ),
+                    ),
+                  ))
           : const Center(
               child: Text(
                 AppStrings.pogodjeneSveReci,

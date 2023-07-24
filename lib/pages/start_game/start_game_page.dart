@@ -57,22 +57,25 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    AppStrings.brojIgraca,
-                    style: AppStyles.text25WhiteBold,
+                  SizedBox(height: 30),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppStrings.izaberiteBrojIgraca,
+                        style: AppStyles.text30WhiteBold,
+                      ),
+                      Text(
+                        '.',
+                        style: AppStyles.text30CoralBold,
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
-                  const Center(
-                    child: Text(
-                      AppStrings.izaberiteBrojIgraca,
-                      style: AppStyles.text20WhiteNormal,
-                    ),
-                  ),
+                  const SizedBox(height: 30),
                   FormBuilderChoiceChip(
                     backgroundColor: AppColors.white,
                     onChanged: (value) {
                       ref.read(playerNumberProvider.notifier).state = value!;
-                      print('players: ${ref.read(playerNumberProvider)}');
                       setState(() {
                         formKeys = List.generate(
                             ref.watch(playerNumberProvider) ~/ 2,
