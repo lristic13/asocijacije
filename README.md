@@ -17,3 +17,4 @@ Traje 60 sekundi i treba pantomimom objasniti pojmove iz prethodnih rundi.
 
 Na kraju svih rundi, tim sa najviše objašnjenih pojmova je pobedio.
 
+Runda traje dok se ne objasne svi pojmovi, tek nakon toga se prelazi u novu rundu.
