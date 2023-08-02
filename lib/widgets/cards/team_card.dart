@@ -18,7 +18,7 @@ class _TeamCardState extends State<TeamCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150,
+      height: 155,
       child: Card(
         child: Container(
           decoration: AppStyles.containerGradientWhite

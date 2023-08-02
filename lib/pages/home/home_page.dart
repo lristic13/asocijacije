@@ -1,8 +1,11 @@
+import 'package:animations/animations.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/widgets/app_animated_menu_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:in_app_update/in_app_update.dart';
 
 import '../../constants/app_colors.dart';
 import '../../constants/app_strings.dart';
@@ -21,6 +24,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    _checkForUpdate();
     super.initState();
   }
 
@@ -60,31 +64,14 @@ class _HomePageState extends State<HomePage> {
               const Spacer(),
               Stack(
                 children: [
-                  MenuCard(
-                    title: AppStrings.pocniIgru,
-                    colors: const [
-                      AppColors.white,
-                      AppColors.whiteDarker,
-                    ],
-                    icon: const Icon(
+                  const AppAnimatedMenuCard(
+                    targetPage: StartGamePage(),
+                    menuCardTitle: AppStrings.pocniIgru,
+                    menuCardIcon: Icon(
                       Icons.play_arrow_rounded,
                       size: 45,
-                      color: AppColors.englishViolet,
+                      color: AppColors.white,
                     ),
-                    alignment: CrossAxisAlignment.start,
-                    rowAlignment: MainAxisAlignment.start,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.topToBottom,
-                          curve: Curves.easeIn,
-                          duration: const Duration(milliseconds: 300),
-                          child: const StartGamePage(),
-                          childCurrent: widget,
-                        ),
-                      );
-                    },
                   ),
                   Align(
                     alignment: Alignment.topRight,
@@ -96,8 +83,8 @@ class _HomePageState extends State<HomePage> {
                           center: Alignment.topCenter,
                           stops: [.2, 1],
                           colors: [
-                            AppColors.coral,
-                            AppColors.coralDarker,
+                            AppColors.white,
+                            AppColors.whiteDarker,
                           ],
                         ).createShader(bounds),
                         child: const Icon(
@@ -112,27 +99,14 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 30),
               Stack(
                 children: [
-                  MenuCard(
-                    title: AppStrings.uputstva,
-                    icon: const Icon(
+                  const AppAnimatedMenuCard(
+                    targetPage: InstructionsPage(),
+                    menuCardTitle: AppStrings.uputstvaZaIgru,
+                    menuCardIcon: Icon(
                       Icons.rule_sharp,
                       size: 45,
-                      color: AppColors.englishViolet,
+                      color: AppColors.white,
                     ),
-                    colors: const [
-                      AppColors.whiteDarker,
-                      AppColors.white,
-                    ],
-                    alignment: CrossAxisAlignment.end,
-                    rowAlignment: MainAxisAlignment.end,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                            child: InstructionsPage(),
-                            type: PageTransitionType.bottomToTop),
-                      );
-                    },
                   ),
                   Container(
                     transform: Matrix4.translationValues(15.0, -35.0, 0.0),
@@ -142,8 +116,8 @@ class _HomePageState extends State<HomePage> {
                         center: Alignment.topCenter,
                         stops: [.2, 1],
                         colors: [
-                          AppColors.coral,
-                          AppColors.coralDarker,
+                          AppColors.white,
+                          AppColors.whiteDarker,
                         ],
                       ).createShader(bounds),
                       child: const Icon(
@@ -160,11 +134,11 @@ class _HomePageState extends State<HomePage> {
                 icon: const Icon(
                   Icons.exit_to_app_rounded,
                   size: 40,
-                  color: AppColors.englishViolet,
+                  color: AppColors.white,
                 ),
                 colors: const [
-                  AppColors.whiteDarker,
-                  AppColors.white,
+                  AppColors.englishVioletDarker,
+                  AppColors.englishViolet,
                 ],
                 alignment: CrossAxisAlignment.start,
                 rowAlignment: MainAxisAlignment.start,
@@ -182,4 +156,14 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+void _checkForUpdate() {
+  InAppUpdate.checkForUpdate().then((updateInfo) {
+    if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+      if (updateInfo.immediateUpdateAllowed) {
+        InAppUpdate.performImmediateUpdate();
+      }
+    }
+  });
 }

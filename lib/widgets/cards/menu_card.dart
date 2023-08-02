@@ -27,24 +27,26 @@ class MenuCard extends StatelessWidget {
         elevation: 5,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(13),
+            border: Border.all(color: AppColors.coral, width: 3),
+            borderRadius: BorderRadius.circular(12),
             gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
                 colors?[0] ?? AppColors.white,
                 colors?[1] ?? AppColors.whiteDarker,
               ],
             ),
           ),
-          height: 100,
+          height: 110,
           width: double.infinity,
           child: Column(
             crossAxisAlignment: alignment!,
             children: [
               Padding(
-                  padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                  child: icon),
+                padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                child: icon,
+              ),
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(left: 20, bottom: 15, right: 20),
@@ -55,7 +57,7 @@ class MenuCard extends StatelessWidget {
                     children: [
                       Text(
                         title ?? '',
-                        style: AppStyles.text20VioletBold,
+                        style: AppStyles.text20WhiteBold,
                       ),
                       const Text(
                         '.',

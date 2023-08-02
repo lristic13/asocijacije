@@ -33,12 +33,13 @@ class AppCardsBuilder extends ConsumerWidget {
                           borderRadius: BorderRadius.circular(13),
                           color: AppColors.white,
                         ),
-                        height: 300,
-                        width: 250,
+                        height: 360,
+                        width: 290,
                         child: Center(
                             child: Text(
                           ref.watch(wordsProvider).wordsToPlay[0],
-                          style: AppStyles.text30VioletBold,
+                          style:
+                              AppStyles.text25VioletBold.copyWith(fontSize: 28),
                         )),
                       ),
                     ),

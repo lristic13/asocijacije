@@ -53,7 +53,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        mainAxisExtent: 120,
+                        mainAxisExtent: 130,
                       ),
                       itemBuilder: (context, index) {
                         return Card(

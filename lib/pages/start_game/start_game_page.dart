@@ -43,111 +43,127 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        resizeToAvoidBottomInset: true,
-        backgroundColor: Colors.transparent,
-        body: Container(
-          decoration: AppStyles.containerGradientViolet,
-          child: GestureDetector(
-            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 30),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        AppStrings.izaberiteBrojIgraca,
-                        style: AppStyles.text30WhiteBold,
-                      ),
-                      Text(
-                        '.',
-                        style: AppStyles.text30CoralBold,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  FormBuilderChoiceChip(
-                    backgroundColor: AppColors.white,
-                    onChanged: (value) {
-                      ref.read(playerNumberProvider.notifier).state = value!;
-                      setState(() {
-                        formKeys = List.generate(
-                            ref.watch(playerNumberProvider) ~/ 2,
-                            (i) => GlobalKey<FormBuilderState>());
-                      });
-                    },
-                    alignment: WrapAlignment.center,
-                    spacing: 20,
-                    initialValue: 4,
-                    name: 'players',
-                    options: const [
-                      FormBuilderChipOption(
-                          value: 4,
-                          child: Text('4',
-                              style: AppStyles.text20VioletDarkerBold)),
-                      FormBuilderChipOption(
-                          value: 6,
-                          child: Text('6',
-                              style: AppStyles.text20VioletDarkerBold)),
-                      FormBuilderChipOption(
-                          value: 8,
-                          child: Text('8',
-                              style: AppStyles.text20VioletDarkerBold)),
-                    ],
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: ref.watch(playerNumberProvider) ~/ 2,
-                        itemBuilder: (context, index) =>
-                            TeamCard(formKeys[index], index, 5),
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: AppStyles.containerGradientViolet,
+        child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(height: 30),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      AppStrings.pocniIgru,
+                      style: AppStyles.text30WhiteBold,
+                    ),
+                    Text(
+                      '.',
+                      style: AppStyles.text30CoralBold,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                FormBuilderChoiceChip(
+                  backgroundColor: AppColors.white,
+                  onChanged: (value) {
+                    ref.read(playerNumberProvider.notifier).state = value!;
+                    setState(() {
+                      formKeys = List.generate(
+                          ref.watch(playerNumberProvider) ~/ 2,
+                          (i) => GlobalKey<FormBuilderState>());
+                    });
+                  },
+                  alignment: WrapAlignment.center,
+                  spacing: 20,
+                  initialValue: 4,
+                  name: 'players',
+                  options: const [
+                    FormBuilderChipOption(
+                      value: 4,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('4', style: AppStyles.text20VioletDarkerBold),
+                          SizedBox(width: 10),
+                          Icon(Icons.person),
+                        ],
                       ),
                     ),
+                    FormBuilderChipOption(
+                      value: 6,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('6', style: AppStyles.text20VioletDarkerBold),
+                          SizedBox(width: 10),
+                          Icon(Icons.person),
+                        ],
+                      ),
+                    ),
+                    FormBuilderChipOption(
+                      value: 8,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('8', style: AppStyles.text20VioletDarkerBold),
+                          SizedBox(width: 10),
+                          Icon(Icons.person),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: ref.watch(playerNumberProvider) ~/ 2,
+                      itemBuilder: (context, index) =>
+                          TeamCard(formKeys[index], index, 5),
+                    ),
                   ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: 60,
-                          child: AppButtonEmpty(
-                            buttonText: AppStrings.nazad,
-                            borderColor: AppColors.coral,
-                            textColor: AppColors.coral,
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(context,
-                                  AppRoutes.homePage, (route) => false);
-                            },
-                          ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        height: 60,
+                        child: AppButtonEmpty(
+                          buttonText: AppStrings.nazad,
+                          borderColor: AppColors.coral,
+                          textColor: AppColors.coral,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                         ),
                       ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: SizedBox(
-                          height: 60,
-                          child: AppButtonFull(
-                            buttonText: AppStrings.dalje,
-                            fillColor: AppColors.coral,
-                            textColor: AppColors.englishVioletDarker,
-                            onPressed: () {
-                              validateForms(
-                                  context, ref, formKeys, box, teamId);
-                            },
-                          ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: SizedBox(
+                        height: 60,
+                        child: AppButtonFull(
+                          buttonText: AppStrings.dalje,
+                          fillColor: AppColors.coral,
+                          textColor: AppColors.englishVioletDarker,
+                          onPressed: () {
+                            validateForms(context, ref, formKeys, box, teamId);
+                          },
                         ),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),

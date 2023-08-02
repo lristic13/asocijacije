@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import '../constants/app_colors.dart';
+import '../constants/app_routes.dart';
 import '../constants/app_strings.dart';
 import '../constants/app_styles.dart';
 import '../models/team.dart';
@@ -54,7 +55,7 @@ class AppFinalScore extends ConsumerWidget {
             onPressed: () {
               ref.read(gameAdminProvider).resetGame();
               Navigator.pushNamedAndRemoveUntil(
-                  context, '/startGame', (route) => false);
+                  context, AppRoutes.homePage, (route) => false);
             },
           ),
         ),
