@@ -1,10 +1,8 @@
-import 'package:animations/animations.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/widgets/app_animated_menu_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 import '../../constants/app_colors.dart';

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_strings.dart';
-import '../pages/instructions/instructions_page.dart';
 import 'cards/menu_card.dart';
 
 class AppAnimatedMenuCard extends StatelessWidget {
