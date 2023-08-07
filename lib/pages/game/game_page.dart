@@ -128,50 +128,58 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         ),
                         const AppSeparator(color: AppColors.coral),
                         const SizedBox(height: 20),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: CircularCountDownTimer(
-                              controller: _controllerTimer,
-                              autoStart: false,
-                              textStyle: AppStyles.text35WhiteBold,
-                              strokeWidth: 10,
-                              isReverse: true,
-                              isReverseAnimation: true,
-                              width: 100,
-                              height: 100,
-                              duration:
-                                  ref.read(gameAdminProvider).roundInProgress ==
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Center(
+                                child: CircularCountDownTimer(
+                                  controller: _controllerTimer,
+                                  autoStart: false,
+                                  textStyle: AppStyles.text50WhiteBold,
+                                  strokeWidth: 15,
+                                  isReverse: true,
+                                  isReverseAnimation: true,
+                                  width: 150,
+                                  height: 150,
+                                  duration: ref
+                                              .read(gameAdminProvider)
+                                              .roundInProgress ==
                                           3
                                       ? 60
                                       : 45,
-                              ringColor: AppColors.englishVioletDarker,
-                              fillColor: AppColors.coral,
-                              textFormat: CountdownTextFormat.S,
-                              onComplete: () {
-                                setState(() {
-                                  timerCompleted = true;
-                                });
-                              },
+                                  ringColor: AppColors.englishVioletDarker,
+                                  fillColor: AppColors.coral,
+                                  textFormat: CountdownTextFormat.S,
+                                  onComplete: () {
+                                    setState(() {
+                                      timerCompleted = true;
+                                    });
+                                  },
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              playerExplaining == 1 ? player1 : player2,
-                              style: AppStyles.text25WhiteBold,
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    playerExplaining == 1 ? player1 : player2,
+                                    style: AppStyles.text25WhiteBold,
+                                  ),
+                                  const Icon(Icons.arrow_downward_outlined,
+                                      color: AppColors.coral, size: 30),
+                                  Text(
+                                    playerExplaining == 1 ? player2 : player1,
+                                    style: AppStyles.text25WhiteBold,
+                                  )
+                                ],
+                              ),
                             ),
-                            const Icon(Icons.arrow_right_alt,
-                                color: AppColors.coral, size: 30),
-                            Text(
-                              playerExplaining == 1 ? player2 : player1,
-                              style: AppStyles.text25WhiteBold,
-                            )
                           ],
                         ),
+                        const SizedBox(height: 20),
                         Expanded(
                           flex: 4,
                           child: AppCardsBuilder(
@@ -185,7 +193,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                               valueListenable: box.listenable(),
                               builder: (context, Box<Team> box, _) => Text(
                                   '${AppStrings.poeni}: ${Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}').points.toString()}',
-                                  style: AppStyles.text30WhiteBold),
+                                  style: AppStyles.text35WhiteBold),
                             ),
                           ),
                         ),

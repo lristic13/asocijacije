@@ -24,7 +24,7 @@ class AppStrings {
   static const String odustani = 'Odustani';
   static const String odustajete = 'Odustajete?';
   static const String odustaniAlertContent =
-      'Ako odustanete, prenosite bodove i na redu je sledeci tim.';
+      'Ako odustanete, prenosite bodove i na redu je sledeći tim.';
   static const String odustajanjeUput =
       'Ukoliko ne možete da objasnite reč, možete odustati od objašnjavanja i preneti do sad osvojene bodove.';
   static const String pantomimaRunda = 'Pantomima Runda';
