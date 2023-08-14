@@ -143,4 +143,23 @@ class AppStyles {
         AppColors.whiteDarker,
         AppColors.white,
       ]));
+
+  // Input fields
+  static final focusedErrorBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(13),
+      borderSide: const BorderSide(color: AppColors.coral, width: 3));
+
+  static final errorBorder = OutlineInputBorder(
+      borderRadius: BorderRadius.circular(13),
+      borderSide: const BorderSide(color: AppColors.coral, width: 3));
+
+  static final enabledBorder = OutlineInputBorder(
+      borderSide: const BorderSide(
+          color: AppColors.englishVioletMoreLighter, width: 1.5),
+      borderRadius: BorderRadius.circular(13));
+
+  static final focusedBorder = OutlineInputBorder(
+      borderSide:
+          const BorderSide(color: AppColors.englishVioletMoreLighter, width: 3),
+      borderRadius: BorderRadius.circular(13));
 }

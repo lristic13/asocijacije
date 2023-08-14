@@ -6,6 +6,8 @@ class AppStrings {
   static const String daLiSteSigurniIzlaz =
       'Da li ste sigurni da želite da izađete? Moraćete da krenete igru iz početka!';
   static const String imeIgraca = 'Ime igrača';
+  static const String ime1Igraca = 'Ime 1.igrača';
+  static const String ime2Igraca = 'Ime 2.igrača';
   static const String izaberiteBrojIgraca = 'Izaberite broj igrača';
   static const String izlaz = 'Izlaz';
   static const String jednaRecRunda = 'Jedna Reč Runda';

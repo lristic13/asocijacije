@@ -138,8 +138,8 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         height: 60,
                         child: AppButtonEmpty(
                           buttonText: AppStrings.nazad,
-                          borderColor: AppColors.coral,
-                          textColor: AppColors.coral,
+                          borderColor: AppColors.white,
+                          textColor: AppColors.white,
                           onPressed: () {
                             Navigator.pop(context);
                           },

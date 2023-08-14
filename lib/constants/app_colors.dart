@@ -4,6 +4,7 @@ class AppColors {
   static const Color tiffanyBlue = Color(0xff66D7D1);
   static const Color tiffanyBlueDarker = Color.fromARGB(255, 32, 129, 126);
   static const Color englishViolet = Color(0xff403D58);
+  static const Color englishVioletMoreLighter = Color(0xFFBBB6EE);
   static const Color englishVioletLighter = Color(0xFF6B6693);
   static const Color englishVioletDarker = Color(0xFF17113D);
   static const Color white = Color(0xffF2EFEA);
