@@ -21,7 +21,7 @@ class InstructionItem extends StatelessWidget {
             titleText,
             style: AppStyles.text20CoralBold,
           ),
-          Text(bodyText, style: AppStyles.text15WhiteDarkerNormal),
+          Text(bodyText, style: AppStyles.text15WhiteNormal),
         ],
       ),
     );

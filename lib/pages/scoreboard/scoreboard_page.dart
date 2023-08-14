@@ -47,54 +47,75 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                 const AppSeparator(color: AppColors.coral),
                 const Spacer(),
                 Center(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.4,
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisExtent: 130,
-                      ),
-                      itemBuilder: (context, index) {
-                        return Card(
-                          color: AppColors.white,
+                  child: ListView.builder(
+                    itemBuilder: (context, index) {
+                      Team currentTeam = Boxes.getTeamById(
+                          Hive.box<Team>('teams'), 'tim-${index + 1}');
+                      return Card(
+                        elevation: 5,
+                        color: AppColors.white,
+                        child: Container(
+                          height: MediaQuery.sizeOf(context).height * 0.15,
+                          decoration: BoxDecoration(
+                            border:
+                                Border.all(color: AppColors.coral, width: 3),
+                            borderRadius: BorderRadius.circular(12),
+                            gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                AppColors.englishVioletDarker,
+                                AppColors.englishViolet
+                              ],
+                            ),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30.0,
                               vertical: 10,
                             ),
-                            child: Column(
+                            child: Row(
                               children: [
-                                Text(
-                                  'Tim ${index + 1}',
-                                  style: AppStyles.text20VioletBold,
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Tim ${index + 1}',
+                                      style: AppStyles.text40WhiteBold,
+                                    ),
+                                    Text(
+                                      '(${currentTeam.player1}, ${currentTeam.player2})',
+                                      style: AppStyles.text15WhiteNormal,
+                                    )
+                                  ],
                                 ),
                                 const Spacer(),
                                 Text(
-                                  '${Boxes.getTeamById(Hive.box<Team>('teams'), 'tim-${index + 1}').points}',
-                                  style: AppStyles.text40VioletBold,
+                                  '${currentTeam.points}',
+                                  style: AppStyles.text45WhiteBold,
                                 )
                               ],
                             ),
                           ),
-                        );
-                      },
-                      shrinkWrap: true,
-                      itemCount: Boxes.getTeams().length,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Center(
-                  child: Text(
-                    '${AppStrings.sledeciIgraTim} ${ref.read(gameAdminProvider).teamPlaying}',
-                    style: AppStyles.text20WhiteBold,
+                        ),
+                      );
+                    },
+                    shrinkWrap: true,
+                    itemCount: Boxes.getTeams().length,
                   ),
                 ),
                 const Spacer(),
+                Center(
+                  child: Text(
+                    '${AppStrings.sledeciIgraTim} ${ref.read(gameAdminProvider).teamPlaying}!',
+                    style: AppStyles.text25WhiteBold,
+                  ),
+                ),
+                const SizedBox(height: 10),
                 SizedBox(
                   width: double.infinity,
-                  height: 60,
+                  height: MediaQuery.sizeOf(context).height * 0.075,
                   child: AppButtonFull(
                     buttonText: AppStrings.dalje,
                     fillColor: AppColors.coral,

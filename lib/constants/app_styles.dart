@@ -81,6 +81,18 @@ class AppStyles {
     fontWeight: FontWeight.bold,
   );
 
+  static const TextStyle text45WhiteBold = TextStyle(
+    color: AppColors.white,
+    fontSize: 45,
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle text40WhiteBold = TextStyle(
+    color: AppColors.white,
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle text25WhiteDarkerBold = TextStyle(
     color: AppColors.whiteDarker,
     fontSize: 25,
@@ -98,7 +110,7 @@ class AppStyles {
     color: AppColors.white,
   );
 
-  static const TextStyle text15WhiteDarkerNormal = TextStyle(
+  static const TextStyle text15WhiteNormal = TextStyle(
     fontSize: 15,
     color: AppColors.white,
   );
