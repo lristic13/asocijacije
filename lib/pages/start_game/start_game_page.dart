@@ -22,9 +22,7 @@ class StartGamePage extends ConsumerStatefulWidget {
 
 class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   int teamId = 1;
-  late List<GlobalKey<FormBuilderState>> formKeys = List.generate(
-      ref.read(playerNumberProvider) ~/ 2,
-      (i) => GlobalKey<FormBuilderState>());
+
   late Box box;
   @override
   void initState() {
@@ -33,6 +31,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
       await Hive.openBox<Team>('teams');
       box = Hive.box<Team>('teams')..clear();
     });
+    ref.read(playerNumberProvider.notifier).state = 4;
   }
 
   @override
@@ -42,6 +41,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
 
   @override
   Widget build(BuildContext context) {
+    List<GlobalKey<FormBuilderState>> formKeys = List.generate(
+        ref.watch(playerNumberProvider) ~/ 2,
+        (i) => GlobalKey<FormBuilderState>());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
@@ -73,11 +75,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                   backgroundColor: AppColors.white,
                   onChanged: (value) {
                     ref.read(playerNumberProvider.notifier).state = value!;
-                    setState(() {
-                      formKeys = List.generate(
-                          ref.watch(playerNumberProvider) ~/ 2,
-                          (i) => GlobalKey<FormBuilderState>());
-                    });
                   },
                   alignment: WrapAlignment.center,
                   spacing: 10,
