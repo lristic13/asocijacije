@@ -50,7 +50,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -80,7 +80,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                     });
                   },
                   alignment: WrapAlignment.center,
-                  spacing: 20,
+                  spacing: 10,
                   initialValue: 4,
                   name: 'players',
                   options: const [
@@ -90,7 +90,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text('4', style: AppStyles.text20VioletDarkerBold),
-                          SizedBox(width: 10),
                           Icon(Icons.person),
                         ],
                       ),
@@ -101,7 +100,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text('6', style: AppStyles.text20VioletDarkerBold),
-                          SizedBox(width: 10),
                           Icon(Icons.person),
                         ],
                       ),
@@ -112,7 +110,16 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text('8', style: AppStyles.text20VioletDarkerBold),
-                          SizedBox(width: 10),
+                          Icon(Icons.person),
+                        ],
+                      ),
+                    ),
+                    FormBuilderChipOption(
+                      value: 10,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('10', style: AppStyles.text20VioletDarkerBold),
                           Icon(Icons.person),
                         ],
                       ),

@@ -32,7 +32,6 @@ mixin FormsMixin {
       words.shuffle();
       ref.read(wordsProvider.notifier).wordsToPlay =
           words.sublist(0, ref.read(playerNumberProvider) * 8);
-      print(ref.read(wordsProvider.notifier).wordsToPlay.length);
       Navigator.push(
           context,
           PageTransition(

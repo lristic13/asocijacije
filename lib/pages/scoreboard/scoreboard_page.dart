@@ -34,7 +34,8 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
         child: Container(
           decoration: AppStyles.containerGradientViolet,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+            padding:
+                const EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -55,7 +56,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                         elevation: 5,
                         color: AppColors.white,
                         child: Container(
-                          height: MediaQuery.sizeOf(context).height * 0.15,
+                          height: MediaQuery.sizeOf(context).height * 0.125,
                           decoration: BoxDecoration(
                             border:
                                 Border.all(color: AppColors.coral, width: 3),
@@ -72,7 +73,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30.0,
-                              vertical: 10,
+                              vertical: 2.5,
                             ),
                             child: Row(
                               children: [
@@ -82,7 +83,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                                   children: [
                                     Text(
                                       'Tim ${index + 1}',
-                                      style: AppStyles.text40WhiteBold,
+                                      style: AppStyles.text35WhiteBold,
                                     ),
                                     Text(
                                       '(${currentTeam.player1}, ${currentTeam.player2})',
