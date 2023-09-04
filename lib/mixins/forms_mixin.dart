@@ -29,6 +29,10 @@ mixin FormsMixin {
       }
     }
     if (ref.read(checkerProvider) && context.mounted) {
+      List<String> words = [];
+      ref.read(localeProvider) == const Locale('sr')
+          ? words = rsWords
+          : words = enWords;
       words.shuffle();
       ref.read(wordsProvider.notifier).wordsToPlay =
           words.sublist(0, ref.read(playerNumberProvider) * 8);

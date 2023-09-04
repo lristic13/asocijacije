@@ -1,8 +1,8 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'instruction_item.dart';
 
@@ -21,14 +21,14 @@ class InstructionsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Spacer(),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    AppStrings.uputstvaZaIgru,
+                    AppLocalizations.of(context)!.uputstvaZaIgru,
                     style: AppStyles.text30WhiteBold,
                   ),
-                  Text(
+                  const Text(
                     '.',
                     style: AppStyles.text30CoralBold,
                   ),
@@ -36,35 +36,36 @@ class InstructionsPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
               const Spacer(),
-              const InstructionItem(
-                titleText: AppStrings.normalnaRunda,
-                bodyText: AppStrings.normalnaRundaUput,
+              InstructionItem(
+                titleText: AppLocalizations.of(context)!.normalnaRunda,
+                bodyText: AppLocalizations.of(context)!.normalnaRundaUput,
               ),
               const SizedBox(height: 30),
-              const InstructionItem(
-                titleText: AppStrings.jednaRecRunda,
-                bodyText: AppStrings.jednaRecRundaUput,
+              InstructionItem(
+                titleText: AppLocalizations.of(context)!.jednaRecRunda,
+                bodyText: AppLocalizations.of(context)!.jednaRecRundaUput,
               ),
               const SizedBox(height: 30),
-              const InstructionItem(
-                titleText: AppStrings.pantomimaRunda,
-                bodyText: AppStrings.pantomimaRundaUput,
+              InstructionItem(
+                titleText: AppLocalizations.of(context)!.pantomimaRunda,
+                bodyText: AppLocalizations.of(context)!.pantomimaRundaUput,
               ),
               const SizedBox(height: 30),
-              const Text(
-                AppStrings.rezultatUput,
-                style: TextStyle(color: AppColors.white),
+              Text(
+                AppLocalizations.of(context)!.rezultatUput,
+                style: const TextStyle(color: AppColors.white),
               ),
               const SizedBox(height: 10),
-              const Text(
-                AppStrings.odustajanjeUput,
-                style: TextStyle(color: AppColors.white),
+              Text(
+                AppLocalizations.of(context)!.odustajanjeUput,
+                style: const TextStyle(color: AppColors.white),
               ),
               const SizedBox(height: 10),
-              const Wrap(
+              Wrap(
                 children: [
-                  Text(AppStrings.napomena, style: AppStyles.text15CoralBold),
-                  Text(AppStrings.napomenaTekst,
+                  Text(AppLocalizations.of(context)!.napomena,
+                      style: AppStyles.text15CoralBold),
+                  Text(AppLocalizations.of(context)!.napomenaTekst,
                       style: AppStyles.text15WhiteBold),
                 ],
               ),
@@ -73,7 +74,7 @@ class InstructionsPage extends StatelessWidget {
                 width: double.infinity,
                 height: 60,
                 child: AppButtonFull(
-                  buttonText: AppStrings.nazad,
+                  buttonText: AppLocalizations.of(context)!.nazad,
                   fillColor: AppColors.coral,
                   textColor: AppColors.englishViolet,
                   onPressed: () => Navigator.pop(context),

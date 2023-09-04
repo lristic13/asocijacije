@@ -1,8 +1,8 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TeamCard extends StatefulWidget {
   const TeamCard(this.formKey, this.index, this.height, {super.key});
@@ -42,7 +42,7 @@ class _TeamCardState extends State<TeamCard> {
                   child: Row(
                     children: [
                       Text(
-                        'Tim ${widget.index + 1}',
+                        '${AppLocalizations.of(context)!.tim} ${widget.index + 1}',
                         style: AppStyles.text30WhiteBold,
                       ),
                       const Text(
@@ -66,7 +66,7 @@ class _TeamCardState extends State<TeamCard> {
                         decoration: InputDecoration(
                           focusedErrorBorder: AppStyles.focusedErrorBorder,
                           errorBorder: AppStyles.errorBorder,
-                          label: const Text(AppStrings.ime1Igraca),
+                          label: Text(AppLocalizations.of(context)!.ime1Igraca),
                           labelStyle: const TextStyle(color: AppColors.white),
                           errorStyle: const TextStyle(color: AppColors.coral),
                           contentPadding: const EdgeInsets.only(left: 10),
@@ -76,7 +76,8 @@ class _TeamCardState extends State<TeamCard> {
                         name: 'player1',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppStrings.unesiteImeIgraca;
+                            return AppLocalizations.of(context)!
+                                .unesiteImeIgraca;
                           }
 
                           return null;
@@ -90,7 +91,8 @@ class _TeamCardState extends State<TeamCard> {
                         name: 'player2',
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return AppStrings.unesiteImeIgraca;
+                            return AppLocalizations.of(context)!
+                                .unesiteImeIgraca;
                           }
 
                           return null;
@@ -98,7 +100,7 @@ class _TeamCardState extends State<TeamCard> {
                         decoration: InputDecoration(
                           focusedErrorBorder: AppStyles.focusedErrorBorder,
                           errorBorder: AppStyles.errorBorder,
-                          label: const Text(AppStrings.ime2Igraca),
+                          label: Text(AppLocalizations.of(context)!.ime2Igraca),
                           labelStyle: const TextStyle(color: AppColors.white),
                           errorStyle: const TextStyle(color: AppColors.coral),
                           contentPadding: const EdgeInsets.only(left: 10),

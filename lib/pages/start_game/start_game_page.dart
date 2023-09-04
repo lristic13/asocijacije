@@ -1,5 +1,4 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/forms_mixin.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_button_empty.dart';
@@ -8,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/team.dart';
 import '../../providers/all_providers.dart';
@@ -57,14 +57,14 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 30),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      AppStrings.pocniIgru,
+                      AppLocalizations.of(context)!.pocniIgru,
                       style: AppStyles.text30WhiteBold,
                     ),
-                    Text(
+                    const Text(
                       '.',
                       style: AppStyles.text30CoralBold,
                     ),
@@ -141,7 +141,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       child: SizedBox(
                         height: 60,
                         child: AppButtonEmpty(
-                          buttonText: AppStrings.nazad,
+                          buttonText: AppLocalizations.of(context)!.nazad,
                           borderColor: AppColors.white,
                           textColor: AppColors.white,
                           onPressed: () {
@@ -155,7 +155,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       child: SizedBox(
                         height: 60,
                         child: AppButtonFull(
-                          buttonText: AppStrings.dalje,
+                          buttonText: AppLocalizations.of(context)!.dalje,
                           fillColor: AppColors.coral,
                           textColor: AppColors.englishVioletDarker,
                           onPressed: () {

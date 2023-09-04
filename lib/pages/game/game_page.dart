@@ -1,5 +1,4 @@
 import 'package:asoscijacije_nove/constants/app_routes.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
@@ -17,6 +16,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/team.dart';
@@ -71,8 +71,8 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
             showDialog(
               context: context,
               builder: (context) => AppAlertDialog(
-                title: AppStrings.izlaz,
-                content: AppStrings.daLiSteSigurniIzlaz,
+                title: AppLocalizations.of(context)!.izlaz,
+                content: AppLocalizations.of(context)!.daLiSteSigurniIzlaz,
                 onPressedNo: () {
                   Navigator.of(context).pop();
                   _controllerTimer.resume();
@@ -100,7 +100,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                           children: [
                             Row(
                               children: [
-                                Text(getRoundTitle(ref),
+                                Text(getRoundTitle(ref, context),
                                     style: AppStyles.text25WhiteBold),
                                 const Text('.',
                                     style: AppStyles.text25CoralBold),
@@ -192,7 +192,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             child: ValueListenableBuilder(
                               valueListenable: box.listenable(),
                               builder: (context, Box<Team> box, _) => Text(
-                                  '${AppStrings.poeni}: ${Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}').points.toString()}',
+                                  '${AppLocalizations.of(context)!.poeni}: ${Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}').points.toString()}',
                                   style: AppStyles.text35WhiteBold),
                             ),
                           ),
@@ -215,7 +215,8 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             child: AppButtonEmpty(
                               borderColor: AppColors.white,
                               textColor: AppColors.white,
-                              buttonText: AppStrings.odustani,
+                              buttonText:
+                                  AppLocalizations.of(context)!.odustani,
                               textSize: 15,
                               onPressed: () {
                                 _controllerTimer.pause();
@@ -223,8 +224,10 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AppAlertDialog(
-                                    title: AppStrings.odustajete,
-                                    content: AppStrings.odustaniAlertContent,
+                                    title: AppLocalizations.of(context)!
+                                        .odustajete,
+                                    content: AppLocalizations.of(context)!
+                                        .odustaniAlertContent,
                                     onPressedNo: () {
                                       Navigator.of(context).pop();
                                       _controllerTimer.resume();
@@ -255,7 +258,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
       return AppButtonFull(
         fillColor: AppColors.coral,
         textColor: AppColors.englishVioletDarker,
-        buttonText: AppStrings.sledecaRec,
+        buttonText: AppLocalizations.of(context)!.sledecaRec,
         onPressed: () async {
           await audio.setAsset('assets/sounds/correct-choice.mp3');
           audio.play();
@@ -264,14 +267,13 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           ref.read(wordsProvider).addWord(wordsToPlay[0]);
           ref.read(wordsProvider).removeWord(wordsToPlay[0]);
           _cardSwiperController.swipeLeft();
-          // animateToIndex(indexToScroll++, pageController);
         },
       );
     } else if (timerCompleted || wordsToPlay.isEmpty) {
       return AppButtonFull(
         fillColor: AppColors.englishVioletDarker,
         textColor: AppColors.white,
-        buttonText: AppStrings.sledeciTim,
+        buttonText: AppLocalizations.of(context)!.sledeciTim,
         onPressed: () {
           _controllerTimer.pause();
           roundEnd(context, ref);
@@ -281,7 +283,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
       return AppButtonFull(
         fillColor: AppColors.englishVioletDarker,
         textColor: AppColors.white,
-        buttonText: AppStrings.start,
+        buttonText: AppLocalizations.of(context)!.start,
         onPressed: () {
           if (timerController.isPaused) {
             timerController.resume();

@@ -1,7 +1,11 @@
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/widgets/app_animated_menu_card.dart';
+
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:in_app_update/in_app_update.dart';
 
@@ -11,21 +15,23 @@ import '../../models/team.dart';
 import '../../widgets/cards/menu_card.dart';
 import '../instructions/instructions_page.dart';
 import '../start_game/start_game_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageConsumerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageConsumerState extends ConsumerState<HomePage> {
   @override
   void initState() {
     _checkForUpdate();
     super.initState();
   }
 
+  List<Locale> locales = [Locale('sr'), Locale('en')];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,6 +48,52 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                      foregroundDecoration:
+                          ref.watch(localeProvider) != const Locale('sr')
+                              ? const BoxDecoration(
+                                  color: Colors.grey,
+                                  backgroundBlendMode: BlendMode.saturation,
+                                )
+                              : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
+                        child: InkWell(
+                          onTap: () {
+                            ref.read(localeProvider.notifier).state =
+                                const Locale('sr');
+                          },
+                          child: CountryFlag.fromCountryCode('rs',
+                              height: 30, width: 30),
+                        ),
+                      )),
+                  const SizedBox(width: 20),
+                  Container(
+                      foregroundDecoration:
+                          ref.watch(localeProvider) != const Locale('us')
+                              ? const BoxDecoration(
+                                  color: Colors.grey,
+                                  backgroundBlendMode: BlendMode.saturation,
+                                )
+                              : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
+                        child: InkWell(
+                          onTap: () {
+                            ref.read(localeProvider.notifier).state =
+                                const Locale('us');
+                          },
+                          child: CountryFlag.fromCountryCode('us',
+                              height: 30, width: 30),
+                        ),
+                      )),
+                ],
+              ),
               Spacer(),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -56,16 +108,16 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ],
               ),
-              const Center(
-                  child: Text('sa papirića u aplikaciju!',
+              Center(
+                  child: Text(AppLocalizations.of(context)!.saPapiricaUApp,
                       style: AppStyles.text20CoralBold)),
               const Spacer(),
               Stack(
                 children: [
-                  const AppAnimatedMenuCard(
-                    targetPage: StartGamePage(),
-                    menuCardTitle: AppStrings.pocniIgru,
-                    menuCardIcon: Icon(
+                  AppAnimatedMenuCard(
+                    targetPage: const StartGamePage(),
+                    menuCardTitle: AppLocalizations.of(context)!.pocniIgru,
+                    menuCardIcon: const Icon(
                       Icons.play_arrow_rounded,
                       size: 45,
                       color: AppColors.white,
@@ -97,10 +149,10 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(height: 30),
               Stack(
                 children: [
-                  const AppAnimatedMenuCard(
-                    targetPage: InstructionsPage(),
-                    menuCardTitle: AppStrings.uputstvaZaIgru,
-                    menuCardIcon: Icon(
+                  AppAnimatedMenuCard(
+                    targetPage: const InstructionsPage(),
+                    menuCardTitle: AppLocalizations.of(context)!.uputstvaZaIgru,
+                    menuCardIcon: const Icon(
                       Icons.rule_sharp,
                       size: 45,
                       color: AppColors.white,
@@ -128,7 +180,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 30),
               MenuCard(
-                title: AppStrings.izlaz,
+                title: AppLocalizations.of(context)!.izlaz,
                 icon: const Icon(
                   Icons.exit_to_app_rounded,
                   size: 40,

@@ -2,8 +2,8 @@ import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
-import '../constants/app_strings.dart';
 import 'cards/menu_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppAnimatedMenuCard extends StatelessWidget {
   const AppAnimatedMenuCard(
@@ -32,12 +32,13 @@ class AppAnimatedMenuCard extends StatelessWidget {
           AppColors.englishVioletDarker,
           AppColors.englishViolet,
         ],
-        alignment: menuCardTitle == AppStrings.uputstvaZaIgru
+        alignment: menuCardTitle == AppLocalizations.of(context)!.uputstvaZaIgru
             ? CrossAxisAlignment.end
             : CrossAxisAlignment.start,
-        rowAlignment: menuCardTitle == AppStrings.uputstvaZaIgru
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.start,
+        rowAlignment:
+            menuCardTitle == AppLocalizations.of(context)!.uputstvaZaIgru
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
         onTap: action,
       ),
     );
