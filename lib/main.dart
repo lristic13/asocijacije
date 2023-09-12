@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
+import 'constants/app_colors.dart';
+
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TeamAdapter());
@@ -26,6 +28,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: 'Geologica',
+        tabBarTheme: const TabBarTheme(
+          labelColor: AppColors.white,
+          unselectedLabelColor: AppColors.englishVioletDarker,
+          dividerColor: AppColors.englishVioletDarker,
+          indicatorColor: AppColors.coral,
+        ),
       ),
       home: const HomePage(),
       routes: {
