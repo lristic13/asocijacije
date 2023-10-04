@@ -281,5 +281,15 @@ List<String> words = [
   'Pristojno', 'Nepristojno', 'Nerazuman', 'Nedokazan', 'Dokaz', 'Teoretski',
   'Praktično', 'Nedogled', 'Začkoljica', 'Zakazano', 'Rezervisano',
   'Razlikovati', 'Pomešati', 'Potrošiti', 'Uštedeti', 'Osamostaliti se',
-  'Uklopiti se', 'Uplašeno', 'Drška'
+  'Uklopiti se', 'Uplašeno', 'Drška',
+  'Zalizak', 'Divergencija', 'Aspiracija', 'Gozba', 'Pozdrav', 'Renta', 'Koza',
+  'Krofna', 'Eskalacija', 'Eskalirati', 'Samostalno', 'Proba', 'Prosveta',
+  'Radnik', 'Mesečno', 'Nezdravo', 'Štetno', 'Ispisati se', 'Predskazanje',
+  'Utičnica', 'Priručnik', 'Prapostojbina', 'Izveštaj', 'Testiranje',
+  'Samica', 'Slog', 'Osamiti se', 'Raskid', 'Raskinuti', 'Pogoditi',
+  'Izlaz', 'Ulaz', 'Cena', 'Maler', 'Moler', 'Ponuditi', 'Svota', 'Suma',
+  'Sklopiti', 'Obeležiti', 'Spasiti', 'Spas', 'Smrad', 'Lista', 'Rang',
+  'Rangirati', 'Poredak', 'Svet', 'Revizija', 'Evaluacija', 'Evidencija',
+  'Emitovati', 'Emisija', 'Kanal', 'Krov', 'Terasa', 'Roleri', 'Rolšue',
+  'Kandža', 'Kreveljiti se'
 ];
