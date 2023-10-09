@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,6 +19,7 @@ class AppCardsBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    bool shouldBlur = ref.watch(blurProvider);
     return Expanded(
       flex: 4,
       child: Center(
@@ -25,8 +28,12 @@ class AppCardsBuilder extends ConsumerWidget {
                 controller: swiperController,
                 isDisabled: true,
                 cardsCount: ref.read(wordsProvider).wordsToPlay.length + 2,
-                cardBuilder: (context, index, horizontalOffsetPercentage,
-                        verticalOffsetPercentage) =>
+                cardBuilder: (
+                  context,
+                  index,
+                  horizontalOffsetPercentage,
+                  verticalOffsetPercentage,
+                ) =>
                     Center(
                       child: Card(
                         elevation: 10,
@@ -37,12 +44,25 @@ class AppCardsBuilder extends ConsumerWidget {
                           ),
                           height: 360,
                           width: 290,
-                          child: Center(
-                              child: Text(
-                            ref.watch(wordsProvider).wordsToPlay[0],
-                            style: AppStyles.text25VioletBold
-                                .copyWith(fontSize: 28),
-                          )),
+                          child: shouldBlur
+                              ? ImageFiltered(
+                                  imageFilter:
+                                      ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+                                  child: Center(
+                                    child: Text(
+                                      ref.watch(wordsProvider).wordsToPlay[0],
+                                      style: AppStyles.text25VioletBold
+                                          .copyWith(fontSize: 28),
+                                    ),
+                                  ),
+                                )
+                              : Center(
+                                  child: Text(
+                                    ref.watch(wordsProvider).wordsToPlay[0],
+                                    style: AppStyles.text25VioletBold
+                                        .copyWith(fontSize: 28),
+                                  ),
+                                ),
                         ),
                       ),
                     ))

@@ -82,7 +82,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   AppAlignIcon(
-                    align: Alignment.topLeft,
                     icon: Icon(
                       Icons.question_mark_rounded,
                       size: 100,

@@ -21,7 +21,7 @@ import 'package:page_transition/page_transition.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/team.dart';
-import '../../widgets/app_ingame_button.dart';
+import '../../widgets/buttons/app_ingame_button.dart';
 import '../../widgets/app_separator.dart';
 
 class GamePage extends ConsumerStatefulWidget {
@@ -172,6 +172,9 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             box: box,
                             timerCompleted: timerCompleted,
                             cardSwiper: _cardSwiperController,
+                            updateParentState: () {
+                              setState(() {});
+                            },
                           ),
                         ),
                         const SizedBox(height: 10),

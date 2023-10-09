@@ -11,3 +11,5 @@ final wordsProvider = ChangeNotifierProvider<WordsState>(
     (ref) => WordsState(usedWords: [], wordsToPlay: []));
 
 final checkerProvider = StateProvider<bool>((ref) => false);
+
+final blurProvider = StateProvider<bool>((ref) => true);

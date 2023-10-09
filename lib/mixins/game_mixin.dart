@@ -22,6 +22,9 @@ mixin GameMixin {
       ref.read(gameAdminProvider.notifier).state.teamPlaying++;
     }
 
+    ref.read(wordsProvider).wordsToPlay.shuffle();
+    ref.read(blurProvider.notifier).state = true;
+
     Navigator.pushNamedAndRemoveUntil(
         context, AppRoutes.scoreboardPage, (route) => false);
   }

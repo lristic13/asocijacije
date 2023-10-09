@@ -6,11 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 
-import '../constants/app_colors.dart';
-import '../constants/app_strings.dart';
-import '../providers/all_providers.dart';
-import '../util/boxes.dart';
-import 'buttons/base-buttons/app_button_full.dart';
+import '../../constants/app_colors.dart';
+import '../../constants/app_strings.dart';
+import '../../providers/all_providers.dart';
+import '../../util/boxes.dart';
+import 'base-buttons/app_button_full.dart';
 
 class AppInGameButton extends StatefulWidget {
   const AppInGameButton(
@@ -22,6 +22,7 @@ class AppInGameButton extends StatefulWidget {
       required this.box,
       required this.timerCompleted,
       required this.cardSwiper,
+      required this.updateParentState,
       super.key});
 
   final List<String> wordsToPlay;
@@ -32,6 +33,7 @@ class AppInGameButton extends StatefulWidget {
   final Box box;
   final bool timerCompleted;
   final CardSwiperController cardSwiper;
+  final Function updateParentState;
 
   @override
   State<AppInGameButton> createState() => _AppInGameButtonState();
@@ -83,7 +85,9 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
             widget.timerController.start();
           }
 
-          setState(() {});
+          widget.ref.read(blurProvider.notifier).state = false;
+
+          widget.updateParentState();
         },
       );
     }
