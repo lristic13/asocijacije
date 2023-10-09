@@ -1,7 +1,7 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
+import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
 
 import 'instruction_item.dart';
@@ -20,7 +20,7 @@ class InstructionsPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Spacer(),
+              const Spacer(),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

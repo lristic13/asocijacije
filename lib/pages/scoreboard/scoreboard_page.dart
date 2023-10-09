@@ -2,7 +2,7 @@ import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
+import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

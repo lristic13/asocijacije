@@ -17,40 +17,43 @@ class AppCardsBuilder extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Center(
-      child: ref.watch(wordsProvider).wordsToPlay.isNotEmpty
-          ? CardSwiper(
-              controller: swiperController,
-              isDisabled: true,
-              cardsCount: ref.read(wordsProvider).wordsToPlay.length + 2,
-              cardBuilder: (context, index, horizontalOffsetPercentage,
-                      verticalOffsetPercentage) =>
-                  Center(
-                    child: Card(
-                      elevation: 10,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(13),
-                          color: AppColors.white,
+    return Expanded(
+      flex: 4,
+      child: Center(
+        child: ref.watch(wordsProvider).wordsToPlay.isNotEmpty
+            ? CardSwiper(
+                controller: swiperController,
+                isDisabled: true,
+                cardsCount: ref.read(wordsProvider).wordsToPlay.length + 2,
+                cardBuilder: (context, index, horizontalOffsetPercentage,
+                        verticalOffsetPercentage) =>
+                    Center(
+                      child: Card(
+                        elevation: 10,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(13),
+                            color: AppColors.white,
+                          ),
+                          height: 360,
+                          width: 290,
+                          child: Center(
+                              child: Text(
+                            ref.watch(wordsProvider).wordsToPlay[0],
+                            style: AppStyles.text25VioletBold
+                                .copyWith(fontSize: 28),
+                          )),
                         ),
-                        height: 360,
-                        width: 290,
-                        child: Center(
-                            child: Text(
-                          ref.watch(wordsProvider).wordsToPlay[0],
-                          style:
-                              AppStyles.text25VioletBold.copyWith(fontSize: 28),
-                        )),
                       ),
-                    ),
-                  ))
-          : const Center(
-              child: Text(
-                AppStrings.pogodjeneSveReci,
-                textAlign: TextAlign.center,
-                style: AppStyles.text25CoralBold,
+                    ))
+            : const Center(
+                child: Text(
+                  AppStrings.pogodjeneSveReci,
+                  textAlign: TextAlign.center,
+                  style: AppStyles.text25CoralBold,
+                ),
               ),
-            ),
+      ),
     );
   }
 }

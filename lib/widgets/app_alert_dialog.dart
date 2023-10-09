@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_strings.dart';
-import 'buttons/app_button_empty.dart';
-import 'buttons/app_button_full.dart';
+import 'buttons/base-buttons/app_button_empty.dart';
+import 'buttons/base-buttons/app_button_full.dart';
 
 class AppAlertDialog extends StatelessWidget {
   const AppAlertDialog(

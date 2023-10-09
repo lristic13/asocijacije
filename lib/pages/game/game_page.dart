@@ -7,19 +7,21 @@ import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/util/boxes.dart';
 import 'package:asoscijacije_nove/widgets/app_alert_dialog.dart';
 import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
+import 'package:asoscijacije_nove/widgets/app_explaining_column.dart';
 import 'package:asoscijacije_nove/widgets/app_final_score.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_button_empty.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
+import 'package:asoscijacije_nove/widgets/app_timer.dart';
+import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
+import 'package:asoscijacije_nove/widgets/buttons/app_icon_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/team.dart';
+import '../../widgets/app_ingame_button.dart';
 import '../../widgets/app_separator.dart';
 
 class GamePage extends ConsumerStatefulWidget {
@@ -30,7 +32,6 @@ class GamePage extends ConsumerStatefulWidget {
 }
 
 class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
-  final AudioPlayer audio = AudioPlayer();
   final CountDownController _controllerTimer = CountDownController();
   final CardSwiperController _cardSwiperController = CardSwiperController();
 
@@ -107,84 +108,46 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                               ],
                             ),
                             const Spacer(),
-                            IconButton(
-                              onPressed: () {
+                            AppIconButton(
+                              onButtonPressed: () {
                                 _controllerTimer.pause();
                                 setState(() {});
                                 Navigator.push(
                                   context,
                                   PageTransition(
-                                    type: PageTransitionType.topToBottom,
-                                    curve: Curves.easeIn,
-                                    duration: const Duration(milliseconds: 300),
-                                    child: const InstructionsPage(),
-                                  ),
+                                      type: PageTransitionType.topToBottom,
+                                      curve: Curves.easeIn,
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      child: const InstructionsPage()),
                                 );
                               },
-                              icon: const Icon(Icons.info_outline,
-                                  color: AppColors.white),
-                            ),
+                            )
                           ],
                         ),
                         const AppSeparator(color: AppColors.coral),
                         const SizedBox(height: 20),
                         Row(
                           children: [
-                            Expanded(
-                              flex: 4,
-                              child: Center(
-                                child: CircularCountDownTimer(
-                                  controller: _controllerTimer,
-                                  autoStart: false,
-                                  textStyle: AppStyles.text50WhiteBold,
-                                  strokeWidth: 15,
-                                  isReverse: true,
-                                  isReverseAnimation: true,
-                                  width: 150,
-                                  height: 150,
-                                  duration: ref
-                                              .read(gameAdminProvider)
-                                              .roundInProgress ==
-                                          3
-                                      ? 60
-                                      : 45,
-                                  ringColor: AppColors.englishVioletDarker,
-                                  fillColor: AppColors.coral,
-                                  textFormat: CountdownTextFormat.S,
-                                  onComplete: () {
-                                    setState(() {
-                                      timerCompleted = true;
-                                    });
-                                  },
-                                ),
-                              ),
+                            AppTimer(
+                              controllerTimer: _controllerTimer,
+                              ref: ref,
+                              onTimerComplete: () {
+                                setState(() {
+                                  timerCompleted = true;
+                                });
+                              },
                             ),
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    playerExplaining == 1 ? player1 : player2,
-                                    style: AppStyles.text25WhiteBold,
-                                  ),
-                                  const Icon(Icons.arrow_downward_outlined,
-                                      color: AppColors.coral, size: 30),
-                                  Text(
-                                    playerExplaining == 1 ? player2 : player1,
-                                    style: AppStyles.text25WhiteBold,
-                                  )
-                                ],
-                              ),
+                            AppExplainingColumn(
+                              playerExplaining: playerExplaining,
+                              player1: player1,
+                              player2: player2,
                             ),
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Expanded(
-                          flex: 4,
-                          child: AppCardsBuilder(
-                            swiperController: _cardSwiperController,
-                          ),
+                        AppCardsBuilder(
+                          swiperController: _cardSwiperController,
                         ),
                         Expanded(
                           flex: 1,
@@ -200,98 +163,27 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         SizedBox(
                           width: double.infinity,
                           height: 60,
-                          child: _showButton(wordsToPlay, usedWords,
-                              indexToScroll, _controllerTimer),
+                          child: AppInGameButton(
+                            wordsToPlay: wordsToPlay,
+                            usedWords: usedWords,
+                            index: indexToScroll,
+                            timerController: _controllerTimer,
+                            ref: ref,
+                            box: box,
+                            timerCompleted: timerCompleted,
+                            cardSwiper: _cardSwiperController,
+                          ),
                         ),
                         const SizedBox(height: 10),
-                        Visibility(
-                          visible: _controllerTimer.getTime() != '0' &&
-                              _controllerTimer.getTime() != '' &&
-                              !_controllerTimer.isPaused &&
-                              wordsToPlay.isNotEmpty,
-                          child: SizedBox(
-                            width: double.infinity,
-                            height: 40,
-                            child: AppButtonEmpty(
-                              borderColor: AppColors.white,
-                              textColor: AppColors.white,
-                              buttonText: AppStrings.odustani,
-                              textSize: 15,
-                              onPressed: () {
-                                _controllerTimer.pause();
-                                setState(() {});
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => AppAlertDialog(
-                                    title: AppStrings.odustajete,
-                                    content: AppStrings.odustaniAlertContent,
-                                    onPressedNo: () {
-                                      Navigator.of(context).pop();
-                                      _controllerTimer.resume();
-                                      setState(() {});
-                                    },
-                                    onPressedYes: () {
-                                      roundEnd(context, ref);
-                                    },
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                        AppCancelButton(
+                          timerController: _controllerTimer,
+                          wordsToPlay: wordsToPlay,
+                          ref: ref,
                         )
                       ],
                     ),
             ),
           ),
         ));
-  }
-
-  Widget _showButton(List<String> wordsToPlay, List<String> usedWords,
-      int indexToScroll, CountDownController timerController) {
-    if (timerController.getTime() != '0' &&
-        timerController.getTime() != '' &&
-        !timerController.isPaused &&
-        wordsToPlay.isNotEmpty) {
-      return AppButtonFull(
-        fillColor: AppColors.coral,
-        textColor: AppColors.englishVioletDarker,
-        buttonText: AppStrings.sledecaRec,
-        onPressed: () async {
-          await audio.setAsset('assets/sounds/correct-choice.mp3');
-          audio.play();
-          Boxes.addPoints(
-              box, 'tim-${ref.read(gameAdminProvider).teamPlaying}');
-          ref.read(wordsProvider).addWord(wordsToPlay[0]);
-          ref.read(wordsProvider).removeWord(wordsToPlay[0]);
-          _cardSwiperController.swipeLeft();
-          // animateToIndex(indexToScroll++, pageController);
-        },
-      );
-    } else if (timerCompleted || wordsToPlay.isEmpty) {
-      return AppButtonFull(
-        fillColor: AppColors.englishVioletDarker,
-        textColor: AppColors.white,
-        buttonText: AppStrings.sledeciTim,
-        onPressed: () {
-          _controllerTimer.pause();
-          roundEnd(context, ref);
-        },
-      );
-    } else {
-      return AppButtonFull(
-        fillColor: AppColors.englishVioletDarker,
-        textColor: AppColors.white,
-        buttonText: AppStrings.start,
-        onPressed: () {
-          if (timerController.isPaused) {
-            timerController.resume();
-          } else {
-            timerController.start();
-          }
-
-          setState(() {});
-        },
-      );
-    }
   }
 }
