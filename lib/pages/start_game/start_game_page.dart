@@ -71,59 +71,119 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                   ],
                 ),
                 const SizedBox(height: 10),
-                FormBuilderChoiceChip(
-                  backgroundColor: AppColors.white,
-                  onChanged: (value) {
-                    ref.read(playerNumberProvider.notifier).state = value!;
-                  },
-                  alignment: WrapAlignment.center,
-                  spacing: 10,
-                  initialValue: 4,
-                  name: 'players',
-                  options: const [
-                    FormBuilderChipOption(
-                      value: 4,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('4', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
-                      ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 6,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('6', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
-                      ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 8,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('8', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
-                      ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 10,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('10', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.09,
+                  child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 30),
+                      itemCount: 4,
+                      itemBuilder: (context, index) {
+                        bool selected = _isSelected(index);
+                        return GestureDetector(
+                          onTap: () {
+                            ref.read(playerNumberProvider.notifier).state =
+                                (index + 2) * 2;
+                          },
+                          child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 300),
+                              height: 80,
+                              width: 70,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      color: AppColors.coral, width: 1.5),
+                                  color: selected
+                                      ? AppColors.coral
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(13)),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  AnimatedDefaultTextStyle(
+                                    duration: const Duration(milliseconds: 300),
+                                    style: TextStyle(
+                                        fontFamily: 'Geologica',
+                                        fontSize: 36,
+                                        fontWeight: FontWeight.bold,
+                                        color: selected
+                                            ? AppColors.englishViolet
+                                            : AppColors.white),
+                                    child: Text('${(index + 2) * 2}'),
+                                  ),
+                                  AnimatedDefaultTextStyle(
+                                    duration: const Duration(milliseconds: 300),
+                                    style: TextStyle(
+                                        fontFamily: 'Geologica',
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: selected
+                                            ? AppColors.englishViolet
+                                            : AppColors.white),
+                                    child: const Text('igrača'),
+                                  ),
+                                ],
+                              )),
+                        );
+                      }),
                 ),
+
+                // FormBuilderChoiceChip(
+                //   backgroundColor: AppColors.white,
+                //   onChanged: (value) {
+                //     ref.read(playerNumberProvider.notifier).state = value!;
+                //   },
+                //   decoration: InputDecoration(),
+                //   selectedColor: AppColors.coral,
+                //   alignment: WrapAlignment.center,
+                //   spacing: 10,
+                //   initialValue: 4,
+                //   name: 'players',
+                //   options: const [
+                //     FormBuilderChipOption(
+                //       value: 4,
+                //       child: Column(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: [
+                //           Text('4', style: AppStyles.text20VioletDarkerBold),
+                //           Text('igrača',
+                //               style: AppStyles.text20VioletDarkerBold)
+                //         ],
+                //       ),
+                //     ),
+                //     FormBuilderChipOption(
+                //       value: 6,
+                //       child: Row(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: [
+                //           Text('6', style: AppStyles.text20VioletDarkerBold),
+                //           Icon(Icons.person),
+                //         ],
+                //       ),
+                //     ),
+                //     FormBuilderChipOption(
+                //       value: 8,
+                //       child: Row(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: [
+                //           Text('8', style: AppStyles.text20VioletDarkerBold),
+                //           Icon(Icons.person),
+                //         ],
+                //       ),
+                //     ),
+                //     FormBuilderChipOption(
+                //       value: 10,
+                //       child: Row(
+                //         mainAxisSize: MainAxisSize.min,
+                //         children: [
+                //           Text('10', style: AppStyles.text20VioletDarkerBold),
+                //           Icon(Icons.person),
+                //         ],
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 Expanded(
+                  flex: 5,
                   child: SingleChildScrollView(
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
@@ -172,5 +232,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
         ),
       ),
     );
+  }
+
+  bool _isSelected(int index) {
+    return ref.read(playerNumberProvider.notifier).state == (index + 2) * 2;
   }
 }
