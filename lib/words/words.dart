@@ -291,5 +291,14 @@ List<String> words = [
   'Sklopiti', 'Obeležiti', 'Spasiti', 'Spas', 'Smrad', 'Lista', 'Rang',
   'Rangirati', 'Poredak', 'Svet', 'Revizija', 'Evaluacija', 'Evidencija',
   'Emitovati', 'Emisija', 'Kanal', 'Krov', 'Terasa', 'Roleri', 'Rolšue',
-  'Kandža', 'Kreveljiti se'
+  'Kandža', 'Kreveljiti se',
+  'Oduševljenje', 'Statistika', 'Seizmika', 'Podešavati', 'Sedište',
+  'Nasloniti se',
+  'Iskriviti se', 'Sramežljiv', 'Smotano', 'Ispitano', 'Preporučiti',
+  'Preporuka',
+  'Percepcija', 'Recepcija', 'Izričito', 'Stopostotno', 'Žvake', 'Žvakati',
+  'Preživati', 'Osveženje', 'Prekid', 'Pronaći', 'Poreći', 'Spotaći se',
+  'Spojiti', 'Ranoranilac', 'Starosedelac', 'Sistematizovano', 'Isključivo',
+  'Pretpostaviti', 'Poraniti', 'Zakasniti', 'Izgovor', 'Razgovor', 'Dogovor',
+  'Pogovor', 'Predgovor', 'Mirisati', 'Pomirisati', 'Smutiti', 'Mlečno'
 ];
