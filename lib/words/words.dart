@@ -300,5 +300,19 @@ List<String> words = [
   'Preživati', 'Osveženje', 'Prekid', 'Pronaći', 'Poreći', 'Spotaći se',
   'Spojiti', 'Ranoranilac', 'Starosedelac', 'Sistematizovano', 'Isključivo',
   'Pretpostaviti', 'Poraniti', 'Zakasniti', 'Izgovor', 'Razgovor', 'Dogovor',
-  'Pogovor', 'Predgovor', 'Mirisati', 'Pomirisati', 'Smutiti', 'Mlečno'
+  'Pogovor', 'Predgovor', 'Mirisati', 'Pomirisati', 'Smutiti', 'Mlečno',
+  'Kazaljka', 'Podaci', 'Podatak', 'Fotografija', 'Sanduče', 'Poštedeti',
+  'Propagirati', 'Prvenstveno', 'Prvenstvo', 'Klonuti', 'Klovn', 'Pozamašno',
+  'Propast', 'Pristojnost', 'Viseći', 'Virtuoz', 'Prejesti se', 'Najesti se',
+  'Frizura', 'Obraz', 'Jagodica', 'Trepavica', 'Obrve', 'Kosa', 'Brada',
+  'Grlo', 'Vrat', 'Rame', 'Jabučica', 'Duhovnost', 'Uho', 'Brkovi', 'Teme',
+  'Tema', 'Apostrof', 'Navodno', 'Neizbežno', 'Nezakonito', 'Bezakonje',
+  'Hladovina', 'Hladno', 'Prazno', 'Prezime', 'Prizivati', 'Dozivati',
+  'Odazivati', 'Sazvati', 'Sabor', 'Sastanak', 'Dogovoreno', 'Ugovoreno',
+  'Progovoriti', 'Postulat', 'Priprema', 'Pozor', 'Prozor', 'Tašna', 'Jezik',
+  'Studiranje', 'Imenica', 'Pridev', 'Veznik', 'Vesnik', 'Trezan', 'Radnja',
+  'Roba', 'Dron', 'Slon', 'Kaiš', 'Duplja', 'Proslava', 'Pogodba', 'Pogodak',
+  'Strelac', 'Ideologija', 'Astrologija', 'Astronomija', 'Razmera', 'Konzulat',
+  'Kapija', 'Palisada', 'Zid', 'Ambasada', 'Pijaca', 'Heroj', 'Heroina',
+  'Gvožđe', 'Glina', 'Žito', 'Oružje', 'Šlem', 'Oklop', 'Zaštita'
 ];
