@@ -73,24 +73,46 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                 const SizedBox(height: 10),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.09,
-                  child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(width: 30),
-                      itemCount: 4,
-                      itemBuilder: (context, index) {
-                        bool selected = _isSelected(index);
-                        return AppPlayerNumberContainer(
-                          index: index,
-                          selected: selected,
-                          cbOnTap: () {
-                            ref.read(playerNumberProvider.notifier).state =
-                                (index + 2) * 2;
-                            formKeys = generateKeys(ref);
-                          },
-                        );
-                      }),
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppPlayerNumberContainer(
+                        value: 4,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 4;
+                          formKeys = generateKeys(ref);
+                        },
+                      ),
+                      AppPlayerNumberContainer(
+                        value: 6,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 6;
+                          formKeys = generateKeys(ref);
+                        },
+                      ),
+                      AppPlayerNumberContainer(
+                        value: 8,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 8;
+                          formKeys = generateKeys(ref);
+                        },
+                      ),
+                      AppPlayerNumberContainer(
+                        value: 10,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 10;
+                          formKeys = generateKeys(ref);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(height: 10),
                 Expanded(
                   flex: 5,
                   child: SingleChildScrollView(
