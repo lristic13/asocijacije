@@ -20,7 +20,7 @@ class AppTimer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 4,
+      flex: 2,
       child: Center(
         child: CircularCountDownTimer(
           controller: controllerTimer,
@@ -32,7 +32,7 @@ class AppTimer extends StatelessWidget {
           width: 150,
           height: 150,
           duration: ref.read(gameAdminProvider).roundInProgress == 3 ? 60 : 45,
-          ringColor: AppColors.englishVioletDarker,
+          ringColor: AppColors.englishVioletLighter,
           fillColor: AppColors.coral,
           textFormat: CountdownTextFormat.S,
           onComplete: onTimerComplete,

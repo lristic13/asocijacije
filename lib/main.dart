@@ -2,6 +2,7 @@ import 'package:asoscijacije_nove/constants/app_routes.dart';
 import 'package:asoscijacije_nove/models/team.dart';
 import 'package:asoscijacije_nove/pages/game/game_page.dart';
 import 'package:asoscijacije_nove/pages/home/home_page.dart';
+import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
 import 'package:asoscijacije_nove/pages/scoreboard/scoreboard_page.dart';
 import 'package:asoscijacije_nove/pages/start_game/start_game_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.homePage: (context) => const HomePage(),
         AppRoutes.startGamePage: (context) => const StartGamePage(),
         AppRoutes.scoreboardPage: (context) => const ScoreBoardPage(),
+        AppRoutes.instructionsPage: (context) => const InstructionsPage(),
       },
     );
   }

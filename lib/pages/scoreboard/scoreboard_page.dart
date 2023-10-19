@@ -32,7 +32,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
           return false;
         },
         child: Container(
-          decoration: AppStyles.containerGradientViolet,
+          color: AppColors.englishVioletDarker,
           child: Padding(
             padding:
                 const EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 40),
