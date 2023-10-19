@@ -10,7 +10,6 @@ import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
 import 'package:asoscijacije_nove/widgets/app_explaining_row.dart';
 import 'package:asoscijacije_nove/widgets/app_final_score.dart';
 import 'package:asoscijacije_nove/widgets/app_timer.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_icon_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
@@ -172,10 +171,10 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         AppCardsBuilder(
                           swiperController: _cardSwiperController,
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         SizedBox(
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.1,
+                          height: MediaQuery.of(context).size.height * 0.075,
                           child: AppInGameButton(
                             wordsToPlay: wordsToPlay,
                             usedWords: usedWords,

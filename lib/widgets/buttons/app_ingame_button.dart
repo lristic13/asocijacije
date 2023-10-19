@@ -61,7 +61,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
           const SizedBox(width: 10),
           Expanded(
             child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.1,
+              height: MediaQuery.of(context).size.height * 0.075,
               child: AppButtonFull(
                 fillColor: AppColors.coral,
                 textColor: AppColors.englishVioletDarker,

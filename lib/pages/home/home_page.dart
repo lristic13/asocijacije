@@ -1,16 +1,11 @@
-import 'package:asoscijacije_nove/constants/app_routes.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/widgets/app_header_text.dart';
-import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
 import '../../widgets/app_subtitle_text.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -55,7 +50,7 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
               ),
               const AppTitleText(),
               const AppSubtitleText(),
-              const Spacer(),
+              const Spacer(flex: 2),
               MenuCards(swiperController: _cardSwiperController),
               const Spacer(),
             ],
