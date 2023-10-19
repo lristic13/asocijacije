@@ -2,6 +2,7 @@ import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/forms_mixin.dart';
+import 'package:asoscijacije_nove/widgets/app_player_number_container.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   int teamId = 1;
 
   late Box box;
+  List<GlobalKey<FormBuilderState>> formKeys =
+      List.generate(2, (i) => GlobalKey<FormBuilderState>());
   @override
   void initState() {
     super.initState();
@@ -41,9 +44,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<GlobalKey<FormBuilderState>> formKeys = List.generate(
-        ref.watch(playerNumberProvider) ~/ 2,
-        (i) => GlobalKey<FormBuilderState>());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
@@ -80,108 +80,17 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       itemCount: 4,
                       itemBuilder: (context, index) {
                         bool selected = _isSelected(index);
-                        return GestureDetector(
-                          onTap: () {
+                        return AppPlayerNumberContainer(
+                          index: index,
+                          selected: selected,
+                          cbOnTap: () {
                             ref.read(playerNumberProvider.notifier).state =
                                 (index + 2) * 2;
+                            formKeys = generateKeys(ref);
                           },
-                          child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 300),
-                              height: 80,
-                              width: 70,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      color: AppColors.coral, width: 1.5),
-                                  color: selected
-                                      ? AppColors.coral
-                                      : Colors.transparent,
-                                  borderRadius: BorderRadius.circular(13)),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  AnimatedDefaultTextStyle(
-                                    duration: const Duration(milliseconds: 300),
-                                    style: TextStyle(
-                                        fontFamily: 'Geologica',
-                                        fontSize: 36,
-                                        fontWeight: FontWeight.bold,
-                                        color: selected
-                                            ? AppColors.englishViolet
-                                            : AppColors.white),
-                                    child: Text('${(index + 2) * 2}'),
-                                  ),
-                                  AnimatedDefaultTextStyle(
-                                    duration: const Duration(milliseconds: 300),
-                                    style: TextStyle(
-                                        fontFamily: 'Geologica',
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: selected
-                                            ? AppColors.englishViolet
-                                            : AppColors.white),
-                                    child: const Text('igrača'),
-                                  ),
-                                ],
-                              )),
                         );
                       }),
                 ),
-
-                // FormBuilderChoiceChip(
-                //   backgroundColor: AppColors.white,
-                //   onChanged: (value) {
-                //     ref.read(playerNumberProvider.notifier).state = value!;
-                //   },
-                //   decoration: InputDecoration(),
-                //   selectedColor: AppColors.coral,
-                //   alignment: WrapAlignment.center,
-                //   spacing: 10,
-                //   initialValue: 4,
-                //   name: 'players',
-                //   options: const [
-                //     FormBuilderChipOption(
-                //       value: 4,
-                //       child: Column(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           Text('4', style: AppStyles.text20VioletDarkerBold),
-                //           Text('igrača',
-                //               style: AppStyles.text20VioletDarkerBold)
-                //         ],
-                //       ),
-                //     ),
-                //     FormBuilderChipOption(
-                //       value: 6,
-                //       child: Row(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           Text('6', style: AppStyles.text20VioletDarkerBold),
-                //           Icon(Icons.person),
-                //         ],
-                //       ),
-                //     ),
-                //     FormBuilderChipOption(
-                //       value: 8,
-                //       child: Row(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           Text('8', style: AppStyles.text20VioletDarkerBold),
-                //           Icon(Icons.person),
-                //         ],
-                //       ),
-                //     ),
-                //     FormBuilderChipOption(
-                //       value: 10,
-                //       child: Row(
-                //         mainAxisSize: MainAxisSize.min,
-                //         children: [
-                //           Text('10', style: AppStyles.text20VioletDarkerBold),
-                //           Icon(Icons.person),
-                //         ],
-                //       ),
-                //     ),
-                //   ],
-                // ),
                 Expanded(
                   flex: 5,
                   child: SingleChildScrollView(

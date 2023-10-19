@@ -1,28 +1,28 @@
+import 'package:asoscijacije_nove/constants/app_routes.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/widgets/app_align_icon.dart';
-import 'package:asoscijacije_nove/widgets/app_animated_menu_card.dart';
 import 'package:asoscijacije_nove/widgets/app_header_text.dart';
+import 'package:asoscijacije_nove/widgets/app_separator.dart';
+import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 import '../../constants/app_colors.dart';
 import '../../constants/app_strings.dart';
-import '../../models/team.dart';
 import '../../widgets/app_subtitle_text.dart';
-import '../../widgets/cards/menu_card.dart';
-import '../instructions/instructions_page.dart';
-import '../start_game/start_game_page.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  ConsumerState<HomePage> createState() => _HomePageConsumerState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageConsumerState extends ConsumerState<HomePage> {
+  final CardSwiperController _cardSwiperController = CardSwiperController();
+
   @override
   void initState() {
     _checkForUpdate();
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: AppStyles.containerGradientViolet,
+        color: AppColors.englishVioletDarker,
         child: Padding(
           padding: const EdgeInsets.only(
             top: 50,
@@ -46,70 +46,17 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
+              const Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Align(
+                    alignment: Alignment.centerRight,
+                    child: Icon(Icons.question_answer_rounded,
+                        size: 75, color: AppColors.englishVioletLighter)),
+              ),
               const AppTitleText(),
               const AppSubtitleText(),
               const Spacer(),
-              const Stack(
-                children: [
-                  AppAnimatedMenuCard(
-                    targetPage: StartGamePage(),
-                    menuCardTitle: AppStrings.pocniIgru,
-                    menuCardIcon: Icon(
-                      Icons.play_arrow_rounded,
-                      size: 45,
-                      color: AppColors.white,
-                    ),
-                  ),
-                  AppAlignIcon(
-                    align: Alignment.topRight,
-                    icon: Icon(
-                      Icons.question_answer_rounded,
-                      size: 100,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              const Stack(
-                children: [
-                  AppAnimatedMenuCard(
-                    targetPage: InstructionsPage(),
-                    menuCardTitle: AppStrings.uputstvaZaIgru,
-                    menuCardIcon: Icon(
-                      Icons.rule_sharp,
-                      size: 45,
-                      color: AppColors.white,
-                    ),
-                  ),
-                  AppAlignIcon(
-                    icon: Icon(
-                      Icons.question_mark_rounded,
-                      size: 100,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 30),
-              MenuCard(
-                title: AppStrings.izlaz,
-                icon: const Icon(
-                  Icons.exit_to_app_rounded,
-                  size: 40,
-                  color: AppColors.white,
-                ),
-                colors: const [
-                  AppColors.englishVioletDarker,
-                  AppColors.englishViolet,
-                ],
-                alignment: CrossAxisAlignment.start,
-                rowAlignment: MainAxisAlignment.start,
-                onTap: () async {
-                  if (Hive.isBoxOpen('teams')) {
-                    await Hive.box<Team>('teams').close();
-                  }
-                  SystemNavigator.pop();
-                },
-              ),
+              MenuCards(swiperController: _cardSwiperController),
               const Spacer(),
             ],
           ),

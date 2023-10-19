@@ -125,6 +125,11 @@ class AppStyles {
     fontWeight: FontWeight.w900,
     color: AppColors.white,
   );
+  static const TextStyle text60VioletLighterBold = TextStyle(
+    fontSize: 60,
+    fontWeight: FontWeight.w800,
+    color: AppColors.englishVioletLighter,
+  );
 
   // Container
   static const BoxDecoration containerGradientViolet = BoxDecoration(

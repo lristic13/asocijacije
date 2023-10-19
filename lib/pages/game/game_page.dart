@@ -7,7 +7,7 @@ import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/util/boxes.dart';
 import 'package:asoscijacije_nove/widgets/app_alert_dialog.dart';
 import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
-import 'package:asoscijacije_nove/widgets/app_explaining_column.dart';
+import 'package:asoscijacije_nove/widgets/app_explaining_row.dart';
 import 'package:asoscijacije_nove/widgets/app_final_score.dart';
 import 'package:asoscijacije_nove/widgets/app_timer.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
@@ -89,9 +89,9 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
             return Future.value(true);
           },
           child: Container(
-            decoration: AppStyles.containerGradientViolet,
+            color: AppColors.englishVioletDarker,
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+              padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
               child: ref.read(gameAdminProvider).roundInProgress == 4
                   ? AppFinalScore(box: box)
                   : Column(
@@ -138,31 +138,44 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                                 });
                               },
                             ),
-                            AppExplainingColumn(
-                              playerExplaining: playerExplaining,
-                              player1: player1,
-                              player2: player2,
+                            Expanded(
+                              flex: 2,
+                              child: Center(
+                                child: ValueListenableBuilder(
+                                  valueListenable: box.listenable(),
+                                  builder: (context, Box<Team> box, _) =>
+                                      Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      const Text(AppStrings.poeni,
+                                          style: AppStyles.text35WhiteBold),
+                                      Text(
+                                          Boxes.getTeamById(box,
+                                                  'tim-${ref.read(gameAdminProvider).teamPlaying}')
+                                              .points
+                                              .toString(),
+                                          style: AppStyles
+                                              .text60VioletLighterBold),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 20),
+                        AppExplainingRow(
+                          playerExplaining: playerExplaining,
+                          player1: player1,
+                          player2: player2,
+                        ),
                         AppCardsBuilder(
                           swiperController: _cardSwiperController,
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Center(
-                            child: ValueListenableBuilder(
-                              valueListenable: box.listenable(),
-                              builder: (context, Box<Team> box, _) => Text(
-                                  '${AppStrings.poeni}: ${Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}').points.toString()}',
-                                  style: AppStyles.text35WhiteBold),
-                            ),
-                          ),
-                        ),
+                        SizedBox(height: 10),
                         SizedBox(
                           width: double.infinity,
-                          height: 60,
+                          height: MediaQuery.of(context).size.height * 0.1,
                           child: AppInGameButton(
                             wordsToPlay: wordsToPlay,
                             usedWords: usedWords,
@@ -177,12 +190,6 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             },
                           ),
                         ),
-                        const SizedBox(height: 10),
-                        AppCancelButton(
-                          timerController: _controllerTimer,
-                          wordsToPlay: wordsToPlay,
-                          ref: ref,
-                        )
                       ],
                     ),
             ),

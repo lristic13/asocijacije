@@ -4,7 +4,7 @@ import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class TeamCard extends StatefulWidget {
+class TeamCard extends StatelessWidget {
   const TeamCard(this.formKey, this.index, this.height, {super.key});
 
   final double height;
@@ -12,26 +12,21 @@ class TeamCard extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
-  State<TeamCard> createState() => _TeamCardState();
-}
-
-class _TeamCardState extends State<TeamCard> {
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.225,
-      child: Card(
-        elevation: 5,
-        child: Container(
-          decoration: AppStyles.containerGradientViolet.copyWith(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                  color: AppColors.englishVioletMoreLighter, width: 3)),
-          child: FormBuilder(
-            onChanged: () {
-              widget.formKey.currentState!.save();
-            },
-            key: widget.formKey,
+      child: FormBuilder(
+        onChanged: () {
+          formKey.currentState!.save();
+        },
+        key: formKey,
+        child: Card(
+          elevation: 5,
+          child: Container(
+            decoration: AppStyles.containerGradientViolet.copyWith(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                    color: AppColors.englishVioletMoreLighter, width: 3)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +37,7 @@ class _TeamCardState extends State<TeamCard> {
                   child: Row(
                     children: [
                       Text(
-                        'Tim ${widget.index + 1}',
+                        'Tim ${index + 1}',
                         style: AppStyles.text30WhiteBold,
                       ),
                       const Text(

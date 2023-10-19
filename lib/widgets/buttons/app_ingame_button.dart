@@ -1,4 +1,5 @@
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
+import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -48,24 +49,43 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
         widget.timerController.getTime() != '' &&
         !widget.timerController.isPaused &&
         widget.wordsToPlay.isNotEmpty) {
-      return AppButtonFull(
-        fillColor: AppColors.coral,
-        textColor: AppColors.englishVioletDarker,
-        buttonText: AppStrings.sledecaRec,
-        onPressed: () async {
-          await audio.setAsset('assets/sounds/correct-choice.mp3');
-          audio.play();
-          Boxes.addPoints(widget.box,
-              'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
-          widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
-          widget.ref.read(wordsProvider).removeWord(widget.wordsToPlay[0]);
-          widget.cardSwiper.swipeLeft();
-          // animateToIndex(indexToScroll++, pageController);
-        },
+      return Row(
+        children: [
+          Expanded(
+            child: AppCancelButton(
+              timerController: widget.timerController,
+              wordsToPlay: widget.wordsToPlay,
+              ref: widget.ref,
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.1,
+              child: AppButtonFull(
+                fillColor: AppColors.coral,
+                textColor: AppColors.englishVioletDarker,
+                buttonText: AppStrings.sledecaRec,
+                onPressed: () async {
+                  await audio.setAsset('assets/sounds/correct-choice.mp3');
+                  audio.play();
+                  Boxes.addPoints(widget.box,
+                      'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
+                  widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
+                  widget.ref
+                      .read(wordsProvider)
+                      .removeWord(widget.wordsToPlay[0]);
+                  widget.cardSwiper.swipeLeft();
+                  // animateToIndex(indexToScroll++, pageController);
+                },
+              ),
+            ),
+          ),
+        ],
       );
     } else if (widget.timerCompleted || widget.wordsToPlay.isEmpty) {
       return AppButtonFull(
-        fillColor: AppColors.englishVioletDarker,
+        fillColor: AppColors.englishVioletLighter,
         textColor: AppColors.white,
         buttonText: AppStrings.sledeciTim,
         onPressed: () {
@@ -75,8 +95,8 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
       );
     } else {
       return AppButtonFull(
-        fillColor: AppColors.englishVioletDarker,
-        textColor: AppColors.white,
+        fillColor: AppColors.englishVioletLighter,
+        textColor: AppColors.englishVioletDarker,
         buttonText: AppStrings.start,
         onPressed: () {
           if (widget.timerController.isPaused) {
