@@ -4,14 +4,15 @@ import 'package:asoscijacije_nove/mixins/home_cards_mixin.dart';
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MenuCards extends StatelessWidget with HomeCardsMixin {
+class MenuCards extends ConsumerWidget with HomeCardsMixin {
   const MenuCards({required this.swiperController, super.key});
 
   final CardSwiperController swiperController;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Expanded(
       flex: 4,
       child: CardSwiper(
@@ -62,7 +63,7 @@ class MenuCards extends StatelessWidget with HomeCardsMixin {
                       ),
                       Center(
                         child: IconButton(
-                            onPressed: determineTap(context, index),
+                            onPressed: determineTap(ref, context, index),
                             icon: determineIcon(context, index)),
                       ),
                       const Align(

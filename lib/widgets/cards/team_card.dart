@@ -14,7 +14,6 @@ class TeamCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.225,
       child: FormBuilder(
         onChanged: () {
           formKey.currentState!.save();
@@ -47,7 +46,6 @@ class TeamCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Spacer(),
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: 15, left: 20, right: 20),
@@ -58,15 +56,8 @@ class TeamCard extends StatelessWidget {
                           child: FormBuilderTextField(
                         style: const TextStyle(
                             color: AppColors.englishVioletMoreLighter),
-                        decoration: InputDecoration(
-                          focusedErrorBorder: AppStyles.focusedErrorBorder,
-                          errorBorder: AppStyles.errorBorder,
+                        decoration: AppStyles.errorInputDecoration.copyWith(
                           label: const Text(AppStrings.ime1Igraca),
-                          labelStyle: const TextStyle(color: AppColors.white),
-                          errorStyle: const TextStyle(color: AppColors.coral),
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          enabledBorder: AppStyles.enabledBorder,
-                          focusedBorder: AppStyles.focusedBorder,
                         ),
                         name: 'player1',
                         validator: (value) {
@@ -79,28 +70,22 @@ class TeamCard extends StatelessWidget {
                       )),
                       const SizedBox(width: 20),
                       Expanded(
-                          child: FormBuilderTextField(
-                        style: const TextStyle(
-                            color: AppColors.englishVioletMoreLighter),
-                        name: 'player2',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.unesiteImeIgraca;
-                          }
+                        child: FormBuilderTextField(
+                          style: const TextStyle(
+                              color: AppColors.englishVioletMoreLighter),
+                          decoration: AppStyles.errorInputDecoration.copyWith(
+                            label: const Text(AppStrings.ime2Igraca),
+                          ),
+                          name: 'player2',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.unesiteImeIgraca;
+                            }
 
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          focusedErrorBorder: AppStyles.focusedErrorBorder,
-                          errorBorder: AppStyles.errorBorder,
-                          label: const Text(AppStrings.ime2Igraca),
-                          labelStyle: const TextStyle(color: AppColors.white),
-                          errorStyle: const TextStyle(color: AppColors.coral),
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          enabledBorder: AppStyles.enabledBorder,
-                          focusedBorder: AppStyles.focusedBorder,
+                            return null;
+                          },
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 ),

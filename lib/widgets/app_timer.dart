@@ -30,7 +30,7 @@ class AppTimer extends StatelessWidget {
           isReverse: true,
           isReverseAnimation: true,
           width: 150,
-          height: 150,
+          height: MediaQuery.of(context).size.height * 0.2,
           duration: ref.read(gameAdminProvider).roundInProgress == 3 ? 60 : 45,
           ringColor: AppColors.englishVioletLighter,
           fillColor: AppColors.coral,

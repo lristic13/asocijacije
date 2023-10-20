@@ -30,6 +30,7 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(13)),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.min,
             children: [
               AnimatedDefaultTextStyle(

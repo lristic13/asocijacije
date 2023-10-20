@@ -51,11 +51,10 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -71,7 +70,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.09,
                   width: double.infinity,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,7 +109,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                     ],
                   ),
                 ),
-                const SizedBox(height: 10),
                 Expanded(
                   flex: 5,
                   child: SingleChildScrollView(
