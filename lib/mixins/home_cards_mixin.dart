@@ -20,11 +20,12 @@ mixin HomeCardsMixin {
     }
   }
 
-  Icon determineIcon(int index) {
+  Icon determineIcon(BuildContext context, int index) {
     switch (index) {
       case 1:
-        return const Icon(Icons.play_arrow_rounded,
-            size: 200, color: AppColors.englishVioletDarker);
+        return Icon(Icons.play_arrow_rounded,
+            size: MediaQuery.of(context).size.height * 0.225,
+            color: AppColors.englishVioletDarker);
       case 2:
         return const Icon(Icons.rule_rounded,
             size: 150, color: AppColors.englishVioletDarker);

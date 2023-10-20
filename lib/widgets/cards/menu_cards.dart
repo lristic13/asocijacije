@@ -13,7 +13,7 @@ class MenuCards extends StatelessWidget with HomeCardsMixin {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 8,
+      flex: 4,
       child: CardSwiper(
         controller: swiperController,
         initialIndex: 1,
@@ -63,7 +63,7 @@ class MenuCards extends StatelessWidget with HomeCardsMixin {
                       Center(
                         child: IconButton(
                             onPressed: determineTap(context, index),
-                            icon: determineIcon(index)),
+                            icon: determineIcon(context, index)),
                       ),
                       const Align(
                         alignment: Alignment.centerRight,

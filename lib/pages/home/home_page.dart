@@ -32,7 +32,7 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
         color: AppColors.englishVioletDarker,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: 50,
+            top: 20,
             left: 20,
             right: 20,
           ),
@@ -40,7 +40,6 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
               const Padding(
                 padding: EdgeInsets.only(right: 10.0),
                 child: Align(
@@ -50,9 +49,8 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
               ),
               const AppTitleText(),
               const AppSubtitleText(),
-              const Spacer(flex: 2),
+              const Spacer(flex: 1),
               MenuCards(swiperController: _cardSwiperController),
-              const Spacer(),
             ],
           ),
         ),

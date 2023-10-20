@@ -14,7 +14,6 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
   final Function()? cbOnTap;
   final int value;
   final WidgetRef ref;
-  
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,9 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
           width: 70,
           decoration: BoxDecoration(
               border: Border.all(color: AppColors.coral, width: 1.5),
-              color: value == ref.read(playerNumberProvider) ? AppColors.coral : Colors.transparent,
+              color: value == ref.read(playerNumberProvider)
+                  ? AppColors.coral
+                  : Colors.transparent,
               borderRadius: BorderRadius.circular(13)),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -37,8 +38,9 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                     fontFamily: 'Geologica',
                     fontSize: 36,
                     fontWeight: FontWeight.bold,
-                    color:
-                        value == ref.read(playerNumberProvider) ? AppColors.englishViolet : AppColors.white),
+                    color: value == ref.read(playerNumberProvider)
+                        ? AppColors.englishViolet
+                        : AppColors.white),
                 child: Text(value.toString()),
               ),
               AnimatedDefaultTextStyle(
@@ -47,8 +49,9 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                     fontFamily: 'Geologica',
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
-                    color:
-                        value == ref.read(playerNumberProvider) ? AppColors.englishViolet : AppColors.white),
+                    color: value == ref.read(playerNumberProvider)
+                        ? AppColors.englishViolet
+                        : AppColors.white),
                 child: const Text('igrača'),
               ),
             ],

@@ -34,7 +34,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
       await Hive.openBox<Team>('teams');
       box = Hive.box<Team>('teams')..clear();
     });
-    ref.read(playerNumberProvider.notifier).state = 4;
   }
 
   @override
