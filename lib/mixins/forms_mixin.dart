@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import '../models/team.dart';
 import '../pages/game/game_page.dart';
 import '../providers/all_providers.dart';
-import '../words/words.dart';
+import '../words/new_words.dart';
 
 mixin FormsMixin {
   void validateForms(BuildContext context, WidgetRef ref,
@@ -26,6 +26,7 @@ mixin FormsMixin {
         );
 
         box.put('tim-${teamId++}', team);
+        ref.read(blurProvider.notifier).state = true;
       }
     }
     if (ref.read(checkerProvider) && context.mounted) {
@@ -41,5 +42,10 @@ mixin FormsMixin {
           PageTransition(
               child: const GamePage(), type: PageTransitionType.leftToRight));
     }
+  }
+
+  List<GlobalKey<FormBuilderState>> generateKeys(WidgetRef ref) {
+    return List.generate(ref.read(playerNumberProvider) ~/ 2,
+        (i) => GlobalKey<FormBuilderState>());
   }
 }

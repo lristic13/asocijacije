@@ -1,4 +1,4 @@
-![](designs/banner.png)
+![](designs/1.png)
 # Asocijacije.
 
 Popularna društvena igra, ali sa 3 vrste rundi - Normalna, Jedna reč i Pantomima.

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class TeamCard extends StatefulWidget {
+class TeamCard extends StatelessWidget {
   const TeamCard(this.formKey, this.index, this.height, {super.key});
 
   final double height;
@@ -12,26 +12,20 @@ class TeamCard extends StatefulWidget {
   final GlobalKey<FormBuilderState> formKey;
 
   @override
-  State<TeamCard> createState() => _TeamCardState();
-}
-
-class _TeamCardState extends State<TeamCard> {
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.225,
-      child: Card(
-        elevation: 5,
-        child: Container(
-          decoration: AppStyles.containerGradientViolet.copyWith(
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                  color: AppColors.englishVioletMoreLighter, width: 3)),
-          child: FormBuilder(
-            onChanged: () {
-              widget.formKey.currentState!.save();
-            },
-            key: widget.formKey,
+      child: FormBuilder(
+        onChanged: () {
+          formKey.currentState!.save();
+        },
+        key: formKey,
+        child: Card(
+          elevation: 5,
+          child: Container(
+            decoration: AppStyles.containerGradientViolet.copyWith(
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                    color: AppColors.englishVioletMoreLighter, width: 3)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +36,7 @@ class _TeamCardState extends State<TeamCard> {
                   child: Row(
                     children: [
                       Text(
-                        '${AppLocalizations.of(context)!.tim} ${widget.index + 1}',
+                        '${AppLocalizations.of(context)!.tim} ${index + 1}',
                         style: AppStyles.text30WhiteBold,
                       ),
                       const Text(
@@ -52,7 +46,6 @@ class _TeamCardState extends State<TeamCard> {
                     ],
                   ),
                 ),
-                const Spacer(),
                 Padding(
                   padding:
                       const EdgeInsets.only(bottom: 15, left: 20, right: 20),
@@ -63,15 +56,8 @@ class _TeamCardState extends State<TeamCard> {
                           child: FormBuilderTextField(
                         style: const TextStyle(
                             color: AppColors.englishVioletMoreLighter),
-                        decoration: InputDecoration(
-                          focusedErrorBorder: AppStyles.focusedErrorBorder,
-                          errorBorder: AppStyles.errorBorder,
+                        decoration: AppStyles.errorInputDecoration.copyWith(
                           label: Text(AppLocalizations.of(context)!.ime1Igraca),
-                          labelStyle: const TextStyle(color: AppColors.white),
-                          errorStyle: const TextStyle(color: AppColors.coral),
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          enabledBorder: AppStyles.enabledBorder,
-                          focusedBorder: AppStyles.focusedBorder,
                         ),
                         name: 'player1',
                         validator: (value) {
@@ -85,29 +71,24 @@ class _TeamCardState extends State<TeamCard> {
                       )),
                       const SizedBox(width: 20),
                       Expanded(
-                          child: FormBuilderTextField(
-                        style: const TextStyle(
-                            color: AppColors.englishVioletMoreLighter),
-                        name: 'player2',
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppLocalizations.of(context)!
-                                .unesiteImeIgraca;
-                          }
+                        child: FormBuilderTextField(
+                          style: const TextStyle(
+                              color: AppColors.englishVioletMoreLighter),
+                          decoration: AppStyles.errorInputDecoration.copyWith(
+                            label:
+                                Text(AppLocalizations.of(context)!.ime2Igraca),
+                          ),
+                          name: 'player2',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .unesiteImeIgraca;
+                            }
 
-                          return null;
-                        },
-                        decoration: InputDecoration(
-                          focusedErrorBorder: AppStyles.focusedErrorBorder,
-                          errorBorder: AppStyles.errorBorder,
-                          label: Text(AppLocalizations.of(context)!.ime2Igraca),
-                          labelStyle: const TextStyle(color: AppColors.white),
-                          errorStyle: const TextStyle(color: AppColors.coral),
-                          contentPadding: const EdgeInsets.only(left: 10),
-                          enabledBorder: AppStyles.enabledBorder,
-                          focusedBorder: AppStyles.focusedBorder,
+                            return null;
+                          },
                         ),
-                      )),
+                      ),
                     ],
                   ),
                 ),

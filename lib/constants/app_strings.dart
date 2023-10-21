@@ -40,6 +40,7 @@ class AppStrings {
   static const String rezultat = 'Rezultat';
   static const String rezultatUput =
       'Rezultat se sabira kroz runde, tim sa najviše poena je pobednički.';
+  static const String saPapiricaUAplikaciju = 'sa papirića u aplikaciju!';
   static const String sledecaRec = 'Sledeća reč';
   static const String sledeciTim = 'Sledeći tim';
   static const String sledeciIgraTim = 'Sledeći igra Tim';

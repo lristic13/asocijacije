@@ -125,6 +125,11 @@ class AppStyles {
     fontWeight: FontWeight.w900,
     color: AppColors.white,
   );
+  static const TextStyle text60VioletLighterBold = TextStyle(
+    fontSize: 60,
+    fontWeight: FontWeight.w800,
+    color: AppColors.englishVioletLighter,
+  );
 
   // Container
   static const BoxDecoration containerGradientViolet = BoxDecoration(
@@ -162,4 +167,14 @@ class AppStyles {
       borderSide:
           const BorderSide(color: AppColors.englishVioletMoreLighter, width: 3),
       borderRadius: BorderRadius.circular(13));
+
+  static final errorInputDecoration = InputDecoration(
+    focusedErrorBorder: AppStyles.focusedErrorBorder,
+    errorBorder: AppStyles.errorBorder,
+    labelStyle: const TextStyle(color: AppColors.white),
+    errorStyle: const TextStyle(color: AppColors.coral, fontSize: 10),
+    contentPadding: const EdgeInsets.only(left: 10),
+    enabledBorder: AppStyles.enabledBorder,
+    focusedBorder: AppStyles.focusedBorder,
+  );
 }
