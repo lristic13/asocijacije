@@ -40,16 +40,10 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Padding(
-                padding: EdgeInsets.only(right: 10.0),
-                child: Align(
-                    alignment: Alignment.centerRight,
-                    child: Icon(Icons.question_answer_rounded,
-                        size: 75, color: AppColors.englishVioletLighter)),
-              ),
+              const Spacer(),
               const AppTitleText(),
               const AppSubtitleText(),
-              const Spacer(flex: 1),
+              const Spacer(),
               MenuCards(swiperController: _cardSwiperController),
             ],
           ),

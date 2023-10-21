@@ -15,9 +15,11 @@ import 'firebase_options.dart';
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(TeamAdapter());
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(
-      DevicePreview(builder: (context) => const ProviderScope(child: MyApp())));
+  await Firebase.initializeApp(
+    name: 'asocijacije',
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -26,8 +28,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: DevicePreview.locale(context),
-      builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

@@ -21,7 +21,6 @@ class AppCardsBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     bool shouldBlur = ref.watch(blurProvider);
-    print(shouldBlur);
     return Expanded(
       flex: 4,
       child: Center(
