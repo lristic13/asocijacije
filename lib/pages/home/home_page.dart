@@ -1,5 +1,7 @@
+import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/widgets/app_header_text.dart';
 import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
+import 'package:country_flags/country_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,6 +43,52 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                      foregroundDecoration:
+                          ref.watch(localeProvider) != const Locale('sr')
+                              ? const BoxDecoration(
+                                  color: Colors.grey,
+                                  backgroundBlendMode: BlendMode.saturation,
+                                )
+                              : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
+                        child: InkWell(
+                          onTap: () {
+                            ref.read(localeProvider.notifier).state =
+                                const Locale('sr');
+                          },
+                          child: CountryFlag.fromCountryCode('rs',
+                              height: 30, width: 30),
+                        ),
+                      )),
+                  const SizedBox(width: 20),
+                  Container(
+                      foregroundDecoration:
+                          ref.watch(localeProvider) != const Locale('us')
+                              ? const BoxDecoration(
+                                  color: Colors.grey,
+                                  backgroundBlendMode: BlendMode.saturation,
+                                )
+                              : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 2),
+                        child: InkWell(
+                          onTap: () {
+                            ref.read(localeProvider.notifier).state =
+                                const Locale('us');
+                          },
+                          child: CountryFlag.fromCountryCode('us',
+                              height: 30, width: 30),
+                        ),
+                      )),
+                ],
+              ),
               const Spacer(),
               const AppTitleText(),
               const AppSubtitleText(),
