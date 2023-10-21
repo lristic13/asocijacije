@@ -9,7 +9,7 @@ import '../constants/app_styles.dart';
 import '../models/team.dart';
 import '../providers/all_providers.dart';
 import '../util/boxes.dart';
-import 'buttons/app_button_full.dart';
+import 'buttons/base-buttons/app_button_full.dart';
 
 class AppFinalScore extends ConsumerWidget {
   const AppFinalScore({required this.box, super.key});

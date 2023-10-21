@@ -14,3 +14,4 @@ final wordsProvider = ChangeNotifierProvider<WordsState>(
 final checkerProvider = StateProvider<bool>((ref) => false);
 
 final localeProvider = StateProvider<Locale>((ref) => const Locale('sr'));
+final blurProvider = StateProvider<bool>((ref) => true);

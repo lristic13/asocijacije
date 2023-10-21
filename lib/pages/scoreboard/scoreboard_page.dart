@@ -2,7 +2,7 @@ import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_button_full.dart';
+import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +32,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
           return false;
         },
         child: Container(
-          decoration: AppStyles.containerGradientViolet,
+          color: AppColors.englishVioletDarker,
           child: Padding(
             padding:
                 const EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 40),
@@ -57,7 +57,6 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                         elevation: 5,
                         color: AppColors.white,
                         child: Container(
-                          height: MediaQuery.sizeOf(context).height * 0.125,
                           decoration: BoxDecoration(
                             border:
                                 Border.all(color: AppColors.coral, width: 3),
@@ -74,7 +73,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 30.0,
-                              vertical: 2.5,
+                              vertical: 10,
                             ),
                             child: Row(
                               children: [
