@@ -1,11 +1,13 @@
 {
     "language": "Srpski",
+    "asocijacije": "Asocijacije",
     "saPapiricaUApp": "sa papirića u aplikaciju!",
     "pocniIgru": "Počni igru",
     "uputstvaZaIgru": "Uputstva za igru",
     "izlaz": "Izlaz",
     "ime1Igraca": "Ime 1.igrača",
     "ime2Igraca": "Ime 2.igrača",
+    "igraca": "igrača",
     "dalje": "Dalje",
     "nazad": "Nazad",
     "tim": "Tim",
