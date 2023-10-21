@@ -29,16 +29,14 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
     return Visibility(
       visible: widget.timerController.getTime() != '0' &&
           widget.timerController.getTime() != '' &&
-          !widget.timerController.isPaused &&
           widget.wordsToPlay.isNotEmpty,
       child: SizedBox(
         width: double.infinity,
-        height: 40,
+        height: MediaQuery.of(context).size.height * 0.075,
         child: AppButtonEmpty(
           borderColor: AppColors.white,
           textColor: AppColors.white,
           buttonText: AppStrings.odustani,
-          textSize: 15,
           onPressed: () {
             widget.timerController.pause();
             setState(() {});
