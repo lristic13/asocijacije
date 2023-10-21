@@ -2,6 +2,7 @@ import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/forms_mixin.dart';
+import 'package:asoscijacije_nove/widgets/app_player_number_container.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,8 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   int teamId = 1;
 
   late Box box;
+  List<GlobalKey<FormBuilderState>> formKeys =
+      List.generate(2, (i) => GlobalKey<FormBuilderState>());
   @override
   void initState() {
     super.initState();
@@ -31,7 +34,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
       await Hive.openBox<Team>('teams');
       box = Hive.box<Team>('teams')..clear();
     });
-    ref.read(playerNumberProvider.notifier).state = 4;
   }
 
   @override
@@ -41,9 +43,6 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
 
   @override
   Widget build(BuildContext context) {
-    List<GlobalKey<FormBuilderState>> formKeys = List.generate(
-        ref.watch(playerNumberProvider) ~/ 2,
-        (i) => GlobalKey<FormBuilderState>());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
@@ -52,11 +51,10 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 30),
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -71,59 +69,48 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                   ],
                 ),
                 const SizedBox(height: 10),
-                FormBuilderChoiceChip(
-                  backgroundColor: AppColors.white,
-                  onChanged: (value) {
-                    ref.read(playerNumberProvider.notifier).state = value!;
-                  },
-                  alignment: WrapAlignment.center,
-                  spacing: 10,
-                  initialValue: 4,
-                  name: 'players',
-                  options: const [
-                    FormBuilderChipOption(
-                      value: 4,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('4', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
+                SizedBox(
+                  width: double.infinity,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      AppPlayerNumberContainer(
+                        value: 4,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 4;
+                          formKeys = generateKeys(ref);
+                        },
                       ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 6,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('6', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
+                      AppPlayerNumberContainer(
+                        value: 6,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 6;
+                          formKeys = generateKeys(ref);
+                        },
                       ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 8,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('8', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
+                      AppPlayerNumberContainer(
+                        value: 8,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 8;
+                          formKeys = generateKeys(ref);
+                        },
                       ),
-                    ),
-                    FormBuilderChipOption(
-                      value: 10,
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('10', style: AppStyles.text20VioletDarkerBold),
-                          Icon(Icons.person),
-                        ],
+                      AppPlayerNumberContainer(
+                        value: 10,
+                        ref: ref,
+                        cbOnTap: () {
+                          ref.read(playerNumberProvider.notifier).state = 10;
+                          formKeys = generateKeys(ref);
+                        },
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Expanded(
+                  flex: 5,
                   child: SingleChildScrollView(
                     child: ListView.builder(
                       physics: const NeverScrollableScrollPhysics(),
@@ -172,5 +159,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
         ),
       ),
     );
+  }
+
+  bool _isSelected(int index) {
+    return ref.read(playerNumberProvider.notifier).state == (index + 2) * 2;
   }
 }
