@@ -35,8 +35,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.18.0
-  circle_flags: ^3.0.1
-  country_flags: ^2.1.1
   just_audio: ^0.9.34
   page_transition: ^2.0.9
   riverpod: ^2.3.6
