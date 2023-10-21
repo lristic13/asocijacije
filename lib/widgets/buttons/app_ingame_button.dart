@@ -8,10 +8,10 @@ import 'package:hive/hive.dart';
 import 'package:just_audio/just_audio.dart';
 
 import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
 import '../../providers/all_providers.dart';
 import '../../util/boxes.dart';
 import 'base-buttons/app_button_full.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppInGameButton extends StatefulWidget {
   const AppInGameButton(
@@ -65,7 +65,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
               child: AppButtonFull(
                 fillColor: AppColors.coral,
                 textColor: AppColors.englishVioletDarker,
-                buttonText: AppStrings.sledecaRec,
+                buttonText: AppLocalizations.of(context)!.sledecaRec,
                 onPressed: () async {
                   await audio.setAsset('assets/sounds/correct-choice.mp3');
                   audio.play();
@@ -87,7 +87,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
       return AppButtonFull(
         fillColor: AppColors.englishVioletLighter,
         textColor: AppColors.white,
-        buttonText: AppStrings.sledeciTim,
+        buttonText: AppLocalizations.of(context)!.sledeciTim,
         onPressed: () {
           widget.timerController.pause();
           roundEnd(context, widget.ref);
@@ -97,7 +97,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
       return AppButtonFull(
         fillColor: AppColors.englishVioletLighter,
         textColor: AppColors.englishVioletDarker,
-        buttonText: AppStrings.start,
+        buttonText: AppLocalizations.of(context)!.start,
         onPressed: () {
           if (widget.timerController.isPaused) {
             widget.timerController.resume();

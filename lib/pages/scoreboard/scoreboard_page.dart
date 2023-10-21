@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-import '../../constants/app_strings.dart';
 import '../../models/team.dart';
 import '../../util/boxes.dart';
 import '../game/game_page.dart';
@@ -39,10 +39,11 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   children: [
-                    Text(AppStrings.rezultat, style: AppStyles.text25WhiteBold),
-                    Text('.', style: AppStyles.text25CoralBold),
+                    Text(AppLocalizations.of(context)!.rezultat,
+                        style: AppStyles.text25WhiteBold),
+                    const Text('.', style: AppStyles.text25CoralBold),
                   ],
                 ),
                 const AppSeparator(color: AppColors.coral),
@@ -81,7 +82,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      'Tim ${index + 1}',
+                                      '${AppLocalizations.of(context)!.tim} ${index + 1}',
                                       style: AppStyles.text35WhiteBold,
                                     ),
                                     Text(
@@ -108,7 +109,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                 const Spacer(),
                 Center(
                   child: Text(
-                    '${AppStrings.sledeciIgraTim} ${ref.read(gameAdminProvider).teamPlaying}!',
+                    '${AppLocalizations.of(context)!.sledeciIgraTim} ${ref.watch(gameAdminProvider).teamPlaying}!',
                     style: AppStyles.text25WhiteBold,
                   ),
                 ),
@@ -117,7 +118,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                   width: double.infinity,
                   height: MediaQuery.sizeOf(context).height * 0.075,
                   child: AppButtonFull(
-                    buttonText: AppStrings.dalje,
+                    buttonText: AppLocalizations.of(context)!.dalje,
                     fillColor: AppColors.coral,
                     textColor: AppColors.englishVioletDarker,
                     onPressed: () {

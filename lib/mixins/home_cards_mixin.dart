@@ -1,22 +1,22 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_routes.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/models/team.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 mixin HomeCardsMixin {
-  String determineText(int index) {
+  String determineText(BuildContext context, int index) {
     switch (index) {
       case 1:
-        return AppStrings.pocniIgru;
+        return AppLocalizations.of(context)!.pocniIgru;
       case 2:
-        return AppStrings.uputstva;
+        return AppLocalizations.of(context)!.uputstvaZaIgru;
       case 0:
-        return AppStrings.izlaz;
+        return AppLocalizations.of(context)!.izlaz;
       default:
         return '';
     }

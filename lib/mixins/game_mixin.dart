@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/app_routes.dart';
-import '../constants/app_strings.dart';
 import '../providers/all_providers.dart';
 
 mixin GameMixin {
@@ -40,20 +40,12 @@ mixin GameMixin {
         context, AppRoutes.scoreboardPage, (route) => false);
   }
 
-  String getRoundTitle(WidgetRef ref) {
+  String getRoundTitle(WidgetRef ref, BuildContext context) {
     if (ref.read(gameAdminProvider).roundInProgress == 1) {
-      return AppStrings.normalnaRunda;
+      return AppLocalizations.of(context)!.normalnaRunda;
     } else if (ref.read(gameAdminProvider).roundInProgress == 2) {
-      return AppStrings.jednaRecRunda;
+      return AppLocalizations.of(context)!.jednaRecRunda;
     }
-    return AppStrings.pantomimaRunda;
-  }
-
-  void animateToIndex(int index, PageController controller) {
-    controller.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 500),
-      curve: Curves.easeInOut,
-    );
+    return AppLocalizations.of(context)!.pantomimaRunda;
   }
 }

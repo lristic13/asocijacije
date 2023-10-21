@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import '../models/team.dart';
 import '../pages/game/game_page.dart';
 import '../providers/all_providers.dart';
-import '../words/words.dart';
+import '../words/new_words.dart';
 
 mixin FormsMixin {
   void validateForms(BuildContext context, WidgetRef ref,
@@ -30,6 +30,10 @@ mixin FormsMixin {
       }
     }
     if (ref.read(checkerProvider) && context.mounted) {
+      List<String> words = [];
+      ref.read(localeProvider) == const Locale('sr')
+          ? words = rsWords
+          : words = enWords;
       words.shuffle();
       ref.read(wordsProvider.notifier).wordsToPlay =
           words.sublist(0, ref.read(playerNumberProvider) * 8);

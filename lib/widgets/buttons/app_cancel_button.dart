@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../constants/app_colors.dart';
-import '../../constants/app_strings.dart';
+
 import '../app_alert_dialog.dart';
 import 'base-buttons/app_button_empty.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppCancelButton extends StatefulWidget {
   const AppCancelButton(
@@ -36,15 +37,15 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
         child: AppButtonEmpty(
           borderColor: AppColors.white,
           textColor: AppColors.white,
-          buttonText: AppStrings.odustani,
+          buttonText: AppLocalizations.of(context)!.odustani,
           onPressed: () {
             widget.timerController.pause();
             setState(() {});
             showDialog(
               context: context,
               builder: (context) => AppAlertDialog(
-                title: AppStrings.odustajete,
-                content: AppStrings.odustaniAlertContent,
+                title: AppLocalizations.of(context)!.odustajete,
+                content: AppLocalizations.of(context)!.odustaniAlertContent,
                 onPressedNo: () {
                   Navigator.of(context).pop();
                   widget.timerController.resume();

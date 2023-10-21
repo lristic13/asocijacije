@@ -57,7 +57,7 @@ class MenuCards extends ConsumerWidget with HomeCardsMixin {
                           alignment: Alignment.centerLeft,
                           child: Row(
                             children: [
-                              Text(determineText(index),
+                              Text(determineText(context, index),
                                   style: AppStyles.text25WhiteBold),
                               const Text('.', style: AppStyles.text25CoralBold),
                             ],
