@@ -7,7 +7,7 @@ import 'package:page_transition/page_transition.dart';
 import '../models/team.dart';
 import '../pages/game/game_page.dart';
 import '../providers/all_providers.dart';
-import '../words/new_words.dart';
+import '../words/words.dart';
 
 mixin FormsMixin {
   void validateForms(BuildContext context, WidgetRef ref,
