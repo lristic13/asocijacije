@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/app_colors.dart';
-import '../constants/app_strings.dart';
 import 'buttons/base-buttons/app_button_empty.dart';
 import 'buttons/base-buttons/app_button_full.dart';
 
@@ -37,13 +37,13 @@ class AppAlertDialog extends StatelessWidget {
         AppButtonEmpty(
           borderColor: AppColors.white,
           textColor: AppColors.white,
-          buttonText: AppStrings.ne,
+          buttonText: AppLocalizations.of(context)!.ne,
           onPressed: onPressedNo,
         ),
         AppButtonFull(
             fillColor: AppColors.englishVioletDarker,
             textColor: AppColors.white,
-            buttonText: AppStrings.da,
+            buttonText: AppLocalizations.of(context)!.da,
             onPressed: onPressedYes),
       ],
     );

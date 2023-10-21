@@ -1,4 +1,5 @@
 import 'package:asoscijacije_nove/widgets/app_header_text.dart';
+import 'package:asoscijacije_nove/widgets/app_languages_row.dart';
 import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -40,6 +41,7 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const AppLanguagesRow(),
               const Spacer(),
               const AppTitleText(),
               const AppSubtitleText(),

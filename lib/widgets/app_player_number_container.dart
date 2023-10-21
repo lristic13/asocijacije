@@ -3,6 +3,7 @@ import 'package:asoscijacije_nove/mixins/forms_mixin.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
   const AppPlayerNumberContainer(
@@ -53,7 +54,7 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                     color: value == ref.read(playerNumberProvider)
                         ? AppColors.englishViolet
                         : AppColors.white),
-                child: const Text('igrača'),
+                child: Text(AppLocalizations.of(context)!.igraca),
               ),
             ],
           )),

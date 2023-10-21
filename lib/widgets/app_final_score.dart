@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_routes.dart';
-import '../constants/app_strings.dart';
 import '../constants/app_styles.dart';
 import '../models/team.dart';
 import '../providers/all_providers.dart';
@@ -22,14 +22,14 @@ class AppFinalScore extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              AppStrings.krajIgre,
+              AppLocalizations.of(context)!.krajIgre,
               style: AppStyles.text50WhiteBold,
             ),
-            Text(
+            const Text(
               '.',
               style: AppStyles.text50CoralBold,
             ),
@@ -39,7 +39,7 @@ class AppFinalScore extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Text(
-              'Pobenik je Tim ${Boxes.getWinnerTeam(box).substring(Boxes.getWinnerTeam(box).length - 1)}!',
+              '${AppLocalizations.of(context)!.pobednikJeTim} ${Boxes.getWinnerTeam(box).substring(Boxes.getWinnerTeam(box).length - 1)}!',
               style: AppStyles.text25CoralBold,
             ),
           ),
@@ -51,7 +51,7 @@ class AppFinalScore extends ConsumerWidget {
           child: AppButtonFull(
             fillColor: AppColors.coral,
             textColor: AppColors.englishViolet,
-            buttonText: AppStrings.novaIgra,
+            buttonText: AppLocalizations.of(context)!.novaIgra,
             onPressed: () {
               ref.read(gameAdminProvider).resetGame();
               Navigator.pushNamedAndRemoveUntil(

@@ -4,9 +4,9 @@ import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/app_colors.dart';
-import '../constants/app_strings.dart';
 import '../constants/app_styles.dart';
 import '../providers/all_providers.dart';
 
@@ -90,9 +90,9 @@ class AppCardsBuilder extends ConsumerWidget {
                         ),
                       ),
                     ))
-            : const Center(
+            : Center(
                 child: Text(
-                  AppStrings.pogodjeneSveReci,
+                  AppLocalizations.of(context)!.pogodjeneSveReci,
                   textAlign: TextAlign.center,
                   style: AppStyles.text25CoralBold,
                 ),

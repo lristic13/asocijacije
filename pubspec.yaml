@@ -12,10 +12,11 @@ environment:
 
 dependencies:
   flutter:
+  
     sdk: flutter
 
 
-
+  
   animations: ^2.0.7
   animated_text_kit: ^4.2.2
   build_runner: ^2.4.5
@@ -31,6 +32,9 @@ dependencies:
   hive_flutter: ^1.1.0
   hive_generator: ^2.0.0
   in_app_update: ^4.1.4
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.18.0
   just_audio: ^0.9.34
   page_transition: ^2.0.9
   riverpod: ^2.3.6
@@ -56,6 +60,7 @@ dev_dependencies:
 
 
 flutter:
+  generate: true
 
   uses-material-design: true
 

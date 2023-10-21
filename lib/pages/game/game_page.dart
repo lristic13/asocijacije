@@ -1,5 +1,4 @@
 import 'package:asoscijacije_nove/constants/app_routes.dart';
-import 'package:asoscijacije_nove/constants/app_strings.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
@@ -17,6 +16,7 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/team.dart';
@@ -71,8 +71,8 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
             showDialog(
               context: context,
               builder: (context) => AppAlertDialog(
-                title: AppStrings.izlaz,
-                content: AppStrings.daLiSteSigurniIzlaz,
+                title: AppLocalizations.of(context)!.izlaz,
+                content: AppLocalizations.of(context)!.daLiSteSigurniIzlaz,
                 onPressedNo: () {
                   Navigator.of(context).pop();
                   _controllerTimer.resume();
@@ -100,7 +100,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                           children: [
                             Row(
                               children: [
-                                Text(getRoundTitle(ref),
+                                Text(getRoundTitle(ref, context),
                                     style: AppStyles.text25WhiteBold),
                                 const Text('.',
                                     style: AppStyles.text25CoralBold),
@@ -146,7 +146,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                                       Column(
                                     crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      const Text(AppStrings.poeni,
+                                      Text(AppLocalizations.of(context)!.poeni,
                                           style: AppStyles.text35WhiteBold),
                                       Text(
                                           Boxes.getTeamById(box,
