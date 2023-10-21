@@ -29,9 +29,10 @@ class AppButtonFull extends StatelessWidget {
       child: Text(
         buttonText ?? '',
         style: TextStyle(
-            color: textColor ?? AppColors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: 20),
+          color: textColor ?? AppColors.white,
+          fontWeight: FontWeight.bold,
+          fontSize: 22,
+        ),
       ),
     );
   }

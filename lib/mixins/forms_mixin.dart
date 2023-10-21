@@ -26,6 +26,7 @@ mixin FormsMixin {
         );
 
         box.put('tim-${teamId++}', team);
+        ref.read(blurProvider.notifier).state = true;
       }
     }
     if (ref.read(checkerProvider) && context.mounted) {
@@ -37,5 +38,10 @@ mixin FormsMixin {
           PageTransition(
               child: const GamePage(), type: PageTransitionType.leftToRight));
     }
+  }
+
+  List<GlobalKey<FormBuilderState>> generateKeys(WidgetRef ref) {
+    return List.generate(ref.read(playerNumberProvider) ~/ 2,
+        (i) => GlobalKey<FormBuilderState>());
   }
 }
