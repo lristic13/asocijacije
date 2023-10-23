@@ -20,22 +20,26 @@ class AppButtonEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: ButtonStyle(
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            side: BorderSide(color: borderColor ?? AppColors.white, width: 3),
-            borderRadius: BorderRadius.circular(13),
+    return SizedBox(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.075,
+      child: TextButton(
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              side: BorderSide(color: borderColor ?? AppColors.white, width: 3),
+              borderRadius: BorderRadius.circular(13),
+            ),
           ),
         ),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        buttonText ?? '',
-        style: TextStyle(
-            color: textColor ?? AppColors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: textSize ?? 22),
+        onPressed: onPressed,
+        child: Text(
+          buttonText ?? '',
+          style: TextStyle(
+              color: textColor ?? AppColors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: textSize ?? 22),
+        ),
       ),
     );
   }

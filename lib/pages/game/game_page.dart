@@ -1,5 +1,4 @@
 import 'package:asoscijacije_nove/constants/app_routes.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
@@ -8,6 +7,8 @@ import 'package:asoscijacije_nove/widgets/app_alert_dialog.dart';
 import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
 import 'package:asoscijacije_nove/widgets/app_explaining_row.dart';
 import 'package:asoscijacije_nove/widgets/app_final_score.dart';
+import 'package:asoscijacije_nove/widgets/app_page_header.dart';
+import 'package:asoscijacije_nove/widgets/app_points.dart';
 import 'package:asoscijacije_nove/widgets/app_timer.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_icon_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -98,14 +99,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                       children: [
                         Row(
                           children: [
-                            Row(
-                              children: [
-                                Text(getRoundTitle(ref, context),
-                                    style: AppStyles.text25WhiteBold),
-                                const Text('.',
-                                    style: AppStyles.text25CoralBold),
-                              ],
-                            ),
+                            AppPageHeader(title: getRoundTitle(ref, context)),
                             const Spacer(),
                             AppIconButton(
                               onButtonPressed: () {
@@ -137,29 +131,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                                 });
                               },
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: Center(
-                                child: ValueListenableBuilder(
-                                  valueListenable: box.listenable(),
-                                  builder: (context, Box<Team> box, _) =>
-                                      Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
-                                    children: [
-                                      Text(AppLocalizations.of(context)!.poeni,
-                                          style: AppStyles.text35WhiteBold),
-                                      Text(
-                                          Boxes.getTeamById(box,
-                                                  'tim-${ref.read(gameAdminProvider).teamPlaying}')
-                                              .points
-                                              .toString(),
-                                          style: AppStyles
-                                              .text60VioletLighterBold),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
+                            AppPoints(box: box, ref: ref),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -172,22 +144,17 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                           swiperController: _cardSwiperController,
                         ),
                         const SizedBox(height: 10),
-                        SizedBox(
-                          width: double.infinity,
-                          height: MediaQuery.of(context).size.height * 0.075,
-                          child: AppInGameButton(
-                            wordsToPlay: wordsToPlay,
-                            usedWords: usedWords,
-                            index: indexToScroll,
-                            timerController: _controllerTimer,
-                            ref: ref,
-                            box: box,
-                            timerCompleted: timerCompleted,
-                            cardSwiper: _cardSwiperController,
-                            updateParentState: () {
-                              setState(() {});
-                            },
-                          ),
+                        AppInGameButton(
+                          wordsToPlay: wordsToPlay,
+                          usedWords: usedWords,
+                          timerController: _controllerTimer,
+                          ref: ref,
+                          box: box,
+                          timerCompleted: timerCompleted,
+                          cardSwiper: _cardSwiperController,
+                          updateParentState: () {
+                            setState(() {});
+                          },
                         ),
                       ],
                     ),

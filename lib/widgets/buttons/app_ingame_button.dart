@@ -17,7 +17,6 @@ class AppInGameButton extends StatefulWidget {
   const AppInGameButton(
       {required this.wordsToPlay,
       required this.usedWords,
-      required this.index,
       required this.timerController,
       required this.ref,
       required this.box,
@@ -28,7 +27,7 @@ class AppInGameButton extends StatefulWidget {
 
   final List<String> wordsToPlay;
   final List<String> usedWords;
-  final int index;
+
   final CountDownController timerController;
   final WidgetRef ref;
   final Box box;
@@ -60,25 +59,21 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
           ),
           const SizedBox(width: 10),
           Expanded(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.075,
-              child: AppButtonFull(
-                fillColor: AppColors.coral,
-                textColor: AppColors.englishVioletDarker,
-                buttonText: AppLocalizations.of(context)!.sledecaRec,
-                onPressed: () async {
-                  await audio.setAsset('assets/sounds/correct-choice.mp3');
-                  audio.play();
-                  Boxes.addPoints(widget.box,
-                      'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
-                  widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
-                  widget.ref
-                      .read(wordsProvider)
-                      .removeWord(widget.wordsToPlay[0]);
-                  widget.cardSwiper.swipeLeft();
-                  // animateToIndex(indexToScroll++, pageController);
-                },
-              ),
+            child: AppButtonFull(
+              fillColor: AppColors.coral,
+              textColor: AppColors.englishVioletDarker,
+              buttonText: AppLocalizations.of(context)!.sledecaRec,
+              onPressed: () async {
+                await audio.setAsset('assets/sounds/correct-choice.mp3');
+                audio.play();
+                Boxes.addPoints(widget.box,
+                    'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
+                widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
+                widget.ref
+                    .read(wordsProvider)
+                    .removeWord(widget.wordsToPlay[0]);
+                widget.cardSwiper.swipeLeft();
+              },
             ),
           ),
         ],

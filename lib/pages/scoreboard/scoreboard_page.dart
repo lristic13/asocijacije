@@ -2,6 +2,7 @@ import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
+import 'package:asoscijacije_nove/widgets/app_page_header.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
@@ -39,13 +40,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(AppLocalizations.of(context)!.rezultat,
-                        style: AppStyles.text25WhiteBold),
-                    const Text('.', style: AppStyles.text25CoralBold),
-                  ],
-                ),
+                AppPageHeader(title: AppLocalizations.of(context)!.rezultat),
                 const AppSeparator(color: AppColors.coral),
                 const Spacer(),
                 Center(
@@ -114,26 +109,22 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                   ),
                 ),
                 const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  height: MediaQuery.sizeOf(context).height * 0.075,
-                  child: AppButtonFull(
-                    buttonText: AppLocalizations.of(context)!.dalje,
-                    fillColor: AppColors.coral,
-                    textColor: AppColors.englishVioletDarker,
-                    onPressed: () {
-                      if (context.mounted) {
-                        if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
-                          allWordsGuessed(context, ref);
-                        }
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                child: const GamePage(),
-                                type: PageTransitionType.leftToRight));
+                AppButtonFull(
+                  buttonText: AppLocalizations.of(context)!.dalje,
+                  fillColor: AppColors.coral,
+                  textColor: AppColors.englishVioletDarker,
+                  onPressed: () {
+                    if (context.mounted) {
+                      if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
+                        allWordsGuessed(context, ref);
                       }
-                    },
-                  ),
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              child: const GamePage(),
+                              type: PageTransitionType.leftToRight));
+                    }
+                  },
                 ),
               ],
             ),
