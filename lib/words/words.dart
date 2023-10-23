@@ -314,7 +314,12 @@ List<String> rsWords = [
   'Roba', 'Dron', 'Slon', 'Kaiš', 'Duplja', 'Proslava', 'Pogodba', 'Pogodak',
   'Strelac', 'Ideologija', 'Astrologija', 'Astronomija', 'Razmera', 'Konzulat',
   'Kapija', 'Palisada', 'Zid', 'Ambasada', 'Pijaca', 'Heroj', 'Heroina',
-  'Gvožđe', 'Glina', 'Žito', 'Oružje', 'Šlem', 'Oklop', 'Zaštita'
+  'Gvožđe', 'Glina', 'Žito', 'Oružje', 'Šlem', 'Oklop', 'Zaštita',
+  'Istražiti', 'Zatražiti', 'Pretražiti', 'Potražiti', 'Uvažiti',
+  'Pokazati', 'Zakazati', 'Iskazati', 'Majstor', 'Majstorski', 'Zanat',
+  'Zanatlija', 'Zimzeleno', 'Predispitne', 'Obaveze', 'Obaveza',
+  'Proslaviti', 'Dostaviti', 'Dodir', 'Nežno', 'Neobavezno',
+  'Zarazno', 'Neprolazno', 'Večno', 'Prosečno'
 ];
 
 List<String> enWords = [
@@ -554,7 +559,6 @@ List<String> enWords = [
   'Notification', 'Information', 'Consideration', 'Unprofessional', 'Careless',
   'Careful',
   'Systematic', 'System', 'Symmetry', 'Faceless',
-
   'Caring', 'Sharp', 'Fighter', 'Combative', 'Bison', 'Pain', 'Free', 'Benefit',
   'Fast', 'Ship', 'Time', 'Timely', 'Forecast',
   'Asymmetric', 'Dedication', 'Post', 'Province',
