@@ -34,17 +34,26 @@ class AppAlertDialog extends StatelessWidget {
         style: const TextStyle(color: AppColors.white),
       ),
       actions: [
-        AppButtonEmpty(
-          borderColor: AppColors.white,
-          textColor: AppColors.white,
-          buttonText: AppLocalizations.of(context)!.ne,
-          onPressed: onPressedNo,
+        Row(
+          children: [
+            Expanded(
+              child: AppButtonEmpty(
+                borderColor: AppColors.white,
+                textColor: AppColors.white,
+                buttonText: AppLocalizations.of(context)!.ne,
+                onPressed: onPressedNo,
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: AppButtonFull(
+                  fillColor: AppColors.englishVioletDarker,
+                  textColor: AppColors.white,
+                  buttonText: AppLocalizations.of(context)!.da,
+                  onPressed: onPressedYes),
+            ),
+          ],
         ),
-        AppButtonFull(
-            fillColor: AppColors.englishVioletDarker,
-            textColor: AppColors.white,
-            buttonText: AppLocalizations.of(context)!.da,
-            onPressed: onPressedYes),
       ],
     );
   }

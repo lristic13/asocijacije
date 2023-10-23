@@ -1,4 +1,4 @@
-import 'package:asoscijacije_nove/widgets/app_header_text.dart';
+import 'package:asoscijacije_nove/widgets/app_title_text.dart';
 import 'package:asoscijacije_nove/widgets/app_languages_row.dart';
 import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
         color: AppColors.englishVioletDarker,
         child: Padding(
           padding: const EdgeInsets.only(
-            top: 30,
+            top: 40,
             left: 20,
             right: 20,
           ),

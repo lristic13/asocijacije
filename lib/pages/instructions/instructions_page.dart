@@ -1,5 +1,6 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/widgets/app_page_header.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,25 +15,16 @@ class InstructionsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Container(
-        decoration: AppStyles.containerGradientViolet,
+        color: AppColors.englishVioletDarker,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          padding:
+              const EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Spacer(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.uputstvaZaIgru,
-                    style: AppStyles.text30WhiteBold,
-                  ),
-                  const Text(
-                    '.',
-                    style: AppStyles.text30CoralBold,
-                  ),
-                ],
+              AppPageHeader(
+                title: AppLocalizations.of(context)!.uputstvaZaIgru,
               ),
               const SizedBox(height: 30),
               const Spacer(),
@@ -70,15 +62,11 @@ class InstructionsPage extends StatelessWidget {
                 ],
               ),
               const Spacer(flex: 3),
-              SizedBox(
-                width: double.infinity,
-                height: 60,
-                child: AppButtonFull(
-                  buttonText: AppLocalizations.of(context)!.nazad,
-                  fillColor: AppColors.coral,
-                  textColor: AppColors.englishViolet,
-                  onPressed: () => Navigator.pop(context),
-                ),
+              AppButtonFull(
+                buttonText: AppLocalizations.of(context)!.nazad,
+                fillColor: AppColors.coral,
+                textColor: AppColors.englishViolet,
+                onPressed: () => Navigator.pop(context),
               ),
             ],
           ),

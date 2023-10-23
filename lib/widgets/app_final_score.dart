@@ -45,19 +45,15 @@ class AppFinalScore extends ConsumerWidget {
           ),
         ),
         const Spacer(),
-        SizedBox(
-          width: double.infinity,
-          height: 60,
-          child: AppButtonFull(
-            fillColor: AppColors.coral,
-            textColor: AppColors.englishViolet,
-            buttonText: AppLocalizations.of(context)!.novaIgra,
-            onPressed: () {
-              ref.read(gameAdminProvider).resetGame();
-              Navigator.pushNamedAndRemoveUntil(
-                  context, AppRoutes.homePage, (route) => false);
-            },
-          ),
+        AppButtonFull(
+          fillColor: AppColors.coral,
+          textColor: AppColors.englishViolet,
+          buttonText: AppLocalizations.of(context)!.novaIgra,
+          onPressed: () {
+            ref.read(gameAdminProvider).resetGame();
+            Navigator.pushNamedAndRemoveUntil(
+                context, AppRoutes.homePage, (route) => false);
+          },
         ),
       ],
     );
