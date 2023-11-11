@@ -319,7 +319,9 @@ List<String> rsWords = [
   'Pokazati', 'Zakazati', 'Iskazati', 'Majstor', 'Majstorski', 'Zanat',
   'Zanatlija', 'Zimzeleno', 'Predispitne', 'Obaveze', 'Obaveza',
   'Proslaviti', 'Dostaviti', 'Dodir', 'Nežno', 'Neobavezno',
-  'Zarazno', 'Neprolazno', 'Večno', 'Prosečno'
+  'Zarazno', 'Neprolazno', 'Večno', 'Prosečno',
+  'Testerisati', 'Test', 'Testirati', 'Provera', 'Neizmireno', 'Obavezan',
+  'Opciono'
 ];
 
 List<String> enWords = [
