@@ -321,7 +321,8 @@ List<String> rsWords = [
   'Proslaviti', 'Dostaviti', 'Dodir', 'Nežno', 'Neobavezno',
   'Zarazno', 'Neprolazno', 'Večno', 'Prosečno',
   'Testerisati', 'Test', 'Testirati', 'Provera', 'Neizmireno', 'Obavezan',
-  'Opciono'
+  'Opciono',
+  'Pokloniti'
 ];
 
 List<String> enWords = [

@@ -39,6 +39,7 @@ dependencies:
   page_transition: ^2.0.9
   riverpod: ^2.3.6
   device_preview: ^1.1.0
+  flutter_svg: ^2.0.9
 
 flutter_native_splash:
   color: "#17113D"
@@ -66,6 +67,7 @@ flutter:
 
   assets:
     - assets/sounds/correct-choice.mp3
+    - assets/images/
 
   fonts:
     - family: Geologica

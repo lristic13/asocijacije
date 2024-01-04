@@ -5,6 +5,7 @@ import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MenuCards extends ConsumerWidget with HomeCardsMixin {
   const MenuCards({required this.swiperController, super.key});
@@ -66,10 +67,14 @@ class MenuCards extends ConsumerWidget with HomeCardsMixin {
                         Center(
                           child: determineIcon(context, index),
                         ),
-                        const Align(
+                        Align(
                           alignment: Alignment.centerRight,
-                          child: AppSeparator(
-                              color: AppColors.englishVioletDarker),
+                          child: SvgPicture.asset(
+                            'assets/images/snowflake-regular.svg',
+                            colorFilter:
+                                ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                            height: 46,
+                          ),
                         ),
                       ],
                     ),

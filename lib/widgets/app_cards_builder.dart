@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_styles.dart';
@@ -51,10 +52,14 @@ class AppCardsBuilder extends ConsumerWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Align(
+                                Align(
                                   alignment: Alignment.centerLeft,
-                                  child: AppSeparator(
-                                      color: AppColors.englishVioletDarker),
+                                  child: SvgPicture.asset(
+                                    'assets/images/snowflake-regular.svg',
+                                    colorFilter: const ColorFilter.mode(
+                                        Colors.white, BlendMode.srcIn),
+                                    height: 34,
+                                  ),
                                 ),
                                 shouldBlur
                                     ? ImageFiltered(
@@ -79,10 +84,14 @@ class AppCardsBuilder extends ConsumerWidget {
                                               .copyWith(fontSize: 28),
                                         ),
                                       ),
-                                const Align(
+                                Align(
                                   alignment: Alignment.centerRight,
-                                  child: AppSeparator(
-                                      color: AppColors.englishVioletDarker),
+                                  child: SvgPicture.asset(
+                                    'assets/images/snowflake-regular.svg',
+                                    colorFilter: const ColorFilter.mode(
+                                        Colors.white, BlendMode.srcIn),
+                                    height: 34,
+                                  ),
                                 ),
                               ],
                             ),
