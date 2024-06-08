@@ -17,17 +17,7 @@ class AppTitleText extends StatelessWidget {
           AppLocalizations.of(context)!.asocijacije,
           style: AppStyles.text50WhiteBold,
         ),
-        Column(
-          children: [
-            const SizedBox(height: 30),
-            SvgPicture.asset(
-              'assets/images/snowflake-regular.svg',
-              colorFilter:
-                  const ColorFilter.mode(AppColors.coral, BlendMode.srcIn),
-              height: 20,
-            ),
-          ],
-        ),
+        const Text('.', style: AppStyles.text50CoralBold),
         // const Text(
         //   '.',
         //   style: AppStyles.text50CoralBold,

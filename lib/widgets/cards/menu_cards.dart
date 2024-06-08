@@ -67,14 +67,9 @@ class MenuCards extends ConsumerWidget with HomeCardsMixin {
                         Center(
                           child: determineIcon(context, index),
                         ),
-                        Align(
+                        const Align(
                           alignment: Alignment.centerRight,
-                          child: SvgPicture.asset(
-                            'assets/images/snowflake-regular.svg',
-                            colorFilter:
-                                ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                            height: 46,
-                          ),
+                          child: AppSeparator(color: AppColors.white),
                         ),
                       ],
                     ),

@@ -52,15 +52,11 @@ class AppCardsBuilder extends ConsumerWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: SvgPicture.asset(
-                                    'assets/images/snowflake-regular.svg',
-                                    colorFilter: const ColorFilter.mode(
-                                        Colors.white, BlendMode.srcIn),
-                                    height: 34,
-                                  ),
-                                ),
+                                const Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: AppSeparator(
+                                      color: AppColors.white,
+                                    )),
                                 shouldBlur
                                     ? ImageFiltered(
                                         imageFilter: ImageFilter.blur(
@@ -84,13 +80,10 @@ class AppCardsBuilder extends ConsumerWidget {
                                               .copyWith(fontSize: 28),
                                         ),
                                       ),
-                                Align(
+                                const Align(
                                   alignment: Alignment.centerRight,
-                                  child: SvgPicture.asset(
-                                    'assets/images/snowflake-regular.svg',
-                                    colorFilter: const ColorFilter.mode(
-                                        Colors.white, BlendMode.srcIn),
-                                    height: 34,
+                                  child: AppSeparator(
+                                    color: AppColors.white,
                                   ),
                                 ),
                               ],
