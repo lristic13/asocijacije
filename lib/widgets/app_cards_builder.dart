@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
+import 'package:asoscijacije_nove/widgets/app_two_points_label.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -52,11 +53,14 @@ class AppCardsBuilder extends ConsumerWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: AppSeparator(
-                                      color: AppColors.white,
-                                    )),
+                                const Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    AppSeparator(color: AppColors.white),
+                                    AppTwoPointsLabel(),
+                                  ],
+                                ),
                                 shouldBlur
                                     ? ImageFiltered(
                                         imageFilter: ImageFilter.blur(
