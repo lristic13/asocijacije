@@ -66,6 +66,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         ref: ref,
                         cbOnTap: () {
                           ref.read(playerNumberProvider.notifier).state = 4;
+                          ref.read(teamNumberProvider.notifier).state = 2;
                           formKeys = generateKeys(ref);
                         },
                       ),
@@ -74,6 +75,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         ref: ref,
                         cbOnTap: () {
                           ref.read(playerNumberProvider.notifier).state = 6;
+                          ref.read(teamNumberProvider.notifier).state = 3;
                           formKeys = generateKeys(ref);
                         },
                       ),
@@ -82,6 +84,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         ref: ref,
                         cbOnTap: () {
                           ref.read(playerNumberProvider.notifier).state = 8;
+                          ref.read(teamNumberProvider.notifier).state = 4;
                           formKeys = generateKeys(ref);
                         },
                       ),
@@ -90,6 +93,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         ref: ref,
                         cbOnTap: () {
                           ref.read(playerNumberProvider.notifier).state = 10;
+                          ref.read(teamNumberProvider.notifier).state = 5;
                           formKeys = generateKeys(ref);
                         },
                       ),

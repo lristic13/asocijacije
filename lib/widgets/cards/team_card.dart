@@ -35,14 +35,24 @@ class TeamCard extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Row(
                     children: [
-                      Text(
-                        '${AppLocalizations.of(context)!.tim} ${index + 1}',
-                        style: AppStyles.text30WhiteBold,
-                      ),
-                      const Text(
-                        '.',
-                        style: AppStyles.text30CoralBold,
-                      ),
+                      Expanded(
+                        child: FormBuilderTextField(
+                          style: const TextStyle(
+                              color: AppColors.englishVioletMoreLighter),
+                          decoration: AppStyles.errorInputDecoration.copyWith(
+                            label: Text(AppLocalizations.of(context)!.imeTima),
+                          ),
+                          name: 'teamName',
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppLocalizations.of(context)!
+                                  .unesiteImeTima;
+                            }
+
+                            return null;
+                          },
+                        ),
+                      )
                     ],
                   ),
                 ),

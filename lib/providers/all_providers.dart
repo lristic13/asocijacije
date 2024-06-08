@@ -6,6 +6,8 @@ import '../models/game_state.dart';
 
 final playerNumberProvider = StateProvider<int>((ref) => 4);
 
+final teamNumberProvider = StateProvider<int>((ref) => 2);
+
 final gameAdminProvider = StateProvider<GameState>((ref) => GameState());
 
 final wordsProvider = ChangeNotifierProvider<WordsState>(

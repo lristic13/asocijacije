@@ -8,6 +8,7 @@ class Team extends HiveObject {
     required this.player1,
     required this.player2,
     required this.points,
+    required this.teamName,
   });
 
   @HiveField(1)
@@ -19,8 +20,11 @@ class Team extends HiveObject {
   @HiveField(3)
   int points;
 
+  @HiveField(4, defaultValue: '')
+  String teamName;
+
   @override
   String toString() {
-    return 'Team($player1, $player2, points: $points)';
+    return 'Team(name: $teamName,$player1, $player2, points: $points)';
   }
 }

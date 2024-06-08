@@ -51,15 +51,4 @@ mixin GameMixin {
     }
     return AppLocalizations.of(context)!.pantomimaRunda;
   }
-
-  void initBoxAndPlayers(
-      Box<Team> box, String player1, String player2, WidgetRef ref) {
-    box = Hive.box<Team>('teams');
-    player1 =
-        Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}')
-            .player1;
-    player2 =
-        Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}')
-            .player2;
-  }
 }

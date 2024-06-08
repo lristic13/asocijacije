@@ -40,6 +40,7 @@ dependencies:
   just_audio: ^0.9.34
   page_transition: ^2.0.9
   riverpod: ^2.3.6
+  logger: ^2.3.0
 
 flutter_native_splash:
   color: "#17113D"

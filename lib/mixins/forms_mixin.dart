@@ -1,3 +1,4 @@
+import 'package:asoscijacije_nove/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,6 +14,7 @@ mixin FormsMixin {
   void validateForms(BuildContext context, WidgetRef ref,
       List<GlobalKey<FormBuilderState>> formKeys, Box box, int teamId) {
     for (var element in formKeys) {
+      logger.w(element.currentState?.value);
       if (!element.currentState!.validate()) {
         ref.read(checkerProvider.notifier).state = false;
       } else {
@@ -20,7 +22,8 @@ mixin FormsMixin {
 
         final formData = element.currentState?.value;
         Team team = Team(
-          player1: formData!['player1'],
+          teamName: formData!['teamName'],
+          player1: formData['player1'],
           player2: formData['player2'],
           points: 0,
         );
