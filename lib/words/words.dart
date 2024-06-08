@@ -322,7 +322,9 @@ List<String> rsWords = [
   'Zarazno', 'Neprolazno', 'Večno', 'Prosečno',
   'Testerisati', 'Test', 'Testirati', 'Provera', 'Neizmireno', 'Obavezan',
   'Opciono',
-  'Pokloniti'
+  'Pokloniti', 'Istinski', 'Besramno', 'Nedodirljiv', 'Server', 'Kanibalizam',
+  'Revanš',
+  'Ostrvo', 'Osvrnuti se', 'Klupko'
 ];
 
 List<String> enWords = [
@@ -569,4 +571,13 @@ List<String> enWords = [
   'To counter', 'Neglect',
   'Tape', 'Same', 'Route',
   'Chronic', 'Medium', 'Psychology', 'Megalopolis',
+  'Megalomania',
+  'Margin', 'Albatros', 'Tangent', 'Bruise', 'Amphitheater',
+  'Nocturnal', 'Mat', 'Stethoscope', 'Planetarium', 'To translate',
+  'Poverty', 'Scared', 'Rhombus', 'Square', 'Real estate', 'Likeminded',
+  'Roller', 'Cone', 'Pyramid', 'Landmark', 'Musicality', 'Hearing', 'Sight',
+  'Taste', 'Calmness', 'Miniature', 'Minimal', 'Locals',
+  'Hospitable', 'Guest room', 'Salon', 'Fenomenal', 'Brush',
+  'Watery', 'Leader', 'Criminal', 'To transgress',
+  'Approach'
 ];
