@@ -62,4 +62,18 @@ mixin GameMixin {
         Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}')
             .player2;
   }
+
+  int calculateRoundTime(WidgetRef ref) {
+    if (ref.read(gameModeProvider) == 'Normalan') {
+      if (ref.read(gameAdminProvider).roundInProgress == 3) {
+        return 60;
+      }
+      return 45;
+    } else {
+      if (ref.read(gameAdminProvider).roundInProgress == 3) {
+        return 45;
+      }
+      return 30;
+    }
+  }
 }
