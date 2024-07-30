@@ -104,26 +104,29 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               ),
               const SizedBox(height: 10),
               const Divider(),
-              const Row(
+              Row(
                 children: [
-                  Text('Izaberi mod igre', style: AppStyles.text20WhiteBold),
-                  Text('.', style: AppStyles.text20CoralBold),
+                  Text(localizations.izaberiMod,
+                      style: AppStyles.text20WhiteBold),
+                  const Text('.', style: AppStyles.text20CoralBold),
                 ],
               ),
               const SizedBox(height: 5),
               Row(
                 children: [
                   AppModeButton(
-                    modeName: 'Normalan',
+                    modeName: localizations.normalan,
                     onSelected: () {
-                      ref.read(gameModeProvider.notifier).state = 'Normalan';
+                      ref.read(gameModeProvider.notifier).state =
+                          localizations.normalan;
                     },
                   ),
                   const SizedBox(width: 10),
                   AppModeButton(
-                    modeName: 'Brzi',
+                    modeName: localizations.brzi,
                     onSelected: () {
-                      ref.read(gameModeProvider.notifier).state = 'Brzi';
+                      ref.read(gameModeProvider.notifier).state =
+                          localizations.brzi;
                     },
                   ),
                 ],
@@ -131,15 +134,18 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               const SizedBox(height: 5),
               AppRoundRow(
                 roundName: localizations.normalnaRunda,
-                roundLength: selectedGameMode == 'Normalan' ? 45 : 30,
+                roundLength:
+                    selectedGameMode == localizations.normalan ? 45 : 30,
               ),
               AppRoundRow(
                 roundName: localizations.jednaRecRunda,
-                roundLength: selectedGameMode == 'Normalan' ? 45 : 30,
+                roundLength:
+                    selectedGameMode == localizations.normalan ? 45 : 30,
               ),
               AppRoundRow(
                 roundName: localizations.pantomimaRunda,
-                roundLength: selectedGameMode == 'Normalan' ? 60 : 45,
+                roundLength:
+                    selectedGameMode == localizations.normalan ? 60 : 45,
               ),
               const Divider(),
               Expanded(
