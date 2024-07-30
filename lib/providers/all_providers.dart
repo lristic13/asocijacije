@@ -16,4 +16,4 @@ final checkerProvider = StateProvider<bool>((ref) => false);
 final localeProvider = StateProvider<Locale>((ref) => const Locale('sr'));
 final blurProvider = StateProvider<bool>((ref) => true);
 
-final gameModeProvider = StateProvider<String>((ref) => 'Normalan');
+final gameModeProvider = StateProvider<String>((ref) => 'Normal');
