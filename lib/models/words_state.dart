@@ -20,4 +20,10 @@ class WordsState extends ChangeNotifier {
     wordsToPlay.addAll(usedWords);
     notifyListeners();
   }
+
+  void resetWords() {
+    usedWords.clear();
+    wordsToPlay.clear();
+    notifyListeners();
+  }
 }

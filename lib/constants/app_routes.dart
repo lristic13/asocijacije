@@ -4,4 +4,5 @@ class AppRoutes {
   static const String startGamePage = '/startGame';
   static const String scoreboardPage = '/scoreboard';
   static const String instructionsPage = '/instructions';
+  static const String chooseModePage = '/chooseMode';
 }

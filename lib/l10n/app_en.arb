@@ -37,5 +37,6 @@
     "krajIgre": "Final score",
     "pobednikJeTim": "The winner is Team",
     "novaIgra": "New game",
-    "pogodjeneSveReci": "You've guessed all the words!\n Move on to the next round!"
+    "pogodjeneSveReci": "You've guessed all the words!\n Move on to the next round!",
+    "izaberiMod": "Choose game mode"
 }

@@ -81,6 +81,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                 },
                 onPressedYes: () {
                   ref.read(gameAdminProvider).resetGame();
+                  ref.read(wordsProvider).resetWords();
                   Navigator.pushNamedAndRemoveUntil(
                       context, AppRoutes.homePage, (route) => false);
                 },
