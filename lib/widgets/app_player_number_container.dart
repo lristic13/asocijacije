@@ -22,12 +22,13 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
       onTap: cbOnTap,
       child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          height: 80,
-          width: 70,
+          height: 60,
+          width: 60,
           decoration: BoxDecoration(
-              border: Border.all(color: AppColors.coral, width: 1.5),
+              border:
+                  Border.all(color: AppColors.englishVioletLighter, width: 1.5),
               color: value == ref.read(playerNumberProvider)
-                  ? AppColors.coral
+                  ? AppColors.englishVioletLighter
                   : Colors.transparent,
               borderRadius: BorderRadius.circular(13)),
           child: Column(
@@ -38,10 +39,10 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                 duration: const Duration(milliseconds: 300),
                 style: TextStyle(
                     fontFamily: 'Geologica',
-                    fontSize: 36,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                     color: value == ref.read(playerNumberProvider)
-                        ? AppColors.englishViolet
+                        ? AppColors.englishVioletDarker
                         : AppColors.white),
                 child: Text(value.toString()),
               ),
@@ -49,10 +50,10 @@ class AppPlayerNumberContainer extends StatelessWidget with FormsMixin {
                 duration: const Duration(milliseconds: 300),
                 style: TextStyle(
                     fontFamily: 'Geologica',
-                    fontSize: 12,
+                    fontSize: 10,
                     fontWeight: FontWeight.bold,
                     color: value == ref.read(playerNumberProvider)
-                        ? AppColors.englishViolet
+                        ? AppColors.englishVioletDarker
                         : AppColors.white),
                 child: Text(AppLocalizations.of(context)!.igraca),
               ),

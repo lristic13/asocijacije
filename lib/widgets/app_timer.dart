@@ -1,3 +1,4 @@
+import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,7 @@ import '../constants/app_colors.dart';
 import '../constants/app_styles.dart';
 import '../providers/all_providers.dart';
 
-class AppTimer extends StatelessWidget {
+class AppTimer extends StatelessWidget with GameMixin {
   const AppTimer(
       {required this.controllerTimer,
       required this.ref,
@@ -31,7 +32,7 @@ class AppTimer extends StatelessWidget {
           isReverseAnimation: true,
           width: 150,
           height: MediaQuery.of(context).size.height * 0.2,
-          duration: ref.read(gameAdminProvider).roundInProgress == 3 ? 60 : 45,
+          duration: calculateRoundTime(ref),
           ringColor: AppColors.englishVioletLighter,
           fillColor: AppColors.coral,
           textFormat: CountdownTextFormat.S,

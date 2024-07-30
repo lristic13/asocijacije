@@ -10,8 +10,13 @@ import '../providers/all_providers.dart';
 import '../words/words.dart';
 
 mixin FormsMixin {
-  void validateForms(BuildContext context, WidgetRef ref,
-      List<GlobalKey<FormBuilderState>> formKeys, Box box, int teamId) {
+  void validateForms(
+    BuildContext context,
+    WidgetRef ref,
+    List<GlobalKey<FormBuilderState>> formKeys,
+    Box box,
+    int teamId,
+  ) {
     for (var element in formKeys) {
       if (!element.currentState!.validate()) {
         ref.read(checkerProvider.notifier).state = false;

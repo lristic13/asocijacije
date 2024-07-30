@@ -19,7 +19,7 @@ class AppButtonFull extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.075,
+      height: MediaQuery.of(context).size.height * 0.06,
       child: TextButton(
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

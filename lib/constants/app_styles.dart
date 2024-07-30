@@ -9,9 +9,15 @@ class AppStyles {
       fontWeight: FontWeight.bold);
 
   static const TextStyle text25Violet900 = TextStyle(
-      fontSize: 25,
-      fontWeight: FontWeight.w900,
-      color: AppColors.englishVioletDarker);
+    fontSize: 25,
+    fontWeight: FontWeight.w900,
+    color: AppColors.englishVioletDarker,
+  );
+  static const TextStyle text30VioletDarkerBold = TextStyle(
+    fontSize: 30,
+    color: AppColors.englishVioletDarker,
+    fontWeight: FontWeight.bold,
+  );
 
   static const TextStyle text30VioletBold = TextStyle(
     fontSize: 30,
@@ -28,6 +34,10 @@ class AppStyles {
       color: AppColors.englishViolet,
       fontSize: 20,
       fontWeight: FontWeight.bold);
+  static const TextStyle text25VioletDarkerBold = TextStyle(
+      fontSize: 25,
+      fontWeight: FontWeight.bold,
+      color: AppColors.englishVioletDarker);
 
   static const TextStyle text20VioletDarkerBold = TextStyle(
       fontSize: 20,
