@@ -64,7 +64,8 @@ mixin GameMixin {
   }
 
   int calculateRoundTime(WidgetRef ref) {
-    if (ref.read(gameModeProvider) == 'Normal') {
+    if (ref.read(gameModeProvider) == 'Normalan' || ref.read(gameModeProvider) == 'Normal') {
+      
       if (ref.read(gameAdminProvider).roundInProgress == 3) {
         return 60;
       }
