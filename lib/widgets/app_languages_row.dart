@@ -23,6 +23,9 @@ class AppLanguagesRow extends ConsumerWidget {
     return InkWell(
       onTap: () {
         ref.read(localeProvider.notifier).state = locale;
+        locale == const Locale('sr')
+            ? ref.read(gameModeProvider.notifier).state = 'Normalan'
+            : ref.read(gameModeProvider.notifier).state = 'Normal';
       },
       child: Text(
         text,

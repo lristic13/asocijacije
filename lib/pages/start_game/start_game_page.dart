@@ -48,6 +48,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   Widget build(BuildContext context) {
     var localizations = AppLocalizations.of(context)!;
     String selectedGameMode = ref.watch(gameModeProvider);
+    
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
