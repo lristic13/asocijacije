@@ -37,7 +37,7 @@ dependencies:
   in_app_update: ^4.1.4
   flutter_localizations:
     sdk: flutter
-  just_audio: ^0.9.34
+  just_audio: ^0.9.45
   page_transition: ^2.0.9
   riverpod: ^2.3.6
 
