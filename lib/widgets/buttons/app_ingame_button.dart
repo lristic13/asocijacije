@@ -48,62 +48,71 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
         widget.timerController.getTime() != '' &&
         !widget.timerController.isPaused &&
         widget.wordsToPlay.isNotEmpty) {
-      return Row(
-        children: [
-          Expanded(
-            child: AppCancelButton(
-              timerController: widget.timerController,
-              wordsToPlay: widget.wordsToPlay,
-              ref: widget.ref,
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 25.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: AppCancelButton(
+                timerController: widget.timerController,
+                wordsToPlay: widget.wordsToPlay,
+                ref: widget.ref,
+              ),
             ),
-          ),
-          const SizedBox(width: 10),
-          Expanded(
-            child: AppButtonFull(
-              fillColor: AppColors.coral,
-              textColor: AppColors.englishVioletDarker,
-              buttonText: AppLocalizations.of(context)!.sledecaRec,
-              onPressed: () async {
-                await audio.setAsset('assets/sounds/correct-choice.mp3');
-                audio.play();
-                Boxes.addPoints(widget.box,
-                    'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
-                widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
-                widget.ref
-                    .read(wordsProvider)
-                    .removeWord(widget.wordsToPlay[0]);
-                widget.cardSwiper.swipeLeft();
-              },
+            const SizedBox(width: 10),
+            Expanded(
+              child: AppButtonFull(
+                fillColor: AppColors.coral,
+                textColor: AppColors.englishVioletDarker,
+                buttonText: AppLocalizations.of(context)!.sledecaRec,
+                onPressed: () async {
+                  await audio.setAsset('assets/sounds/correct-choice.mp3');
+                  audio.play();
+                  Boxes.addPoints(widget.box,
+                      'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
+                  widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
+                  widget.ref
+                      .read(wordsProvider)
+                      .removeWord(widget.wordsToPlay[0]);
+                  widget.cardSwiper.swipeLeft();
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     } else if (widget.timerCompleted || widget.wordsToPlay.isEmpty) {
-      return AppButtonFull(
-        fillColor: AppColors.englishVioletLighter,
-        textColor: AppColors.white,
-        buttonText: AppLocalizations.of(context)!.sledeciTim,
-        onPressed: () {
-          widget.timerController.pause();
-          roundEnd(context, widget.ref);
-        },
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 25.0),
+        child: AppButtonFull(
+          fillColor: AppColors.englishVioletLighter,
+          textColor: AppColors.white,
+          buttonText: AppLocalizations.of(context)!.sledeciTim,
+          onPressed: () {
+            widget.timerController.pause();
+            roundEnd(context, widget.ref);
+          },
+        ),
       );
     } else {
-      return AppButtonFull(
-        fillColor: AppColors.englishVioletLighter,
-        textColor: AppColors.englishVioletDarker,
-        buttonText: AppLocalizations.of(context)!.start,
-        onPressed: () {
-          if (widget.timerController.isPaused) {
-            widget.timerController.resume();
-          } else {
-            widget.timerController.start();
-          }
+      return Padding(
+        padding: const EdgeInsets.only(bottom: 25.0),
+        child: AppButtonFull(
+          fillColor: AppColors.englishVioletLighter,
+          textColor: AppColors.englishVioletDarker,
+          buttonText: AppLocalizations.of(context)!.start,
+          onPressed: () {
+            if (widget.timerController.isPaused) {
+              widget.timerController.resume();
+            } else {
+              widget.timerController.start();
+            }
 
-          widget.ref.read(blurProvider.notifier).state = false;
+            widget.ref.read(blurProvider.notifier).state = false;
 
-          widget.updateParentState();
-        },
+            widget.updateParentState();
+          },
+        ),
       );
     }
   }

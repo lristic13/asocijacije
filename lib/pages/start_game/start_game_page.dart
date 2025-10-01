@@ -48,7 +48,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   Widget build(BuildContext context) {
     var localizations = AppLocalizations.of(context)!;
     String selectedGameMode = ref.watch(gameModeProvider);
-    
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Colors.transparent,
@@ -163,15 +163,18 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                 ),
               ),
               const SizedBox(height: 20),
-              AppButtonRow(
-                leftButtonText: AppLocalizations.of(context)!.nazad,
-                rightButtonText: AppLocalizations.of(context)!.dalje,
-                leftButtonCb: () {
-                  Navigator.pop(context);
-                },
-                rightButtonCb: () {
-                  validateForms(context, ref, formKeys, box, teamId);
-                },
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                child: AppButtonRow(
+                  leftButtonText: AppLocalizations.of(context)!.nazad,
+                  rightButtonText: AppLocalizations.of(context)!.dalje,
+                  leftButtonCb: () {
+                    Navigator.pop(context);
+                  },
+                  rightButtonCb: () {
+                    validateForms(context, ref, formKeys, box, teamId);
+                  },
+                ),
               )
             ],
           ),
