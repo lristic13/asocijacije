@@ -324,7 +324,13 @@ List<String> rsWords = [
   'Opciono',
   'Pokloniti', 'Istinski', 'Besramno', 'Nedodirljiv', 'Server', 'Kanibalizam',
   'Revanš',
-  'Ostrvo', 'Osvrnuti se', 'Klupko'
+  'Ostrvo', 'Osvrnuti se', 'Klupko', 'Imitacija', 'Afirmacija', 'Adrenalin',
+  'Akcenat', 'Akronim', 'Alapača', 'Alav', 'Amajlija', 'Animozitet', 'Arkada',
+  'Anoreksija', 'Bakšiš', 'Berićetno', 'Boem', 'Blizanac', 'Bubreg',
+  'Busati se', 'Cicija', 'Fiksacija', 'Filantrop', 'Fijaker', 'Lubenica',
+  'Maliciozno',
+  'Letimice', 'Mufljuz', 'Nepotizam', 'Pekmez', 'Podoban', 'Poltron',
+  'Sekvenca', 'Rezolucija', 'Pulen', 'Stereotip', 'Stigma', 'Sentimentalan',
 ];
 
 List<String> enWords = [
