@@ -119,13 +119,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rezultat => 'Score';
 
   @override
-  String get sledeciIgraTim => 'Up next is Team';
+  String get sledeciIgraTim => 'Up next are';
 
   @override
   String get krajIgre => 'Final score';
 
   @override
-  String get pobednikJeTim => 'The winner is Team';
+  String get pobednikJeTim => 'The winners are';
 
   @override
   String get novaIgra => 'New game';
@@ -142,4 +142,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get brzi => 'Quick';
+
+  @override
+  String get imeTima => 'Team name';
+
+  @override
+  String get unesiteImeTima => 'Enter team name!';
 }

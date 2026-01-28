@@ -54,6 +54,7 @@ class _MyAppConsumerState extends ConsumerState<MyApp> {
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
       theme: ThemeData(useMaterial3: true, fontFamily: 'Geologica'),
