@@ -70,11 +70,14 @@ class InstructionsPage extends StatelessWidget {
                 ],
               ),
               const Spacer(flex: 3),
-              AppButtonFull(
-                buttonText: AppLocalizations.of(context)!.nazad,
-                fillColor: AppColors.coral,
-                textColor: AppColors.englishViolet,
-                onPressed: () => Navigator.pop(context),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 25.0),
+                child: AppButtonFull(
+                  buttonText: AppLocalizations.of(context)!.nazad,
+                  fillColor: AppColors.coral,
+                  textColor: AppColors.englishViolet,
+                  onPressed: () => Navigator.pop(context),
+                ),
               ),
             ],
           ),

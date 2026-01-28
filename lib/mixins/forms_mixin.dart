@@ -27,9 +27,11 @@ mixin FormsMixin {
         ref.read(checkerProvider.notifier).update((state) => true);
 
         final formData = currentState.value;
-        if (formData['player1'] != null &&
+        if (formData['teamName'] != null &&
+            formData['player1'] != null &&
             formData['player2'] != null) {
           Team team = Team(
+            teamName: formData['teamName'] as String,
             player1: formData['player1'] as String,
             player2: formData['player2'] as String,
             points: 0,

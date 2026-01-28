@@ -21,6 +21,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../../constants/app_colors.dart';
+import '../../constants/app_styles.dart';
 import '../../models/team.dart';
 import '../../widgets/buttons/app_ingame_button.dart';
 import '../../widgets/app_separator.dart';
@@ -42,6 +43,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
   late Box<Team> box;
   String player1 = 'Player 1';
   String player2 = 'Player 2';
+  String teamName = '';
 
   @override
   void initState() {
@@ -58,6 +60,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
     );
     player1 = team?.player1 ?? 'Player 1';
     player2 = team?.player2 ?? 'Player 2';
+    teamName = team?.teamName ?? '';
   }
 
   @override
@@ -138,6 +141,13 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         ],
                       ),
                       const SizedBox(height: 20),
+                      Center(
+                        child: Text(
+                          teamName,
+                          style: AppStyles.text25WhiteBold,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       AppExplainingRow(
                         playerExplaining: playerExplaining,
                         player1: player1,
