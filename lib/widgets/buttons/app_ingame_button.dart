@@ -1,3 +1,4 @@
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -11,19 +12,19 @@ import '../../constants/app_colors.dart';
 import '../../providers/all_providers.dart';
 import '../../util/boxes.dart';
 import 'base-buttons/app_button_full.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppInGameButton extends StatefulWidget {
-  const AppInGameButton(
-      {required this.wordsToPlay,
-      required this.usedWords,
-      required this.timerController,
-      required this.ref,
-      required this.box,
-      required this.timerCompleted,
-      required this.cardSwiper,
-      required this.updateParentState,
-      super.key});
+  const AppInGameButton({
+    required this.wordsToPlay,
+    required this.usedWords,
+    required this.timerController,
+    required this.ref,
+    required this.box,
+    required this.timerCompleted,
+    required this.cardSwiper,
+    required this.updateParentState,
+    super.key,
+  });
 
   final List<String> wordsToPlay;
   final List<String> usedWords;
@@ -40,7 +41,13 @@ class AppInGameButton extends StatefulWidget {
 }
 
 class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
-  var audio = AudioPlayer();
+  final _audio = AudioPlayer();
+
+  @override
+  void dispose() {
+    _audio.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +73,15 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
                 textColor: AppColors.englishVioletDarker,
                 buttonText: AppLocalizations.of(context)!.sledecaRec,
                 onPressed: () async {
-                  await audio.setAsset('assets/sounds/correct-choice.mp3');
-                  audio.play();
-                  Boxes.addPoints(widget.box,
-                      'tim-${widget.ref.read(gameAdminProvider).teamPlaying}');
+                  await _audio.setAsset('assets/sounds/correct-choice.mp3');
+                  _audio.play();
+                  bool success = Boxes.addPoints(
+                    widget.box,
+                    'tim-${widget.ref.read(gameAdminProvider).teamPlaying}',
+                  );
+                  if (!success) {
+                    debugPrint('Failed to add points to team');
+                  }
                   widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
                   widget.ref
                       .read(wordsProvider)
@@ -108,7 +120,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
               widget.timerController.start();
             }
 
-            widget.ref.read(blurProvider.notifier).state = false;
+            widget.ref.read(blurProvider.notifier).update((state) => false);
 
             widget.updateParentState();
           },

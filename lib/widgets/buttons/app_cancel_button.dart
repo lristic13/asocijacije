@@ -1,3 +1,4 @@
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,14 @@ import '../../constants/app_colors.dart';
 
 import '../app_alert_dialog.dart';
 import 'base-buttons/app_button_empty.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppCancelButton extends StatefulWidget {
-  const AppCancelButton(
-      {required this.timerController,
-      required this.wordsToPlay,
-      required this.ref,
-      super.key});
+  const AppCancelButton({
+    required this.timerController,
+    required this.wordsToPlay,
+    required this.ref,
+    super.key,
+  });
 
   final CountDownController timerController;
   final List<String> wordsToPlay;
@@ -28,7 +29,8 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
   @override
   Widget build(BuildContext context) {
     return Visibility(
-      visible: widget.timerController.getTime() != '0' &&
+      visible:
+          widget.timerController.getTime() != '0' &&
           widget.timerController.getTime() != '' &&
           widget.wordsToPlay.isNotEmpty,
       child: SizedBox(

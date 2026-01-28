@@ -1,5 +1,6 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/widgets/app_page_header.dart';
@@ -9,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/team.dart';
 import '../../util/boxes.dart';
@@ -28,15 +28,17 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.englishViolet,
-      body: WillPopScope(
-        onWillPop: () async {
-          return false;
-        },
+      body: PopScope(
+        canPop: false,
         child: Container(
           color: AppColors.englishVioletDarker,
           child: Padding(
-            padding:
-                const EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 40),
+            padding: const EdgeInsets.only(
+              bottom: 20,
+              left: 20,
+              right: 20,
+              top: 40,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -46,22 +48,27 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                 Center(
                   child: ListView.builder(
                     itemBuilder: (context, index) {
-                      Team currentTeam = Boxes.getTeamById(
-                          Hive.box<Team>('teams'), 'tim-${index + 1}');
+                      Team? currentTeam = Boxes.getTeamById(
+                        Hive.box<Team>('teams'),
+                        'tim-${index + 1}',
+                      );
+                      if (currentTeam == null) return const SizedBox.shrink();
                       return Card(
                         elevation: 5,
                         color: AppColors.white,
                         child: Container(
                           decoration: BoxDecoration(
-                            border:
-                                Border.all(color: AppColors.coral, width: 3),
+                            border: Border.all(
+                              color: AppColors.coral,
+                              width: 3,
+                            ),
                             borderRadius: BorderRadius.circular(12),
                             gradient: const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
                                 AppColors.englishVioletDarker,
-                                AppColors.englishViolet
+                                AppColors.englishViolet,
                               ],
                             ),
                           ),
@@ -83,14 +90,14 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                                     Text(
                                       '(${currentTeam.player1}, ${currentTeam.player2})',
                                       style: AppStyles.text15WhiteNormal,
-                                    )
+                                    ),
                                   ],
                                 ),
                                 const Spacer(),
                                 Text(
                                   '${currentTeam.points}',
                                   style: AppStyles.text45WhiteBold,
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -98,7 +105,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                       );
                     },
                     shrinkWrap: true,
-                    itemCount: Boxes.getTeams().length,
+                    itemCount: Boxes.getTeams()?.length ?? 0,
                   ),
                 ),
                 const Spacer(),
@@ -119,10 +126,12 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                         allWordsGuessed(context, ref);
                       }
                       Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const GamePage(),
-                              type: PageTransitionType.leftToRight));
+                        context,
+                        PageTransition(
+                          child: const GamePage(),
+                          type: PageTransitionType.leftToRight,
+                        ),
+                      );
                     }
                   },
                 ),

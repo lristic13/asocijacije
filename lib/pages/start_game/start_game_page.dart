@@ -1,6 +1,8 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/mixins/forms_mixin.dart';
+import 'package:asoscijacije_nove/models/game_mode.dart';
 import 'package:asoscijacije_nove/widgets/app_page_header.dart';
 import 'package:asoscijacije_nove/widgets/app_player_number_container.dart';
 import 'package:asoscijacije_nove/widgets/app_round_row.dart';
@@ -11,7 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/team.dart';
 import '../../providers/all_providers.dart';
@@ -28,8 +29,10 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   int teamId = 1;
 
   late Box box;
-  List<GlobalKey<FormBuilderState>> formKeys =
-      List.generate(2, (i) => GlobalKey<FormBuilderState>());
+  List<GlobalKey<FormBuilderState>> formKeys = List.generate(
+    2,
+    (i) => GlobalKey<FormBuilderState>(),
+  );
   @override
   void initState() {
     super.initState();
@@ -40,14 +43,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     var localizations = AppLocalizations.of(context)!;
-    String selectedGameMode = ref.watch(gameModeProvider);
+    GameMode selectedGameMode = ref.watch(gameModeProvider);
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
@@ -72,7 +70,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       value: 4,
                       ref: ref,
                       cbOnTap: () {
-                        ref.read(playerNumberProvider.notifier).state = 4;
+                        ref
+                            .read(playerNumberProvider.notifier)
+                            .update((state) => 4);
                         formKeys = generateKeys(ref);
                       },
                     ),
@@ -80,7 +80,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       value: 6,
                       ref: ref,
                       cbOnTap: () {
-                        ref.read(playerNumberProvider.notifier).state = 6;
+                        ref
+                            .read(playerNumberProvider.notifier)
+                            .update((state) => 6);
                         formKeys = generateKeys(ref);
                       },
                     ),
@@ -88,7 +90,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       value: 8,
                       ref: ref,
                       cbOnTap: () {
-                        ref.read(playerNumberProvider.notifier).state = 8;
+                        ref
+                            .read(playerNumberProvider.notifier)
+                            .update((state) => 8);
                         formKeys = generateKeys(ref);
                       },
                     ),
@@ -96,7 +100,9 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       value: 10,
                       ref: ref,
                       cbOnTap: () {
-                        ref.read(playerNumberProvider.notifier).state = 10;
+                        ref
+                            .read(playerNumberProvider.notifier)
+                            .update((state) => 10);
                         formKeys = generateKeys(ref);
                       },
                     ),
@@ -107,8 +113,10 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               const Divider(),
               Row(
                 children: [
-                  Text(localizations.izaberiMod,
-                      style: AppStyles.text20WhiteBold),
+                  Text(
+                    localizations.izaberiMod,
+                    style: AppStyles.text20WhiteBold,
+                  ),
                   const Text('.', style: AppStyles.text20CoralBold),
                 ],
               ),
@@ -117,17 +125,21 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                 children: [
                   AppModeButton(
                     modeName: localizations.normalan,
+                    mode: GameMode.normal,
                     onSelected: () {
-                      ref.read(gameModeProvider.notifier).state =
-                          localizations.normalan;
+                      ref
+                          .read(gameModeProvider.notifier)
+                          .update((state) => GameMode.normal);
                     },
                   ),
                   const SizedBox(width: 10),
                   AppModeButton(
                     modeName: localizations.brzi,
+                    mode: GameMode.quick,
                     onSelected: () {
-                      ref.read(gameModeProvider.notifier).state =
-                          localizations.brzi;
+                      ref
+                          .read(gameModeProvider.notifier)
+                          .update((state) => GameMode.quick);
                     },
                   ),
                 ],
@@ -135,18 +147,21 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               const SizedBox(height: 5),
               AppRoundRow(
                 roundName: localizations.normalnaRunda,
-                roundLength:
-                    selectedGameMode == localizations.normalan ? 45 : 30,
+                roundLength: selectedGameMode == GameMode.normal
+                    ? GameMode.normalRound1And2Duration
+                    : GameMode.quickRound1And2Duration,
               ),
               AppRoundRow(
                 roundName: localizations.jednaRecRunda,
-                roundLength:
-                    selectedGameMode == localizations.normalan ? 45 : 30,
+                roundLength: selectedGameMode == GameMode.normal
+                    ? GameMode.normalRound1And2Duration
+                    : GameMode.quickRound1And2Duration,
               ),
               AppRoundRow(
                 roundName: localizations.pantomimaRunda,
-                roundLength:
-                    selectedGameMode == localizations.normalan ? 60 : 45,
+                roundLength: selectedGameMode == GameMode.normal
+                    ? GameMode.normalRound3Duration
+                    : GameMode.quickRound3Duration,
               ),
               const Divider(),
               Expanded(
@@ -164,7 +179,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               ),
               const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
+                padding: const EdgeInsets.only(bottom: 35.0),
                 child: AppButtonRow(
                   leftButtonText: AppLocalizations.of(context)!.nazad,
                   rightButtonText: AppLocalizations.of(context)!.dalje,
@@ -175,7 +190,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                     validateForms(context, ref, formKeys, box, teamId);
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),

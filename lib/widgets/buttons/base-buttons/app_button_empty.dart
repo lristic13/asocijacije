@@ -25,7 +25,7 @@ class AppButtonEmpty extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.06,
       child: TextButton(
         style: ButtonStyle(
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: BorderSide(color: borderColor ?? AppColors.white, width: 3),
               borderRadius: BorderRadius.circular(13),

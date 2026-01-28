@@ -1,4 +1,5 @@
 import 'package:asoscijacije_nove/constants/app_routes.dart';
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/l10n/l10n.dart';
 import 'package:asoscijacije_nove/models/team.dart';
 import 'package:asoscijacije_nove/pages/game/game_page.dart';
@@ -7,21 +8,29 @@ import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
 import 'package:asoscijacije_nove/pages/scoreboard/scoreboard_page.dart';
 import 'package:asoscijacije_nove/pages/start_game/start_game_page.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
+import 'package:asoscijacije_nove/services/navigation_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../firebase_options.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   Hive.registerAdapter(TeamAdapter());
-  await Firebase.initializeApp(
-    name: 'asocijacije',
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  try {
+    await Firebase.initializeApp(
+      name: 'asocijacije',
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint('Firebase initialization failed: $e');
+  }
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -38,18 +47,16 @@ class _MyAppConsumerState extends ConsumerState<MyApp> {
     final appLocale = ref.watch(localeProvider);
 
     return MaterialApp(
+      navigatorKey: NavigationService.navigatorKey,
       supportedLocales: L10n.all,
       locale: appLocale,
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate
+        GlobalWidgetsLocalizations.delegate,
       ],
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        fontFamily: 'Geologica',
-      ),
+      theme: ThemeData(useMaterial3: true, fontFamily: 'Geologica'),
       home: const HomePage(),
       routes: {
         AppRoutes.gamePage: (context) => const GamePage(),

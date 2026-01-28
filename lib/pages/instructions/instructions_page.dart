@@ -1,9 +1,9 @@
 import 'package:asoscijacije_nove/constants/app_colors.dart';
 import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/widgets/app_page_header.dart';
 import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'instruction_item.dart';
 
@@ -17,8 +17,12 @@ class InstructionsPage extends StatelessWidget {
       body: Container(
         color: AppColors.englishVioletDarker,
         child: Padding(
-          padding:
-              const EdgeInsets.only(left: 20, right: 20, top: 40, bottom: 20),
+          padding: const EdgeInsets.only(
+            left: 20,
+            right: 20,
+            top: 40,
+            bottom: 20,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -55,10 +59,14 @@ class InstructionsPage extends StatelessWidget {
               const SizedBox(height: 10),
               Wrap(
                 children: [
-                  Text(AppLocalizations.of(context)!.napomena,
-                      style: AppStyles.text15CoralBold),
-                  Text(AppLocalizations.of(context)!.napomenaTekst,
-                      style: AppStyles.text15WhiteBold),
+                  Text(
+                    AppLocalizations.of(context)!.napomena,
+                    style: AppStyles.text15CoralBold,
+                  ),
+                  Text(
+                    AppLocalizations.of(context)!.napomenaTekst,
+                    style: AppStyles.text15WhiteBold,
+                  ),
                 ],
               ),
               const Spacer(flex: 3),
