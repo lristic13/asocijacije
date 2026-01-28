@@ -75,9 +75,14 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
                 onPressed: () async {
                   await _audio.setAsset('assets/sounds/correct-choice.mp3');
                   _audio.play();
+                  final pointsToAdd = isInDoublePointsZone(
+                    widget.ref,
+                    widget.timerController.getTime() ?? '0',
+                  ) ? 2 : 1;
                   bool success = Boxes.addPoints(
                     widget.box,
                     'tim-${widget.ref.read(gameAdminProvider).teamPlaying}',
+                    points: pointsToAdd,
                   );
                   if (!success) {
                     debugPrint('Failed to add points to team');

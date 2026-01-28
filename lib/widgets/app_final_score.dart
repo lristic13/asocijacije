@@ -48,6 +48,7 @@ class AppFinalScore extends ConsumerWidget {
           buttonText: AppLocalizations.of(context)!.novaIgra,
           onPressed: () {
             ref.read(gameAdminProvider.notifier).update((state) => state.resetGame());
+            ref.read(doublePointsProvider.notifier).update((state) => false);
             NavigationService.goToHome();
           },
         ),
