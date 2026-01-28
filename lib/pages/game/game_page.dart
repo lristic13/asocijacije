@@ -1,7 +1,9 @@
-import 'package:asoscijacije_nove/constants/app_routes.dart';
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/mixins/game_mixin.dart';
+import 'package:asoscijacije_nove/models/game_mode.dart';
 import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
 import 'package:asoscijacije_nove/providers/all_providers.dart';
+import 'package:asoscijacije_nove/services/navigation_service.dart';
 import 'package:asoscijacije_nove/util/boxes.dart';
 import 'package:asoscijacije_nove/widgets/app_alert_dialog.dart';
 import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
@@ -17,7 +19,6 @@ import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../constants/app_colors.dart';
 import '../../models/team.dart';
@@ -39,24 +40,24 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
 
   bool timerCompleted = false;
   late Box<Team> box;
-  late String player1;
-  late String player2;
+  String player1 = 'Player 1';
+  String player2 = 'Player 2';
 
   @override
   void initState() {
     super.initState();
-    box = Hive.box<Team>('teams');
-    player1 =
-        Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}')
-            .player1;
-    player2 =
-        Boxes.getTeamById(box, 'tim-${ref.read(gameAdminProvider).teamPlaying}')
-            .player2;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
+    final openBox = Boxes.getTeams();
+    if (openBox == null) {
+      debugPrint('Teams box not available');
+      return;
+    }
+    box = openBox;
+    final team = Boxes.getTeamById(
+      box,
+      'tim-${ref.read(gameAdminProvider).teamPlaying}',
+    );
+    player1 = team?.player1 ?? 'Player 1';
+    player2 = team?.player2 ?? 'Player 2';
   }
 
   @override
@@ -66,9 +67,11 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
     List<String> usedWords = ref.watch(wordsProvider).usedWords;
 
     return Scaffold(
-        backgroundColor: Colors.transparent,
-        body: WillPopScope(
-          onWillPop: () {
+      backgroundColor: Colors.transparent,
+      body: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) {
             showDialog(
               context: context,
               builder: (context) => AppAlertDialog(
@@ -80,87 +83,85 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                   setState(() {});
                 },
                 onPressedYes: () {
-                  ref.read(gameAdminProvider).resetGame();
+                  ref.read(gameAdminProvider.notifier).update((state) => state.resetGame());
                   ref.read(wordsProvider).resetWords();
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, AppRoutes.homePage, (route) => false);
+                  NavigationService.goToHome();
                 },
               ),
             );
-            return Future.value(true);
-          },
-          child: Container(
-            color: AppColors.englishVioletDarker,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-              child: ref.read(gameAdminProvider).roundInProgress == 4
-                  ? AppFinalScore(box: box)
-                  : Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            AppPageHeader(title: getRoundTitle(ref, context)),
-                            const Spacer(),
-                            AppIconButton(
-                              onButtonPressed: () {
-                                _controllerTimer.pause();
-                                setState(() {});
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.topToBottom,
-                                      curve: Curves.easeIn,
-                                      duration:
-                                          const Duration(milliseconds: 300),
-                                      child: const InstructionsPage()),
-                                );
-                              },
-                            )
-                          ],
-                        ),
-                        const AppSeparator(color: AppColors.coral),
-                        const SizedBox(height: 20),
-                        Row(
-                          children: [
-                            AppTimer(
-                              controllerTimer: _controllerTimer,
-                              ref: ref,
-                              onTimerComplete: () {
-                                setState(() {
-                                  timerCompleted = true;
-                                });
-                              },
-                            ),
-                            AppPoints(box: box, ref: ref),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        AppExplainingRow(
-                          playerExplaining: playerExplaining,
-                          player1: player1,
-                          player2: player2,
-                        ),
-                        AppCardsBuilder(
-                          swiperController: _cardSwiperController,
-                        ),
-                        const SizedBox(height: 10),
-                        AppInGameButton(
-                          wordsToPlay: wordsToPlay,
-                          usedWords: usedWords,
-                          timerController: _controllerTimer,
-                          ref: ref,
-                          box: box,
-                          timerCompleted: timerCompleted,
-                          cardSwiper: _cardSwiperController,
-                          updateParentState: () {
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    ),
-            ),
+          }
+        },
+        child: Container(
+          color: AppColors.englishVioletDarker,
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
+            child: ref.read(gameAdminProvider).roundInProgress == GameMode.finalRound
+                ? AppFinalScore(box: box)
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          AppPageHeader(title: getRoundTitle(ref, context)),
+                          const Spacer(),
+                          AppIconButton(
+                            onButtonPressed: () {
+                              _controllerTimer.pause();
+                              setState(() {});
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.topToBottom,
+                                  curve: Curves.easeIn,
+                                  duration: const Duration(milliseconds: 300),
+                                  child: const InstructionsPage(),
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                      const AppSeparator(color: AppColors.coral),
+                      const SizedBox(height: 20),
+                      Row(
+                        children: [
+                          AppTimer(
+                            controllerTimer: _controllerTimer,
+                            ref: ref,
+                            onTimerComplete: () {
+                              setState(() {
+                                timerCompleted = true;
+                              });
+                            },
+                          ),
+                          AppPoints(box: box, ref: ref),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      AppExplainingRow(
+                        playerExplaining: playerExplaining,
+                        player1: player1,
+                        player2: player2,
+                      ),
+                      AppCardsBuilder(swiperController: _cardSwiperController),
+                      const SizedBox(height: 10),
+                      AppInGameButton(
+                        wordsToPlay: wordsToPlay,
+                        usedWords: usedWords,
+                        timerController: _controllerTimer,
+                        ref: ref,
+                        box: box,
+                        timerCompleted: timerCompleted,
+                        cardSwiper: _cardSwiperController,
+                        updateParentState: () {
+                          setState(() {});
+                        },
+                      ),
+                    ],
+                  ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

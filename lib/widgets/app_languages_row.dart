@@ -2,7 +2,7 @@ import 'package:asoscijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../providers/all_providers.dart';
+import '../providers/all_providers.dart' show localeProvider;
 
 class AppLanguagesRow extends ConsumerWidget {
   const AppLanguagesRow({super.key});
@@ -22,10 +22,7 @@ class AppLanguagesRow extends ConsumerWidget {
   InkWell _buildLanguageSelector(WidgetRef ref, String text, Locale locale) {
     return InkWell(
       onTap: () {
-        ref.read(localeProvider.notifier).state = locale;
-        locale == const Locale('sr')
-            ? ref.read(gameModeProvider.notifier).state = 'Normalan'
-            : ref.read(gameModeProvider.notifier).state = 'Normal';
+        ref.read(localeProvider.notifier).update((state) => locale);
       },
       child: Text(
         text,

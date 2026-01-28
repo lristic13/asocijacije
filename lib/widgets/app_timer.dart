@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_styles.dart';
-import '../providers/all_providers.dart';
 
 class AppTimer extends StatelessWidget with GameMixin {
   const AppTimer(

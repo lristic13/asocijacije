@@ -1,4 +1,3 @@
-import 'package:asoscijacije_nove/providers/all_providers.dart';
 import 'package:asoscijacije_nove/widgets/app_title_text.dart';
 import 'package:asoscijacije_nove/widgets/app_languages_row.dart';
 import 'package:asoscijacije_nove/widgets/cards/menu_cards.dart';
@@ -22,8 +21,23 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
 
   @override
   void initState() {
-    _checkForUpdate();
     super.initState();
+    _checkForUpdate();
+  }
+
+  void _checkForUpdate() {
+    InAppUpdate.checkForUpdate()
+        .then((updateInfo) {
+          if (updateInfo.updateAvailability ==
+              UpdateAvailability.updateAvailable) {
+            if (updateInfo.immediateUpdateAllowed) {
+              InAppUpdate.performImmediateUpdate();
+            }
+          }
+        })
+        .catchError((e) {
+          debugPrint('Update check failed: $e');
+        });
   }
 
   @override
@@ -33,11 +47,7 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
         width: double.infinity,
         color: AppColors.englishVioletDarker,
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 40,
-            left: 20,
-            right: 20,
-          ),
+          padding: const EdgeInsets.only(top: 70, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -54,14 +64,4 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
       ),
     );
   }
-}
-
-void _checkForUpdate() {
-  InAppUpdate.checkForUpdate().then((updateInfo) {
-    if (updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
-      if (updateInfo.immediateUpdateAllowed) {
-        InAppUpdate.performImmediateUpdate();
-      }
-    }
-  });
 }

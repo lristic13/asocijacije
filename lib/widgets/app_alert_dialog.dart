@@ -1,17 +1,18 @@
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../constants/app_colors.dart';
 import 'buttons/base-buttons/app_button_empty.dart';
 import 'buttons/base-buttons/app_button_full.dart';
 
 class AppAlertDialog extends StatelessWidget {
-  const AppAlertDialog(
-      {required this.title,
-      required this.content,
-      required this.onPressedNo,
-      required this.onPressedYes,
-      super.key});
+  const AppAlertDialog({
+    required this.title,
+    required this.content,
+    required this.onPressedNo,
+    required this.onPressedYes,
+    super.key,
+  });
 
   final String title;
   final String content;
@@ -29,10 +30,7 @@ class AppAlertDialog extends StatelessWidget {
           fontWeight: FontWeight.bold,
         ),
       ),
-      content: Text(
-        content,
-        style: const TextStyle(color: AppColors.white),
-      ),
+      content: Text(content, style: const TextStyle(color: AppColors.white)),
       actions: [
         Row(
           children: [
@@ -47,10 +45,11 @@ class AppAlertDialog extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: AppButtonFull(
-                  fillColor: AppColors.englishVioletDarker,
-                  textColor: AppColors.white,
-                  buttonText: AppLocalizations.of(context)!.da,
-                  onPressed: onPressedYes),
+                fillColor: AppColors.englishVioletDarker,
+                textColor: AppColors.white,
+                buttonText: AppLocalizations.of(context)!.da,
+                onPressed: onPressedYes,
+              ),
             ),
           ],
         ),

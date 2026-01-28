@@ -1,21 +1,20 @@
 import 'dart:ui';
 
+import 'package:asoscijacije_nove/l10n/app_localizations.dart';
 import 'package:asoscijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_styles.dart';
 import '../providers/all_providers.dart';
 
 class AppCardsBuilder extends ConsumerWidget {
-  const AppCardsBuilder({
-    required this.swiperController,
-    super.key,
-  });
+  const AppCardsBuilder({required this.swiperController, super.key});
+
+  /// Extra cards needed by CardSwiper to render the stack effect.
+  static const int _cardsBufferCount = 2;
 
   final CardSwiperController swiperController;
 
@@ -29,14 +28,14 @@ class AppCardsBuilder extends ConsumerWidget {
             ? CardSwiper(
                 controller: swiperController,
                 isDisabled: true,
-                cardsCount: ref.read(wordsProvider).wordsToPlay.length + 2,
-                cardBuilder: (
-                  context,
-                  index,
-                  horizontalOffsetPercentage,
-                  verticalOffsetPercentage,
-                ) =>
-                    Center(
+                cardsCount: ref.read(wordsProvider).wordsToPlay.length + _cardsBufferCount,
+                cardBuilder:
+                    (
+                      context,
+                      index,
+                      horizontalOffsetPercentage,
+                      verticalOffsetPercentage,
+                    ) => Center(
                       child: Card(
                         color: AppColors.englishVioletLighter,
                         elevation: 10,
@@ -53,14 +52,15 @@ class AppCardsBuilder extends ConsumerWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: AppSeparator(
-                                      color: AppColors.white,
-                                    )),
+                                  alignment: Alignment.centerLeft,
+                                  child: AppSeparator(color: AppColors.white),
+                                ),
                                 shouldBlur
                                     ? ImageFiltered(
                                         imageFilter: ImageFilter.blur(
-                                            sigmaX: 6, sigmaY: 6),
+                                          sigmaX: 6,
+                                          sigmaY: 6,
+                                        ),
                                         child: Center(
                                           child: Text(
                                             ref
@@ -82,16 +82,15 @@ class AppCardsBuilder extends ConsumerWidget {
                                       ),
                                 const Align(
                                   alignment: Alignment.centerRight,
-                                  child: AppSeparator(
-                                    color: AppColors.white,
-                                  ),
+                                  child: AppSeparator(color: AppColors.white),
                                 ),
                               ],
                             ),
                           ),
                         ),
                       ),
-                    ))
+                    ),
+              )
             : Center(
                 child: Text(
                   AppLocalizations.of(context)!.pogodjeneSveReci,
