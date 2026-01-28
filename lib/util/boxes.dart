@@ -35,12 +35,12 @@ class Boxes {
     }
   }
 
-  static bool addPoints(Box box, String teamId) {
+  static bool addPoints(Box box, String teamId, {int points = 1}) {
     try {
       Team? team = getTeamById(box, teamId);
       if (team == null) return false;
-      
-      team.points++;
+
+      team.points += points;
       team.save();
       return true;
     } catch (e) {

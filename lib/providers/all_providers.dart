@@ -18,3 +18,5 @@ final localeProvider = StateProvider<Locale>((ref) => const Locale('sr'));
 final blurProvider = StateProvider<bool>((ref) => true);
 
 final gameModeProvider = StateProvider<GameMode>((ref) => GameMode.normal);
+
+final doublePointsProvider = StateProvider<bool>((ref) => false);

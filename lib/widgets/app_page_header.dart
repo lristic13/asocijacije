@@ -10,14 +10,8 @@ class AppPageHeader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: AppStyles.text30WhiteBold,
-        ),
-        const Text(
-          '.',
-          style: AppStyles.text30CoralBold,
-        ),
+        Text(title, style: AppStyles.text30WhiteBold),
+        const Text('.', style: AppStyles.text30CoralBold),
       ],
     );
   }

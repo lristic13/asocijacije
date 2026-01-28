@@ -63,6 +63,28 @@ mixin GameMixin {
     return AppLocalizations.of(context)!.pantomimaRunda;
   }
 
+  int getDoublePointsThreshold(WidgetRef ref) {
+    final isNormal = ref.read(gameModeProvider) == GameMode.normal;
+    final isRound3 = ref.read(gameAdminProvider).roundInProgress == 3;
+
+    if (isNormal) {
+      return isRound3
+          ? GameMode.normalMimeDoublePointsThreshold
+          : GameMode.normalDoublePointsThreshold;
+    } else {
+      return isRound3
+          ? GameMode.quickMimeDoublePointsThreshold
+          : GameMode.quickDoublePointsThreshold;
+    }
+  }
+
+  bool isInDoublePointsZone(WidgetRef ref, String timerValue) {
+    if (!ref.read(doublePointsProvider)) return false;
+    final remaining = int.tryParse(timerValue) ?? 0;
+    if (remaining == 0) return false;
+    return remaining <= getDoublePointsThreshold(ref);
+  }
+
   int calculateRoundTime(WidgetRef ref) {
     final isNormal = ref.read(gameModeProvider) == GameMode.normal;
     final isRound3 = ref.read(gameAdminProvider).roundInProgress == 3;

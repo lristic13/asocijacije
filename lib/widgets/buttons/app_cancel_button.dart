@@ -43,7 +43,7 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
           onPressed: () {
             widget.timerController.pause();
             setState(() {});
-            showDialog(
+            showModalBottomSheet(
               context: context,
               builder: (context) => AppAlertDialog(
                 title: AppLocalizations.of(context)!.odustajete,
