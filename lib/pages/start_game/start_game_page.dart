@@ -48,8 +48,8 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
     GameMode selectedGameMode = ref.watch(gameModeProvider);
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: Colors.transparent,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: AppColors.englishVioletDarker,
       body: Container(
         padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
         color: AppColors.englishVioletDarker,
@@ -340,32 +340,145 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
               ),
               const Divider(),
               Expanded(
-                flex: 5,
                 child: SingleChildScrollView(
-                  child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: EdgeInsets.zero,
-                    itemCount: ref.watch(playerNumberProvider) ~/ 2,
-                    itemBuilder: (context, index) =>
-                        TeamCard(formKeys[index], index, 5),
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppPageHeader(title: localizations.pocniIgru),
+                      const AppSeparator(color: AppColors.coral),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            AppPlayerNumberContainer(
+                              value: 4,
+                              ref: ref,
+                              cbOnTap: () {
+                                ref
+                                    .read(playerNumberProvider.notifier)
+                                    .update((state) => 4);
+                                formKeys = generateKeys(ref);
+                              },
+                            ),
+                            AppPlayerNumberContainer(
+                              value: 6,
+                              ref: ref,
+                              cbOnTap: () {
+                                ref
+                                    .read(playerNumberProvider.notifier)
+                                    .update((state) => 6);
+                                formKeys = generateKeys(ref);
+                              },
+                            ),
+                            AppPlayerNumberContainer(
+                              value: 8,
+                              ref: ref,
+                              cbOnTap: () {
+                                ref
+                                    .read(playerNumberProvider.notifier)
+                                    .update((state) => 8);
+                                formKeys = generateKeys(ref);
+                              },
+                            ),
+                            AppPlayerNumberContainer(
+                              value: 10,
+                              ref: ref,
+                              cbOnTap: () {
+                                ref
+                                    .read(playerNumberProvider.notifier)
+                                    .update((state) => 10);
+                                formKeys = generateKeys(ref);
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      const Divider(),
+                      Row(
+                        children: [
+                          Text(
+                            localizations.izaberiMod,
+                            style: AppStyles.text20WhiteBold,
+                          ),
+                          const Text('.', style: AppStyles.text20CoralBold),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      Row(
+                        children: [
+                          AppModeButton(
+                            modeName: localizations.normalan,
+                            mode: GameMode.normal,
+                            onSelected: () {
+                              ref
+                                  .read(gameModeProvider.notifier)
+                                  .update((state) => GameMode.normal);
+                            },
+                          ),
+                          const SizedBox(width: 10),
+                          AppModeButton(
+                            modeName: localizations.brzi,
+                            mode: GameMode.quick,
+                            onSelected: () {
+                              ref
+                                  .read(gameModeProvider.notifier)
+                                  .update((state) => GameMode.quick);
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 5),
+                      AppRoundRow(
+                        roundName: localizations.normalnaRunda,
+                        roundLength: selectedGameMode == GameMode.normal
+                            ? GameMode.normalRound1And2Duration
+                            : GameMode.quickRound1And2Duration,
+                      ),
+                      AppRoundRow(
+                        roundName: localizations.jednaRecRunda,
+                        roundLength: selectedGameMode == GameMode.normal
+                            ? GameMode.normalRound1And2Duration
+                            : GameMode.quickRound1And2Duration,
+                      ),
+                      AppRoundRow(
+                        roundName: localizations.pantomimaRunda,
+                        roundLength: selectedGameMode == GameMode.normal
+                            ? GameMode.normalRound3Duration
+                            : GameMode.quickRound3Duration,
+                      ),
+                      const Divider(),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        padding: EdgeInsets.zero,
+                        itemCount: ref.watch(playerNumberProvider) ~/ 2,
+                        itemBuilder: (context, index) =>
+                            TeamCard(formKeys[index], index, 5),
+                      ),
+                      const SizedBox(height: 20),
+                    ],
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
               Padding(
-                padding: const EdgeInsets.only(bottom: 35.0),
-                child: AppButtonRow(
-                  leftButtonText: AppLocalizations.of(context)!.nazad,
-                  rightButtonText: AppLocalizations.of(context)!.dalje,
-                  leftButtonCb: () {
-                    Navigator.pop(context);
-                  },
-                  rightButtonCb: () {
-                    validateForms(context, ref, formKeys, box, teamId);
-                  },
+                  padding: const EdgeInsets.only(bottom: 35.0),
+                  child: AppButtonRow(
+                    leftButtonText: AppLocalizations.of(context)!.nazad,
+                    rightButtonText: AppLocalizations.of(context)!.dalje,
+                    leftButtonCb: () {
+                      Navigator.pop(context);
+                    },
+                    rightButtonCb: () {
+                      validateForms(context, ref, formKeys, box, teamId);
+                    },
+                  ),
                 ),
-              ),
             ],
           ),
         ),
