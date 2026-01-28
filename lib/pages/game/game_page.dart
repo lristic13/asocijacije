@@ -75,7 +75,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
         canPop: false,
         onPopInvokedWithResult: (didPop, result) {
           if (!didPop) {
-            showDialog(
+            showModalBottomSheet(
               context: context,
               builder: (context) => AppAlertDialog(
                 title: AppLocalizations.of(context)!.izlaz,
@@ -86,8 +86,13 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                   setState(() {});
                 },
                 onPressedYes: () {
-                  ref.read(gameAdminProvider.notifier).update((state) => state.resetGame());
+                  ref
+                      .read(gameAdminProvider.notifier)
+                      .update((state) => state.resetGame());
                   ref.read(wordsProvider).resetWords();
+                  ref
+                      .read(doublePointsProvider.notifier)
+                      .update((state) => false);
                   NavigationService.goToHome();
                 },
               ),
@@ -98,11 +103,14 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           color: AppColors.englishVioletDarker,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-            child: ref.read(gameAdminProvider).roundInProgress == GameMode.finalRound
+            child:
+                ref.read(gameAdminProvider).roundInProgress ==
+                    GameMode.finalRound
                 ? AppFinalScore(box: box)
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(height: 20),
                       Row(
                         children: [
                           AppPageHeader(title: getRoundTitle(ref, context)),
@@ -153,7 +161,10 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                         player1: player1,
                         player2: player2,
                       ),
-                      AppCardsBuilder(swiperController: _cardSwiperController),
+                      AppCardsBuilder(
+                        swiperController: _cardSwiperController,
+                        timerController: _controllerTimer,
+                      ),
                       const SizedBox(height: 10),
                       AppInGameButton(
                         wordsToPlay: wordsToPlay,

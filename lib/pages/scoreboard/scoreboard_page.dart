@@ -42,6 +42,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 20),
                 AppPageHeader(title: AppLocalizations.of(context)!.rezultat),
                 const AppSeparator(color: AppColors.coral),
                 const Spacer(),
@@ -124,24 +125,27 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                   ),
                 ),
                 const SizedBox(height: 10),
-                AppButtonFull(
-                  buttonText: AppLocalizations.of(context)!.dalje,
-                  fillColor: AppColors.coral,
-                  textColor: AppColors.englishVioletDarker,
-                  onPressed: () {
-                    if (context.mounted) {
-                      if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
-                        allWordsGuessed(context, ref);
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25.0),
+                  child: AppButtonFull(
+                    buttonText: AppLocalizations.of(context)!.dalje,
+                    fillColor: AppColors.coral,
+                    textColor: AppColors.englishVioletDarker,
+                    onPressed: () {
+                      if (context.mounted) {
+                        if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
+                          allWordsGuessed(context, ref);
+                        }
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            child: const GamePage(),
+                            type: PageTransitionType.leftToRight,
+                          ),
+                        );
                       }
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          child: const GamePage(),
-                          type: PageTransitionType.leftToRight,
-                        ),
-                      );
-                    }
-                  },
+                    },
+                  ),
                 ),
               ],
             ),
