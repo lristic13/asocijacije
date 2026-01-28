@@ -119,13 +119,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get rezultat => 'Score';
 
   @override
-  String get sledeciIgraTim => 'Up next is Team';
+  String get sledeciIgraTim => 'Up next are';
 
   @override
   String get krajIgre => 'Final score';
 
   @override
-  String get pobednikJeTim => 'The winner is Team';
+  String get pobednikJeTim => 'The winners are';
 
   @override
   String get novaIgra => 'New game';
@@ -152,4 +152,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dupliPoeniObjasnjenje =>
       'Words guessed in the final seconds of the round earn 2 points instead of 1!\n\nNormal mode:\n• Normal and One-word rounds: last 10 seconds\n• Mime round: last 15 seconds\n\nQuick mode:\n• Normal and One-word rounds: last 7 seconds\n• Mime round: last 10 seconds';
+  String get imeTima => 'Team name';
+
+  @override
+  String get unesiteImeTima => 'Enter team name!';
 }

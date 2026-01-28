@@ -36,7 +36,7 @@ class AppFinalScore extends ConsumerWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Text(
-              '${AppLocalizations.of(context)!.pobednikJeTim} ${Boxes.getWinnerTeam(box)?.substring((Boxes.getWinnerTeam(box)?.length ?? 1) - 1) ?? '?'}!',
+              '${AppLocalizations.of(context)!.pobednikJeTim} ${Boxes.getWinnerTeam(box)?.teamName ?? '?'}!',
               style: AppStyles.text25CoralBold,
             ),
           ),
@@ -51,6 +51,19 @@ class AppFinalScore extends ConsumerWidget {
             ref.read(doublePointsProvider.notifier).update((state) => false);
             NavigationService.goToHome();
           },
+        Padding(
+          padding: const EdgeInsets.only(bottom: 25.0),
+          child: AppButtonFull(
+            fillColor: AppColors.coral,
+            textColor: AppColors.englishViolet,
+            buttonText: AppLocalizations.of(context)!.novaIgra,
+            onPressed: () {
+              ref
+                  .read(gameAdminProvider.notifier)
+                  .update((state) => state.resetGame());
+              NavigationService.goToHome();
+            },
+          ),
         ),
       ],
     );
