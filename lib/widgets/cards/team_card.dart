@@ -34,20 +34,27 @@ class TeamCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  child: Row(
-                    children: [
-                      Text(
-                        '${AppLocalizations.of(context)!.tim} ${index + 1}',
-                        style: AppStyles.text30WhiteBold,
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  child: FormBuilderTextField(
+                    style: AppStyles.text30WhiteBold,
+                    decoration: AppStyles.errorInputDecoration.copyWith(
+                      label: Text(
+                        '${AppLocalizations.of(context)!.imeTima} ${index + 1}',
+                        style: const TextStyle(
+                          color: AppColors.englishVioletLighter,
+                        ),
                       ),
-                      const Text('.', style: AppStyles.text30CoralBold),
-                    ],
+                    ),
+                    name: 'teamName',
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return AppLocalizations.of(context)!.unesiteImeTima;
+                      }
+                      return null;
+                    },
                   ),
                 ),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(
                     bottom: 15,
@@ -65,6 +72,9 @@ class TeamCard extends StatelessWidget {
                           decoration: AppStyles.errorInputDecoration.copyWith(
                             label: Text(
                               AppLocalizations.of(context)!.ime1Igraca,
+                              style: const TextStyle(
+                                color: AppColors.englishVioletLighter,
+                              ),
                             ),
                           ),
                           name: 'player1',
@@ -88,6 +98,9 @@ class TeamCard extends StatelessWidget {
                           decoration: AppStyles.errorInputDecoration.copyWith(
                             label: Text(
                               AppLocalizations.of(context)!.ime2Igraca,
+                              style: const TextStyle(
+                                color: AppColors.englishVioletLighter,
+                              ),
                             ),
                           ),
                           name: 'player2',

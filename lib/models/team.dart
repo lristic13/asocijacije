@@ -5,6 +5,7 @@ part 'team.g.dart';
 @HiveType(typeId: 0)
 class Team extends HiveObject {
   Team({
+    required this.teamName,
     required this.player1,
     required this.player2,
     required this.points,
@@ -19,8 +20,11 @@ class Team extends HiveObject {
   @HiveField(3)
   int points;
 
+  @HiveField(4)
+  String teamName;
+
   @override
   String toString() {
-    return 'Team($player1, $player2, points: $points)';
+    return 'Team($teamName: $player1, $player2, points: $points)';
   }
 }

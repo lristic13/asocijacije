@@ -305,7 +305,7 @@ abstract class AppLocalizations {
   /// No description provided for @sledeciIgraTim.
   ///
   /// In sr, this message translates to:
-  /// **'Sledeći igra Tim'**
+  /// **'Sledeći igraju'**
   String get sledeciIgraTim;
 
   /// No description provided for @krajIgre.
@@ -317,7 +317,7 @@ abstract class AppLocalizations {
   /// No description provided for @pobednikJeTim.
   ///
   /// In sr, this message translates to:
-  /// **'Pobenik je Tim'**
+  /// **'Pobednici su'**
   String get pobednikJeTim;
 
   /// No description provided for @novaIgra.
@@ -349,6 +349,18 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Brzi'**
   String get brzi;
+
+  /// No description provided for @imeTima.
+  ///
+  /// In sr, this message translates to:
+  /// **'Ime tima'**
+  String get imeTima;
+
+  /// No description provided for @unesiteImeTima.
+  ///
+  /// In sr, this message translates to:
+  /// **'Unesite ime tima!'**
+  String get unesiteImeTima;
 }
 
 class _AppLocalizationsDelegate

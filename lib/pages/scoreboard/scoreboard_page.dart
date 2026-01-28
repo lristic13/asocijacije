@@ -84,7 +84,7 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '${AppLocalizations.of(context)!.tim} ${index + 1}',
+                                      currentTeam.teamName,
                                       style: AppStyles.text35WhiteBold,
                                     ),
                                     Text(
@@ -110,9 +110,17 @@ class _ScoreBoardPageConsumerState extends ConsumerState<ScoreBoardPage>
                 ),
                 const Spacer(),
                 Center(
-                  child: Text(
-                    '${AppLocalizations.of(context)!.sledeciIgraTim} ${ref.watch(gameAdminProvider).teamPlaying}!',
-                    style: AppStyles.text25WhiteBold,
+                  child: Builder(
+                    builder: (context) {
+                      final nextTeam = Boxes.getTeamById(
+                        Hive.box<Team>('teams'),
+                        'tim-${ref.watch(gameAdminProvider).teamPlaying}',
+                      );
+                      return Text(
+                        '${AppLocalizations.of(context)!.sledeciIgraTim} ${nextTeam?.teamName ?? ref.watch(gameAdminProvider).teamPlaying}!',
+                        style: AppStyles.text25WhiteBold,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -22,13 +22,13 @@ class Boxes {
     }
   }
 
-  static String? getWinnerTeam(Box<Team> box) {
+  static Team? getWinnerTeam(Box<Team> box) {
     try {
       final teams = box.values.toList()
         ..sort((a, b) => b.points.compareTo(a.points));
       if (teams.isEmpty) return null;
 
-      return teams[0].key;
+      return teams[0];
     } catch (e) {
       debugPrint('Error getting winner team: $e');
       return null;
