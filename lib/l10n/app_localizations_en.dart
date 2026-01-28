@@ -152,6 +152,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get dupliPoeniObjasnjenje =>
       'Words guessed in the final seconds of the round earn 2 points instead of 1!\n\nNormal mode:\n• Normal and One-word rounds: last 10 seconds\n• Mime round: last 15 seconds\n\nQuick mode:\n• Normal and One-word rounds: last 7 seconds\n• Mime round: last 10 seconds';
+
+  @override
   String get imeTima => 'Team name';
 
   @override

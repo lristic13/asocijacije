@@ -367,6 +367,7 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Reči pogođene u poslednjih nekoliko sekundi runde donose 2 poena umesto 1!\n\nNormalan mod:\n• Normalna i Jedna reč runda: poslednjih 10 sekundi\n• Pantomima runda: poslednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna reč runda: poslednjih 7 sekundi\n• Pantomima runda: poslednjih 10 sekundi'**
   String get dupliPoeniObjasnjenje;
+
   /// No description provided for @imeTima.
   ///
   /// In sr, this message translates to:

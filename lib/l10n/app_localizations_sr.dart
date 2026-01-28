@@ -152,6 +152,8 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get dupliPoeniObjasnjenje =>
       'Reči pogođene u poslednjih nekoliko sekundi runde donose 2 poena umesto 1!\n\nNormalan mod:\n• Normalna i Jedna reč runda: poslednjih 10 sekundi\n• Pantomima runda: poslednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna reč runda: poslednjih 7 sekundi\n• Pantomima runda: poslednjih 10 sekundi';
+
+  @override
   String get imeTima => 'Ime tima';
 
   @override
