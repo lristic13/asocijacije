@@ -17,6 +17,7 @@ class TeamAdapter extends TypeAdapter<Team> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Team(
+      teamName: fields[4] as String,
       player1: fields[1] as String,
       player2: fields[2] as String,
       points: fields[3] as int,
@@ -26,13 +27,15 @@ class TeamAdapter extends TypeAdapter<Team> {
   @override
   void write(BinaryWriter writer, Team obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(1)
       ..write(obj.player1)
       ..writeByte(2)
       ..write(obj.player2)
       ..writeByte(3)
-      ..write(obj.points);
+      ..write(obj.points)
+      ..writeByte(4)
+      ..write(obj.teamName);
   }
 
   @override

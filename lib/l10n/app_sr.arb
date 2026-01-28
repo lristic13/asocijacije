@@ -33,12 +33,14 @@
     "da": "Da",
     "ne": "Ne",
     "rezultat": "Rezultat",
-    "sledeciIgraTim": "Sledeći igra Tim",
+    "sledeciIgraTim": "Sledeći igraju",
     "krajIgre": "Kraj igre",
-    "pobednikJeTim": "Pobenik je Tim",
+    "pobednikJeTim": "Pobednici su",
     "novaIgra": "Nova igra",
     "pogodjeneSveReci": "Pogodili ste sve reči!\n Pređite na sledeću rundu",
     "izaberiMod": "Izaberi mod igre",
     "normalan": "Normalan",
-    "brzi": "Brzi"
+    "brzi": "Brzi",
+    "imeTima": "Ime tima",
+    "unesiteImeTima": "Unesite ime tima!"
 }
