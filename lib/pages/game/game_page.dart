@@ -76,6 +76,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
         onPopInvokedWithResult: (didPop, result) {
           if (!didPop) {
             showModalBottomSheet(
+              isDismissible: false,
               context: context,
               builder: (context) => AppAlertDialog(
                 title: AppLocalizations.of(context)!.izlaz,
