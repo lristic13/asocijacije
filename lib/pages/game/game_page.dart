@@ -1,18 +1,18 @@
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
-import 'package:asoscijacije_nove/mixins/game_mixin.dart';
-import 'package:asoscijacije_nove/models/game_mode.dart';
-import 'package:asoscijacije_nove/pages/instructions/instructions_page.dart';
-import 'package:asoscijacije_nove/providers/all_providers.dart';
-import 'package:asoscijacije_nove/services/navigation_service.dart';
-import 'package:asoscijacije_nove/util/boxes.dart';
-import 'package:asoscijacije_nove/widgets/app_alert_dialog.dart';
-import 'package:asoscijacije_nove/widgets/app_cards_builder.dart';
-import 'package:asoscijacije_nove/widgets/app_explaining_row.dart';
-import 'package:asoscijacije_nove/widgets/app_final_score.dart';
-import 'package:asoscijacije_nove/widgets/app_page_header.dart';
-import 'package:asoscijacije_nove/widgets/app_points.dart';
-import 'package:asoscijacije_nove/widgets/app_timer.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_icon_button.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/mixins/game_mixin.dart';
+import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/pages/instructions/instructions_page.dart';
+import 'package:asocijacije_nove/providers/all_providers.dart';
+import 'package:asocijacije_nove/services/navigation_service.dart';
+import 'package:asocijacije_nove/util/boxes.dart';
+import 'package:asocijacije_nove/widgets/app_alert_dialog.dart';
+import 'package:asocijacije_nove/widgets/app_cards_builder.dart';
+import 'package:asocijacije_nove/widgets/app_explaining_row.dart';
+import 'package:asocijacije_nove/widgets/app_final_score.dart';
+import 'package:asocijacije_nove/widgets/app_page_header.dart';
+import 'package:asocijacije_nove/widgets/app_points.dart';
+import 'package:asocijacije_nove/widgets/app_timer.dart';
+import 'package:asocijacije_nove/widgets/buttons/app_icon_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -150,10 +150,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                       ),
                       const SizedBox(height: 20),
                       Center(
-                        child: Text(
-                          teamName,
-                          style: AppStyles.text25WhiteBold,
-                        ),
+                        child: Text(teamName, style: AppStyles.text25WhiteBold),
                       ),
                       const SizedBox(height: 5),
                       AppExplainingRow(

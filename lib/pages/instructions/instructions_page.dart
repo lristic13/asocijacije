@@ -1,8 +1,8 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
-import 'package:asoscijacije_nove/widgets/app_page_header.dart';
-import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/widgets/app_page_header.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
 
 import 'instruction_item.dart';

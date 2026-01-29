@@ -1,16 +1,17 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class MenuCard extends StatelessWidget {
-  const MenuCard(
-      {this.title,
-      this.icon,
-      this.colors,
-      this.alignment = CrossAxisAlignment.start,
-      this.rowAlignment,
-      required this.onTap,
-      super.key});
+  const MenuCard({
+    this.title,
+    this.icon,
+    this.colors,
+    this.alignment = CrossAxisAlignment.start,
+    this.rowAlignment,
+    required this.onTap,
+    super.key,
+  });
 
   final String? title;
   final Icon? icon;
@@ -55,14 +56,8 @@ class MenuCard extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: rowAlignment ?? MainAxisAlignment.start,
                     children: [
-                      Text(
-                        title ?? '',
-                        style: AppStyles.text20WhiteBold,
-                      ),
-                      const Text(
-                        '.',
-                        style: AppStyles.text20CoralBold,
-                      ),
+                      Text(title ?? '', style: AppStyles.text20WhiteBold),
+                      const Text('.', style: AppStyles.text20CoralBold),
                     ],
                   ),
                 ),

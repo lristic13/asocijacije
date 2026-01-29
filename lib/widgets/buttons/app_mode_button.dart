@@ -1,7 +1,7 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/models/game_mode.dart';
-import 'package:asoscijacije_nove/providers/all_providers.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -35,7 +35,9 @@ class _AppModeButtonState extends ConsumerState<AppModeButton> {
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               side: const BorderSide(
-                  color: AppColors.englishVioletLighter, width: 3),
+                color: AppColors.englishVioletLighter,
+                width: 3,
+              ),
               borderRadius: BorderRadius.circular(13),
             ),
           ),

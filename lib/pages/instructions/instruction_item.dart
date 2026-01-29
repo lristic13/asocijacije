@@ -1,4 +1,4 @@
-import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class InstructionItem extends StatelessWidget {
@@ -17,10 +17,7 @@ class InstructionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            titleText,
-            style: AppStyles.text20CoralBold,
-          ),
+          Text(titleText, style: AppStyles.text20CoralBold),
           Text(bodyText, style: AppStyles.text15WhiteNormal),
         ],
       ),

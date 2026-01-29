@@ -1,4 +1,4 @@
-import 'package:asoscijacije_nove/mixins/game_mixin.dart';
+import 'package:asocijacije_nove/mixins/game_mixin.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,11 +7,12 @@ import '../constants/app_colors.dart';
 import '../constants/app_styles.dart';
 
 class AppTimer extends StatelessWidget with GameMixin {
-  const AppTimer(
-      {required this.controllerTimer,
-      required this.ref,
-      required this.onTimerComplete,
-      super.key});
+  const AppTimer({
+    required this.controllerTimer,
+    required this.ref,
+    required this.onTimerComplete,
+    super.key,
+  });
 
   final CountDownController controllerTimer;
   final WidgetRef ref;

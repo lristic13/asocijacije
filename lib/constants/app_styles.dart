@@ -1,12 +1,13 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class AppStyles {
   // Text styles
   static const TextStyle text40VioletBold = TextStyle(
-      color: AppColors.englishViolet,
-      fontSize: 40,
-      fontWeight: FontWeight.bold);
+    color: AppColors.englishViolet,
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+  );
 
   static const TextStyle text25Violet900 = TextStyle(
     fontSize: 25,
@@ -31,18 +32,21 @@ class AppStyles {
   );
 
   static const TextStyle text20VioletBold = TextStyle(
-      color: AppColors.englishViolet,
-      fontSize: 20,
-      fontWeight: FontWeight.bold);
+    color: AppColors.englishViolet,
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+  );
   static const TextStyle text25VioletDarkerBold = TextStyle(
-      fontSize: 25,
-      fontWeight: FontWeight.bold,
-      color: AppColors.englishVioletDarker);
+    fontSize: 25,
+    fontWeight: FontWeight.bold,
+    color: AppColors.englishVioletDarker,
+  );
 
   static const TextStyle text20VioletDarkerBold = TextStyle(
-      fontSize: 20,
-      fontWeight: FontWeight.bold,
-      color: AppColors.englishVioletDarker);
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    color: AppColors.englishVioletDarker,
+  );
 
   static const TextStyle text50CoralBold = TextStyle(
     fontSize: 50,
@@ -143,40 +147,46 @@ class AppStyles {
 
   // Container
   static const BoxDecoration containerGradientViolet = BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-        AppColors.englishVioletDarker,
-        AppColors.englishVioletLighter,
-      ]));
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [AppColors.englishVioletDarker, AppColors.englishVioletLighter],
+    ),
+  );
   static const BoxDecoration containerGradientWhite = BoxDecoration(
-      gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-        AppColors.whiteDarker,
-        AppColors.white,
-      ]));
+    gradient: LinearGradient(
+      begin: Alignment.topLeft,
+      end: Alignment.bottomRight,
+      colors: [AppColors.whiteDarker, AppColors.white],
+    ),
+  );
 
   // Input fields
   static final focusedErrorBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(13),
-      borderSide: const BorderSide(color: AppColors.coral, width: 3));
+    borderRadius: BorderRadius.circular(13),
+    borderSide: const BorderSide(color: AppColors.coral, width: 3),
+  );
 
   static final errorBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(13),
-      borderSide: const BorderSide(color: AppColors.coral, width: 3));
+    borderRadius: BorderRadius.circular(13),
+    borderSide: const BorderSide(color: AppColors.coral, width: 3),
+  );
 
   static final enabledBorder = OutlineInputBorder(
-      borderSide: const BorderSide(
-          color: AppColors.englishVioletMoreLighter, width: 1.5),
-      borderRadius: BorderRadius.circular(13));
+    borderSide: const BorderSide(
+      color: AppColors.englishVioletMoreLighter,
+      width: 1.5,
+    ),
+    borderRadius: BorderRadius.circular(13),
+  );
 
   static final focusedBorder = OutlineInputBorder(
-      borderSide:
-          const BorderSide(color: AppColors.englishVioletMoreLighter, width: 3),
-      borderRadius: BorderRadius.circular(13));
+    borderSide: const BorderSide(
+      color: AppColors.englishVioletMoreLighter,
+      width: 3,
+    ),
+    borderRadius: BorderRadius.circular(13),
+  );
 
   static final errorInputDecoration = InputDecoration(
     focusedErrorBorder: AppStyles.focusedErrorBorder,
