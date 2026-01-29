@@ -1,6 +1,6 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 

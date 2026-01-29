@@ -1,15 +1,16 @@
-import 'package:asoscijacije_nove/constants/app_colors.dart';
-import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
-import 'package:asoscijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
+import 'package:asocijacije_nove/constants/app_colors.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
 
 class AppButtonRow extends StatelessWidget {
-  const AppButtonRow(
-      {required this.leftButtonText,
-      required this.rightButtonText,
-      required this.leftButtonCb,
-      required this.rightButtonCb,
-      super.key});
+  const AppButtonRow({
+    required this.leftButtonText,
+    required this.rightButtonText,
+    required this.leftButtonCb,
+    required this.rightButtonCb,
+    super.key,
+  });
 
   final String leftButtonText;
   final String rightButtonText;

@@ -1,6 +1,6 @@
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
-import 'package:asoscijacije_nove/models/game_mode.dart';
-import 'package:asoscijacije_nove/services/navigation_service.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/services/navigation_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -15,8 +15,8 @@ mixin GameMixin {
         final newState = currentState.copyWith(
           playerExplaining: 1,
           roundInProgress: ref.read(wordsProvider).wordsToPlay.isEmpty
-            ? currentState.roundInProgress + 1
-            : currentState.roundInProgress,
+              ? currentState.roundInProgress + 1
+              : currentState.roundInProgress,
           teamPlaying: 1,
         );
         ref.read(gameAdminProvider.notifier).update((state) => newState);

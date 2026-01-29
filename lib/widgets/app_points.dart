@@ -1,8 +1,8 @@
-import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
-import 'package:asoscijacije_nove/models/team.dart';
-import 'package:asoscijacije_nove/providers/all_providers.dart';
-import 'package:asoscijacije_nove/util/boxes.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/models/team.dart';
+import 'package:asocijacije_nove/providers/all_providers.dart';
+import 'package:asocijacije_nove/util/boxes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -28,9 +28,11 @@ class AppPoints extends StatelessWidget {
               ),
               Text(
                 (Boxes.getTeamById(
-                  box,
-                  'tim-${ref.read(gameAdminProvider).teamPlaying}',
-                )?.points ?? 0).toString(),
+                          box,
+                          'tim-${ref.read(gameAdminProvider).teamPlaying}',
+                        )?.points ??
+                        0)
+                    .toString(),
                 style: AppStyles.text60VioletLighterBold,
               ),
             ],

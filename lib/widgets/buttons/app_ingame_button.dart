@@ -1,6 +1,6 @@
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
-import 'package:asoscijacije_nove/mixins/game_mixin.dart';
-import 'package:asoscijacije_nove/widgets/buttons/app_cancel_button.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/mixins/game_mixin.dart';
+import 'package:asocijacije_nove/widgets/buttons/app_cancel_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -75,10 +75,13 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
                 onPressed: () async {
                   await _audio.setAsset('assets/sounds/correct-choice.mp3');
                   _audio.play();
-                  final pointsToAdd = isInDoublePointsZone(
-                    widget.ref,
-                    widget.timerController.getTime() ?? '0',
-                  ) ? 2 : 1;
+                  final pointsToAdd =
+                      isInDoublePointsZone(
+                        widget.ref,
+                        widget.timerController.getTime() ?? '0',
+                      )
+                      ? 2
+                      : 1;
                   bool success = Boxes.addPoints(
                     widget.box,
                     'tim-${widget.ref.read(gameAdminProvider).teamPlaying}',

@@ -1,5 +1,5 @@
-import 'package:asoscijacije_nove/constants/app_styles.dart';
-import 'package:asoscijacije_nove/l10n/app_localizations.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_colors.dart';

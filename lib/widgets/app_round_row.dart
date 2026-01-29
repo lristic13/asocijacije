@@ -1,4 +1,4 @@
-import 'package:asoscijacije_nove/constants/app_styles.dart';
+import 'package:asocijacije_nove/constants/app_styles.dart';
 import 'package:flutter/material.dart';
 
 class AppRoundRow extends StatelessWidget {
@@ -14,10 +14,14 @@ class AppRoundRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(roundName,
-            style: AppStyles.text20WhiteNormal.copyWith(fontSize: 16)),
-        Text('${roundLength}s',
-            style: AppStyles.text20WhiteNormal.copyWith(fontSize: 16)),
+        Text(
+          roundName,
+          style: AppStyles.text20WhiteNormal.copyWith(fontSize: 16),
+        ),
+        Text(
+          '${roundLength}s',
+          style: AppStyles.text20WhiteNormal.copyWith(fontSize: 16),
+        ),
       ],
     );
   }
