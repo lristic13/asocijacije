@@ -158,4 +158,60 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get unesiteImeTima => 'Unesite ime tima!';
+
+  @override
+  String get prikupiReci => 'Prikupi reči';
+
+  @override
+  String get skenirajDaDodas => 'Skeniraj da dodaš reči';
+
+  @override
+  String get kodSesije => 'Kod sesije';
+
+  @override
+  String get napredak => 'Napredak';
+
+  @override
+  String igracaSpremo(Object ready, Object total) {
+    return '$ready od $total igrača spremno';
+  }
+
+  @override
+  String get igraci => 'Igrači';
+
+  @override
+  String get igrac => 'Igrač';
+
+  @override
+  String get pocniIgruBtn => 'POČNI IGRU ✓';
+
+  @override
+  String get cekanjeNaReci => 'ČEKANJE NA REČI...';
+
+  @override
+  String potrebnoJosReci(Object count) {
+    return 'Potrebno još $count reči';
+  }
+
+  @override
+  String get greskaKreiranjaSesije => 'Greška pri kreiranju sesije';
+
+  @override
+  String get koristiSvojeReci => 'Koristi svoje reči';
+
+  @override
+  String get izaberiReci => 'Izaberi reči';
+
+  @override
+  String get kakoZeliteDaIgrate => 'Kako želiš da igraš?';
+
+  @override
+  String get koristiReciIzAplikacije => 'Koristi reči iz aplikacije';
+
+  @override
+  String get viseOdReciSpremno => 'Više od 1500 unapred pripremljenih reči';
+
+  @override
+  String get svakiIgracDodaje =>
+      'Svaki igrač dodaje 8 reči skeniranjem QR koda';
 }

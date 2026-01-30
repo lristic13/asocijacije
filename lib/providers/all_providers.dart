@@ -21,3 +21,7 @@ final blurProvider = StateProvider<bool>((ref) => true);
 final gameModeProvider = StateProvider<GameMode>((ref) => GameMode.normal);
 
 final doublePointsProvider = StateProvider<bool>((ref) => false);
+
+final customWordsProvider = StateProvider<bool>((ref) => false);
+
+final customWordsListProvider = StateProvider<List<String>>((ref) => []);

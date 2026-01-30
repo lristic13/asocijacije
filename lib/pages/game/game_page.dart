@@ -94,6 +94,12 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                   ref
                       .read(doublePointsProvider.notifier)
                       .update((state) => false);
+                  ref
+                      .read(customWordsProvider.notifier)
+                      .update((state) => false);
+                  ref
+                      .read(customWordsListProvider.notifier)
+                      .update((state) => []);
                   NavigationService.goToHome();
                 },
               ),
