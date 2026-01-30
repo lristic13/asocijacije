@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 
-import '../models/game_mode.dart';
+import '../constants/app_routes.dart';
 import '../models/team.dart';
-import '../pages/game/game_page.dart';
 import '../providers/all_providers.dart';
-import '../services/words_loader.dart';
 
 mixin FormsMixin {
   Future<void> validateForms(
@@ -43,17 +40,7 @@ mixin FormsMixin {
       }
     }
     if (ref.read(checkerProvider) && context.mounted) {
-      final localeCode =
-          ref.read(localeProvider) == const Locale('sr') ? 'sr' : 'en';
-      final words = await WordsLoader.loadWords(localeCode);
-      words.shuffle();
-      if (!context.mounted) return;
-      ref.read(wordsProvider.notifier).wordsToPlay =
-          words.sublist(0, ref.read(playerNumberProvider) * GameMode.wordsPerPlayer);
-      Navigator.push(
-          context,
-          PageTransition(
-              child: const GamePage(), type: PageTransitionType.leftToRight));
+      Navigator.pushNamed(context, AppRoutes.wordSourcePage);
     }
   }
 

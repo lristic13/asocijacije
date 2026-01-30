@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Asocijacije - Add Words</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #17113D 0%, #3D3463 100%);
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: #241D4D;
+      border-radius: 16px;
+      padding: 24px;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      color: #fff;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    h1 .dot {
+      color: #FC7753;
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 8px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: 1px solid #5D5490;
+      color: #9A94C4;
+      padding: 4px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: #5D5490;
+      color: #fff;
+      border-color: #5D5490;
+    }
+
+    .session-code {
+      text-align: center;
+      color: #FC7753;
+      font-weight: bold;
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .instructions {
+      text-align: center;
+      color: #9A94C4;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .progress-bar {
+      background: #3D3463;
+      height: 10px;
+      border-radius: 5px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #FC7753 0%, #FF9A8B 100%);
+      height: 100%;
+      transition: width 0.3s ease;
+      border-radius: 5px;
+    }
+
+    .progress-fill.complete {
+      background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 100%);
+    }
+
+    .progress-text {
+      text-align: center;
+      color: #9A94C4;
+      font-size: 14px;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .input-group {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 14px;
+      font-size: 16px;
+      border: 2px solid #5D5490;
+      border-radius: 12px;
+      background: #17113D;
+      color: #fff;
+      transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #FC7753;
+    }
+
+    input[type="text"]::placeholder {
+      color: #5D5490;
+    }
+
+    button {
+      padding: 14px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-add {
+      background: #FC7753;
+      color: #17113D;
+    }
+
+    .btn-add:hover {
+      background: #FF9A8B;
+      transform: translateY(-2px);
+    }
+
+    .btn-add:disabled {
+      background: #3D3463;
+      color: #5D5490;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .word-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      min-height: 80px;
+      padding: 16px;
+      background: #17113D;
+      border-radius: 12px;
+      border: 2px solid #3D3463;
+    }
+
+    .word-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #3D3463;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #fff;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .word-remove {
+      cursor: pointer;
+      color: #9A94C4;
+      font-weight: bold;
+      font-size: 18px;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+
+    .word-remove:hover {
+      color: #FC7753;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 16px;
+      background: #4CAF50;
+      color: white;
+      font-size: 18px;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: #45a049;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+    }
+
+    .btn-submit:disabled {
+      background: #3D3463;
+      color: #5D5490;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+
+    .status.success {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4CAF50;
+      border: 2px solid #4CAF50;
+    }
+
+    .status.error {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      border: 2px solid #f44336;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .spinner {
+      border: 4px solid #3D3463;
+      border-top: 4px solid #FC7753;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      color: #5D5490;
+      padding: 20px;
+      font-style: italic;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p style="margin-top: 16px; color: #9A94C4;" id="loadingText">Loading session...</p>
+    </div>
+
+    <div id="app" style="display: none;">
+      <div class="header">
+        <h1 id="title">Add Words<span class="dot">.</span></h1>
+        <div class="lang-toggle">
+          <button class="lang-btn" id="btnSr" onclick="setLang('sr')">SR</button>
+          <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
+        </div>
+      </div>
+      <div class="session-code" id="sessionCodeLabel">Session: <span id="sessionCode"></span></div>
+      <p class="instructions" id="instructions">Add exactly 8 words for the game</p>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+      </div>
+      <div class="progress-text" id="progressText">0 / 8</div>
+
+      <div class="input-group">
+        <input
+          type="text"
+          id="wordInput"
+          placeholder="Type a word..."
+          autocomplete="off"
+          autocapitalize="off"
+          autofocus
+        >
+        <button class="btn-add" id="addBtn" onclick="addWord()">+</button>
+      </div>
+
+      <div class="word-list" id="wordList">
+        <div class="empty-state" id="emptyState">Your words will appear here</div>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="submitWords()" disabled>
+        Submit Words
+      </button>
+
+      <div id="status" class="status" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+    import { getDatabase, ref, set, get, onValue } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCeUR7X_HS7dEaFghWtk_6063PeUZrNPQY",
+      authDomain: "asocijacije-2ab22.firebaseapp.com",
+      databaseURL: "https://asocijacije-2ab22-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "asocijacije-2ab22",
+      storageBucket: "asocijacije-2ab22.firebasestorage.app",
+      messagingSenderId: "732785047022",
+      appId: "1:732785047022:web:995c075ecd85f138b20aff"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Get session ID from URL path
+    const pathParts = window.location.pathname.split('/');
+    const sessionId = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2];
+
+    // Get language from URL params or localStorage
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentLang = urlParams.get('lang') || localStorage.getItem('asocijacije_lang') || 'en';
+
+    // Player ID - check localStorage for resume capability
+    let playerId = localStorage.getItem(`asocijacije_player_${sessionId}`);
+    if (!playerId) {
+      playerId = 'player_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem(`asocijacije_player_${sessionId}`, playerId);
+    }
+
+    let words = [];
+    // Try to restore words from localStorage
+    const savedWords = localStorage.getItem(`asocijacije_words_${sessionId}_${playerId}`);
+    if (savedWords) {
+      try {
+        words = JSON.parse(savedWords);
+      } catch (e) {
+        words = [];
+      }
+    }
+
+    const REQUIRED_WORDS = 8;
+
+    // Translations
+    const translations = {
+      en: {
+        title: 'Add Words',
+        sessionLabel: 'Session:',
+        instructions: 'Add exactly 8 words for the game',
+        placeholder: 'Type a word...',
+        submit: 'Submit Words',
+        submitting: 'Submitting...',
+        success: '✓ Words submitted! You can close this page.',
+        errorInvalid: 'Invalid session code!',
+        errorEnded: 'This session has ended.',
+        errorLoading: 'Error loading session',
+        errorSubmit: 'Error submitting words',
+        emptyState: 'Your words will appear here',
+        loading: 'Loading session...',
+        duplicate: 'You already added that word!',
+        maxReached: 'You can only add 8 words!'
+      },
+      sr: {
+        title: 'Dodaj reči',
+        sessionLabel: 'Sesija:',
+        instructions: 'Dodaj tačno 8 reči za igru',
+        placeholder: 'Unesi reč...',
+        submit: 'Pošalji reči',
+        submitting: 'Slanje...',
+        success: '✓ Reči poslate! Možeš zatvoriti stranicu.',
+        errorInvalid: 'Nevažeći kod sesije!',
+        errorEnded: 'Ova sesija je završena.',
+        errorLoading: 'Greška pri učitavanju sesije',
+        errorSubmit: 'Greška pri slanju reči',
+        emptyState: 'Tvoje reči će se pojaviti ovde',
+        loading: 'Učitavanje sesije...',
+        duplicate: 'Već si dodao tu reč!',
+        maxReached: 'Možeš dodati samo 8 reči!'
+      }
+    };
+
+    function t(key) {
+      return translations[currentLang][key] || translations['en'][key];
+    }
+
+    // Update UI language
+    window.setLang = function(lang) {
+      currentLang = lang;
+      localStorage.setItem('asocijacije_lang', lang);
+      updateLangButtons();
+      updateUIText();
+    }
+
+    function updateLangButtons() {
+      document.getElementById('btnSr').classList.toggle('active', currentLang === 'sr');
+      document.getElementById('btnEn').classList.toggle('active', currentLang === 'en');
+    }
+
+    function updateUIText() {
+      document.getElementById('title').innerHTML = t('title') + '<span class="dot">.</span>';
+      document.getElementById('sessionCodeLabel').innerHTML = t('sessionLabel') + ' <span id="sessionCode">' + sessionId + '</span>';
+      document.getElementById('instructions').textContent = t('instructions');
+      document.getElementById('wordInput').placeholder = t('placeholder');
+      document.getElementById('submitBtn').textContent = t('submit');
+      document.getElementById('loadingText').textContent = t('loading');
+      if (words.length === 0) {
+        document.getElementById('emptyState').textContent = t('emptyState');
+      }
+    }
+
+    // Initialize
+    document.getElementById('sessionCode').textContent = sessionId;
+    updateLangButtons();
+    updateUIText();
+
+    // If we have saved words, render them
+    if (words.length > 0) {
+      renderWords();
+      updateProgress();
+    }
+
+    // Check if session exists
+    async function initSession() {
+      try {
+        const sessionRef = ref(db, `sessions/${sessionId}`);
+        const snapshot = await get(sessionRef);
+
+        if (!snapshot.exists()) {
+          showError(t('errorInvalid'));
+          return;
+        }
+
+        const sessionData = snapshot.val();
+        if (sessionData.status !== 'collecting') {
+          showError(t('errorEnded'));
+          return;
+        }
+
+        // Check if this player already submitted
+        if (sessionData.words && sessionData.words[playerId]) {
+          const existingWords = sessionData.words[playerId].words;
+          if (existingWords && existingWords.length === 8) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('app').style.display = 'block';
+            words = existingWords;
+            renderWords();
+            updateProgress();
+            showSuccess(t('success'));
+            document.getElementById('wordInput').disabled = true;
+            document.getElementById('addBtn').disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+            return;
+          }
+        }
+
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('app').style.display = 'block';
+
+        // Listen for session updates
+        onValue(sessionRef, (snapshot) => {
+          if (!snapshot.exists() || snapshot.val().status !== 'collecting') {
+            showError(t('errorEnded'));
+          }
+        });
+
+      } catch (error) {
+        showError(t('errorLoading') + ': ' + error.message);
+      }
+    }
+
+    initSession();
+
+    // Add word function
+    window.addWord = function() {
+      const input = document.getElementById('wordInput');
+      const word = input.value.trim();
+
+      if (!word) return;
+
+      if (words.length >= REQUIRED_WORDS) {
+        alert(t('maxReached'));
+        return;
+      }
+
+      if (words.map(w => w.toLowerCase()).includes(word.toLowerCase())) {
+        alert(t('duplicate'));
+        input.value = '';
+        return;
+      }
+
+      words.push(word);
+      // Save to localStorage for resume
+      localStorage.setItem(`asocijacije_words_${sessionId}_${playerId}`, JSON.stringify(words));
+
+      input.value = '';
+      input.focus();
+
+      renderWords();
+      updateProgress();
+    }
+
+    // Remove word function
+    window.removeWord = function(index) {
+      words.splice(index, 1);
+      // Save to localStorage
+      localStorage.setItem(`asocijacije_words_${sessionId}_${playerId}`, JSON.stringify(words));
+      renderWords();
+      updateProgress();
+    }
+
+    // Render word tags
+    function renderWords() {
+      const container = document.getElementById('wordList');
+
+      if (words.length === 0) {
+        container.innerHTML = '<div class="empty-state" id="emptyState">' + t('emptyState') + '</div>';
+        return;
+      }
+
+      container.innerHTML = words.map((word, index) =>
+        `<div class="word-tag">
+          ${escapeHtml(word)}
+          <span class="word-remove" onclick="removeWord(${index})">×</span>
+        </div>`
+      ).join('');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Update progress bar
+    function updateProgress() {
+      const progress = (words.length / REQUIRED_WORDS) * 100;
+      const progressFill = document.getElementById('progressFill');
+      progressFill.style.width = progress + '%';
+      progressFill.classList.toggle('complete', words.length === REQUIRED_WORDS);
+
+      document.getElementById('progressText').textContent =
+        `${words.length} / ${REQUIRED_WORDS}`;
+
+      // Enable/disable submit button
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = words.length !== REQUIRED_WORDS;
+
+      // Disable add button if limit reached
+      const addBtn = document.getElementById('addBtn');
+      addBtn.disabled = words.length >= REQUIRED_WORDS;
+    }
+
+    // Submit words
+    window.submitWords = async function() {
+      if (words.length !== REQUIRED_WORDS) {
+        return;
+      }
+
+      try {
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = t('submitting');
+
+        await set(ref(db, `sessions/${sessionId}/words/${playerId}`), {
+          words: words,
+          submittedAt: Date.now(),
+          playerName: null
+        });
+
+        // Clear localStorage for this session
+        localStorage.removeItem(`asocijacije_words_${sessionId}_${playerId}`);
+
+        showSuccess(t('success'));
+
+        // Disable input
+        document.getElementById('wordInput').disabled = true;
+        document.getElementById('addBtn').disabled = true;
+
+      } catch (error) {
+        showError(t('errorSubmit') + ': ' + error.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = t('submit');
+      }
+    }
+
+    // Show success message
+    function showSuccess(message) {
+      const status = document.getElementById('status');
+      status.className = 'status success';
+      status.textContent = message;
+      status.style.display = 'block';
+    }
+
+    // Show error message
+    function showError(message) {
+      const status = document.getElementById('status');
+      status.className = 'status error';
+      status.textContent = message;
+      status.style.display = 'block';
+
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+
+      // Hide input elements on error
+      document.querySelector('.input-group').style.display = 'none';
+      document.querySelector('.word-list').style.display = 'none';
+      document.querySelector('.progress-bar').style.display = 'none';
+      document.querySelector('.progress-text').style.display = 'none';
+      document.getElementById('submitBtn').style.display = 'none';
+    }
+
+    // Enter key to add word
+    document.getElementById('wordInput').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addWord();
+      }
+    });
+  </script>
+</body>
+</html>
