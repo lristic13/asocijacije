@@ -214,4 +214,7 @@ class AppLocalizationsSr extends AppLocalizations {
   @override
   String get svakiIgracDodaje =>
       'Svaki igrač dodaje 8 reči skeniranjem QR koda';
+
+  @override
+  String get dodajMojeReci => 'Dodaj moje reči';
 }

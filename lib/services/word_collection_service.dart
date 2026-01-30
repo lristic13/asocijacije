@@ -103,6 +103,21 @@ class WordCollectionService {
     await _database.child('sessions/$sessionId').remove();
   }
 
+  /// Submit words for a player (used by host to add their own words)
+  Future<void> submitWords({
+    required String sessionId,
+    required String playerId,
+    required List<String> words,
+    String? playerName,
+  }) async {
+    final ref = _database.child('sessions/$sessionId/words/$playerId');
+    await ref.set({
+      'words': words,
+      'submittedAt': ServerValue.timestamp,
+      'playerName': playerName,
+    });
+  }
+
   /// Check if session exists and is still collecting
   Future<bool> isSessionValid(String sessionId) async {
     final snapshot = await _database.child('sessions/$sessionId').get();

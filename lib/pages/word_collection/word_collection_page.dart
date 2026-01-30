@@ -8,7 +8,9 @@ import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lottie/lottie.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WordCollectionPage extends ConsumerStatefulWidget {
   const WordCollectionPage({super.key});
@@ -165,7 +167,29 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                       ),
                     ),
 
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 16),
+
+                    // "Add my words" button for the host
+                    Center(
+                      child: TextButton.icon(
+                        onPressed: () async {
+                          final url = Uri.parse(_getWebUrl());
+                          if (await canLaunchUrl(url)) {
+                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                          }
+                        },
+                        icon: const Icon(
+                          Icons.open_in_new,
+                          color: AppColors.coral,
+                        ),
+                        label: Text(
+                          localizations.dodajMojeReci,
+                          style: AppStyles.text15CoralBold,
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 16),
 
                     // Progress Section
                     StreamBuilder<SessionState>(
@@ -258,14 +282,17 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                 ),
                                 child: Row(
                                   children: [
-                                    Icon(
-                                      isComplete
-                                          ? Icons.check_circle
-                                          : Icons.pending,
-                                      color: isComplete
-                                          ? Colors.green
-                                          : AppColors.englishVioletMoreLighter,
-                                    ),
+                                    if (isComplete)
+                                      const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.green,
+                                      )
+                                    else
+                                      Lottie.asset(
+                                        'assets/animations/loading_dots.json',
+                                        width: 24,
+                                        height: 24,
+                                      ),
                                     const SizedBox(width: 12),
                                     Expanded(
                                       child: Text(
