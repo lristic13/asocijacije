@@ -158,4 +158,60 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get unesiteImeTima => 'Enter team name!';
+
+  @override
+  String get prikupiReci => 'Collect Words';
+
+  @override
+  String get skenirajDaDodas => 'Scan to add words';
+
+  @override
+  String get kodSesije => 'Session code';
+
+  @override
+  String get napredak => 'Progress';
+
+  @override
+  String igracaSpremo(Object ready, Object total) {
+    return '$ready of $total players ready';
+  }
+
+  @override
+  String get igraci => 'Players';
+
+  @override
+  String get igrac => 'Player';
+
+  @override
+  String get pocniIgruBtn => 'START GAME ✓';
+
+  @override
+  String get cekanjeNaReci => 'WAITING FOR WORDS...';
+
+  @override
+  String potrebnoJosReci(Object count) {
+    return 'Need $count more words';
+  }
+
+  @override
+  String get greskaKreiranjaSesije => 'Error creating session';
+
+  @override
+  String get koristiSvojeReci => 'Use custom words';
+
+  @override
+  String get izaberiReci => 'Choose Words';
+
+  @override
+  String get kakoZeliteDaIgrate => 'How do you want to play?';
+
+  @override
+  String get koristiReciIzAplikacije => 'Use app\'s words';
+
+  @override
+  String get viseOdReciSpremno => 'Over 1500 pre-made words ready to play';
+
+  @override
+  String get svakiIgracDodaje =>
+      'Each player adds 8 words by scanning a QR code';
 }

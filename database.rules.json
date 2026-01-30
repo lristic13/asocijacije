@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "sessions": {
+      "$sessionId": {
+        ".read": true,
+        ".write": "!data.exists() || (data.child('status').val() === 'collecting' && data.child('expiresAt').val() > now)",
+        ".validate": "newData.hasChildren(['createdAt', 'hostId', 'playerCount', 'status', 'expiresAt', 'targetWords'])",
+        "words": {
+          "$playerId": {
+            ".write": "root.child('sessions').child($sessionId).child('status').val() === 'collecting'",
+            ".validate": "newData.hasChildren(['words', 'submittedAt'])"
+          }
+        }
+      }
+    }
+  }
+}

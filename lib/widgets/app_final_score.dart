@@ -51,6 +51,8 @@ class AppFinalScore extends ConsumerWidget {
                 .read(gameAdminProvider.notifier)
                 .update((state) => state.resetGame());
             ref.read(doublePointsProvider.notifier).update((state) => false);
+            ref.read(customWordsProvider.notifier).update((state) => false);
+            ref.read(customWordsListProvider.notifier).update((state) => []);
             NavigationService.goToHome();
           },
         ),
@@ -64,6 +66,8 @@ class AppFinalScore extends ConsumerWidget {
               ref
                   .read(gameAdminProvider.notifier)
                   .update((state) => state.resetGame());
+              ref.read(customWordsProvider.notifier).update((state) => false);
+              ref.read(customWordsListProvider.notifier).update((state) => []);
               NavigationService.goToHome();
             },
           ),
