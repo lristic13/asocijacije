@@ -1,4 +1,4 @@
-package com.lristic.asocijacije_nove
+package com.lristic.asoscijacije_nove
 
 import io.flutter.embedding.android.FlutterActivity
 
