@@ -45,5 +45,22 @@
     "dvaPoena": "2 poena",
     "dupliPoeniObjasnjenje": "Reči pogođene u poslednjih nekoliko sekundi runde donose 2 poena umesto 1!\n\nNormalan mod:\n• Normalna i Jedna reč runda: poslednjih 10 sekundi\n• Pantomima runda: poslednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna reč runda: poslednjih 7 sekundi\n• Pantomima runda: poslednjih 10 sekundi",
     "imeTima": "Ime tima",
-    "unesiteImeTima": "Unesite ime tima!"
+    "unesiteImeTima": "Unesite ime tima!",
+    "prikupiReci": "Prikupi reči",
+    "skenirajDaDodas": "Skeniraj da dodaš reči",
+    "kodSesije": "Kod sesije",
+    "napredak": "Napredak",
+    "igracaSpremo": "{ready} od {total} igrača spremno",
+    "igraci": "Igrači",
+    "igrac": "Igrač",
+    "pocniIgruBtn": "POČNI IGRU ✓",
+    "cekanjeNaReci": "ČEKANJE NA REČI...",
+    "potrebnoJosReci": "Potrebno još {count} reči",
+    "greskaKreiranjaSesije": "Greška pri kreiranju sesije",
+    "koristiSvojeReci": "Koristi svoje reči",
+    "izaberiReci": "Izaberi reči",
+    "kakoZeliteDaIgrate": "Kako želiš da igraš?",
+    "koristiReciIzAplikacije": "Koristi reči iz aplikacije",
+    "viseOdReciSpremno": "Više od 1500 unapred pripremljenih reči",
+    "svakiIgracDodaje": "Svaki igrač dodaje 8 reči skeniranjem QR koda"
 }

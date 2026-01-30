@@ -45,5 +45,22 @@
     "dvaPoena": "2 points",
     "dupliPoeniObjasnjenje": "Words guessed in the final seconds of the round earn 2 points instead of 1!\n\nNormal mode:\n• Normal and One-word rounds: last 10 seconds\n• Mime round: last 15 seconds\n\nQuick mode:\n• Normal and One-word rounds: last 7 seconds\n• Mime round: last 10 seconds",
     "imeTima": "Team name",
-    "unesiteImeTima": "Enter team name!"
+    "unesiteImeTima": "Enter team name!",
+    "prikupiReci": "Collect Words",
+    "skenirajDaDodas": "Scan to add words",
+    "kodSesije": "Session code",
+    "napredak": "Progress",
+    "igracaSpremo": "{ready} of {total} players ready",
+    "igraci": "Players",
+    "igrac": "Player",
+    "pocniIgruBtn": "START GAME ✓",
+    "cekanjeNaReci": "WAITING FOR WORDS...",
+    "potrebnoJosReci": "Need {count} more words",
+    "greskaKreiranjaSesije": "Error creating session",
+    "koristiSvojeReci": "Use custom words",
+    "izaberiReci": "Choose Words",
+    "kakoZeliteDaIgrate": "How do you want to play?",
+    "koristiReciIzAplikacije": "Use app's words",
+    "viseOdReciSpremno": "Over 1500 pre-made words ready to play",
+    "svakiIgracDodaje": "Each player adds 8 words by scanning a QR code"
 }

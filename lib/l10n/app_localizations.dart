@@ -379,6 +379,108 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Unesite ime tima!'**
   String get unesiteImeTima;
+
+  /// No description provided for @prikupiReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Prikupi reči'**
+  String get prikupiReci;
+
+  /// No description provided for @skenirajDaDodas.
+  ///
+  /// In sr, this message translates to:
+  /// **'Skeniraj da dodaš reči'**
+  String get skenirajDaDodas;
+
+  /// No description provided for @kodSesije.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kod sesije'**
+  String get kodSesije;
+
+  /// No description provided for @napredak.
+  ///
+  /// In sr, this message translates to:
+  /// **'Napredak'**
+  String get napredak;
+
+  /// No description provided for @igracaSpremo.
+  ///
+  /// In sr, this message translates to:
+  /// **'{ready} od {total} igrača spremno'**
+  String igracaSpremo(Object ready, Object total);
+
+  /// No description provided for @igraci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Igrači'**
+  String get igraci;
+
+  /// No description provided for @igrac.
+  ///
+  /// In sr, this message translates to:
+  /// **'Igrač'**
+  String get igrac;
+
+  /// No description provided for @pocniIgruBtn.
+  ///
+  /// In sr, this message translates to:
+  /// **'POČNI IGRU ✓'**
+  String get pocniIgruBtn;
+
+  /// No description provided for @cekanjeNaReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'ČEKANJE NA REČI...'**
+  String get cekanjeNaReci;
+
+  /// No description provided for @potrebnoJosReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Potrebno još {count} reči'**
+  String potrebnoJosReci(Object count);
+
+  /// No description provided for @greskaKreiranjaSesije.
+  ///
+  /// In sr, this message translates to:
+  /// **'Greška pri kreiranju sesije'**
+  String get greskaKreiranjaSesije;
+
+  /// No description provided for @koristiSvojeReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Koristi svoje reči'**
+  String get koristiSvojeReci;
+
+  /// No description provided for @izaberiReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Izaberi reči'**
+  String get izaberiReci;
+
+  /// No description provided for @kakoZeliteDaIgrate.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kako želiš da igraš?'**
+  String get kakoZeliteDaIgrate;
+
+  /// No description provided for @koristiReciIzAplikacije.
+  ///
+  /// In sr, this message translates to:
+  /// **'Koristi reči iz aplikacije'**
+  String get koristiReciIzAplikacije;
+
+  /// No description provided for @viseOdReciSpremno.
+  ///
+  /// In sr, this message translates to:
+  /// **'Više od 1500 unapred pripremljenih reči'**
+  String get viseOdReciSpremno;
+
+  /// No description provided for @svakiIgracDodaje.
+  ///
+  /// In sr, this message translates to:
+  /// **'Svaki igrač dodaje 8 reči skeniranjem QR koda'**
+  String get svakiIgracDodaje;
 }
 
 class _AppLocalizationsDelegate
