@@ -59,7 +59,7 @@ class AppCardsBuilder extends ConsumerWidget with GameMixin {
                             child: Stack(
                               children: [
                                 if (!shouldBlur &&
-                                    !isInDoublePointsZone(
+                                    isInDoublePointsZone(
                                       ref,
                                       timerController.getTime() ?? '0',
                                     ))
