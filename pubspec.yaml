@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 4.0.0+2
+version: 4.1.0+2
 
 environment:
   sdk: ^3.8.1
@@ -34,9 +34,11 @@ dependencies:
   hive_flutter: ^1.1.0
   in_app_update: ^4.1.4
   just_audio: ^0.9.45
+  lottie: ^3.1.0
   page_transition: ^2.0.9
   qr_flutter: ^4.1.0
   riverpod: ^2.3.6
+  url_launcher: ^6.2.1
   uuid: ^4.0.0
 
 flutter_native_splash:
@@ -69,6 +71,7 @@ flutter:
     - assets/sounds/correct-choice.mp3
     - assets/images/
     - assets/words/
+    - assets/animations/
 
   fonts:
     - family: Geologica

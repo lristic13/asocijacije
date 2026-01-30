@@ -481,6 +481,12 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Svaki igrač dodaje 8 reči skeniranjem QR koda'**
   String get svakiIgracDodaje;
+
+  /// No description provided for @dodajMojeReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Dodaj moje reči'**
+  String get dodajMojeReci;
 }
 
 class _AppLocalizationsDelegate
