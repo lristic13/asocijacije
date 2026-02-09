@@ -63,5 +63,48 @@
     "koristiReciIzAplikacije": "Use app's words",
     "viseOdReciSpremno": "Over 1500 pre-made words ready to play",
     "svakiIgracDodaje": "Each player adds 8 words by scanning a QR code",
-    "dodajMojeReci": "Add my words"
+    "dodajMojeReci": "Add my words",
+    "jedanNaJedan": "1v1",
+    "jedanNaJedanOpis": "Two players, one explains, one guesses",
+    "imeIgraca1": "First player name",
+    "imeIgraca2": "Second player name",
+    "objasnjava": "{name} is explaining",
+    "@objasnjava": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "pobednik": "{name} wins!",
+    "@pobednik": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "nereseno": "It's a tie!",
+    "pobedaZaReci": "Won by {count} words",
+    "@pobedaZaReci": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "igraciPoeni": "{name}: {points} points",
+    "@igraciPoeni": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            },
+            "points": {
+                "type": "int"
+            }
+        }
+    },
+    "sledeciIgrac": "Next player",
+    "jedanNaJedanUput": "Two players compete against each other. Players take turns explaining words while the opponent guesses. The winner is the player who explains more words.",
+    "igrajPonovo": "Play again"
 }

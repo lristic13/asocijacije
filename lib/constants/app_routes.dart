@@ -7,4 +7,5 @@ class AppRoutes {
   static const String chooseModePage = '/chooseMode';
   static const String wordCollectionPage = '/wordCollection';
   static const String wordSourcePage = '/wordSource';
+  static const String oneVsOneResultsPage = '/oneVsOneResults';
 }

@@ -63,5 +63,48 @@
     "koristiReciIzAplikacije": "Koristi reči iz aplikacije",
     "viseOdReciSpremno": "Više od 1500 unapred pripremljenih reči",
     "svakiIgracDodaje": "Svaki igrač dodaje 8 reči skeniranjem QR koda",
-    "dodajMojeReci": "Dodaj moje reči"
+    "dodajMojeReci": "Dodaj moje reči",
+    "jedanNaJedan": "1v1",
+    "jedanNaJedanOpis": "Dva igrača, jedno objašnjava, drugo pogađa",
+    "imeIgraca1": "Ime prvog igrača",
+    "imeIgraca2": "Ime drugog igrača",
+    "objasnjava": "{name} objašnjava",
+    "@objasnjava": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "pobednik": "{name} pobeđuje!",
+    "@pobednik": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "nereseno": "Nerešeno!",
+    "pobedaZaReci": "Pobeda za {count} reči",
+    "@pobedaZaReci": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "igraciPoeni": "{name}: {points} poena",
+    "@igraciPoeni": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            },
+            "points": {
+                "type": "int"
+            }
+        }
+    },
+    "sledeciIgrac": "Sledeći igrač",
+    "jedanNaJedanUput": "Dva igrača se takmiče jedan protiv drugog. Igrači naizmenično objašnjavaju reči dok protivnik pogađa. Pobednik je igrač koji objasni više reči.",
+    "igrajPonovo": "Igraj ponovo"
 }

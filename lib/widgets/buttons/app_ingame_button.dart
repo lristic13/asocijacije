@@ -32,7 +32,7 @@ class AppInGameButton extends StatefulWidget {
 
   final CountDownController timerController;
   final WidgetRef ref;
-  final Box box;
+  final Box? box;
   final bool timerCompleted;
   final CardSwiperController cardSwiper;
   final Function updateParentState;
@@ -52,6 +52,8 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
 
   @override
   Widget build(BuildContext context) {
+    final is1v1Mode = widget.ref.watch(gameAdminProvider).is1v1Mode;
+
     if (widget.timerController.getTime() != '0' &&
         widget.timerController.getTime() != '' &&
         !widget.timerController.isPaused &&
@@ -84,14 +86,26 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
                       )
                       ? 2
                       : 1;
-                  bool success = Boxes.addPoints(
-                    widget.box,
-                    'tim-${widget.ref.read(gameAdminProvider).teamPlaying}',
-                    points: pointsToAdd,
-                  );
-                  if (!success) {
-                    debugPrint('Failed to add points to team');
+
+                  if (is1v1Mode) {
+                    // Add points to current player in 1v1 mode
+                    widget.ref.read(oneVsOneProvider.notifier).update(
+                          (state) => state.addPointToCurrentPlayer(points: pointsToAdd),
+                        );
+                  } else {
+                    // Add points to team in team mode
+                    if (widget.box != null) {
+                      bool success = Boxes.addPoints(
+                        widget.box!,
+                        'tim-${widget.ref.read(gameAdminProvider).teamPlaying}',
+                        points: pointsToAdd,
+                      );
+                      if (!success) {
+                        debugPrint('Failed to add points to team');
+                      }
+                    }
                   }
+
                   widget.ref.read(wordsProvider).addWord(widget.wordsToPlay[0]);
                   widget.ref
                       .read(wordsProvider)
@@ -104,12 +118,17 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
         ),
       );
     } else if (widget.timerCompleted || widget.wordsToPlay.isEmpty) {
+      // Show "Next player" for 1v1, "Next team" for team mode
+      final buttonText = is1v1Mode
+          ? AppLocalizations.of(context)!.sledeciIgrac
+          : AppLocalizations.of(context)!.sledeciTim;
+
       return Padding(
         padding: const EdgeInsets.only(bottom: 25.0),
         child: AppButtonFull(
           fillColor: AppColors.englishVioletLighter,
           textColor: AppColors.white,
-          buttonText: AppLocalizations.of(context)!.sledeciTim,
+          buttonText: buttonText,
           onPressed: () {
             widget.timerController.pause();
             roundEnd(context, widget.ref);

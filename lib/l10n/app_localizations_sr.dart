@@ -217,4 +217,49 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get dodajMojeReci => 'Dodaj moje reči';
+
+  @override
+  String get jedanNaJedan => '1v1';
+
+  @override
+  String get jedanNaJedanOpis => 'Dva igrača, jedno objašnjava, drugo pogađa';
+
+  @override
+  String get imeIgraca1 => 'Ime prvog igrača';
+
+  @override
+  String get imeIgraca2 => 'Ime drugog igrača';
+
+  @override
+  String objasnjava(String name) {
+    return '$name objašnjava';
+  }
+
+  @override
+  String pobednik(String name) {
+    return '$name pobeđuje!';
+  }
+
+  @override
+  String get nereseno => 'Nerešeno!';
+
+  @override
+  String pobedaZaReci(int count) {
+    return 'Pobeda za $count reči';
+  }
+
+  @override
+  String igraciPoeni(String name, int points) {
+    return '$name: $points poena';
+  }
+
+  @override
+  String get sledeciIgrac => 'Sledeći igrač';
+
+  @override
+  String get jedanNaJedanUput =>
+      'Dva igrača se takmiče jedan protiv drugog. Igrači naizmenično objašnjavaju reči dok protivnik pogađa. Pobednik je igrač koji objasni više reči.';
+
+  @override
+  String get igrajPonovo => 'Igraj ponovo';
 }
