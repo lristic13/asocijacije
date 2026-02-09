@@ -487,6 +487,78 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Dodaj moje reči'**
   String get dodajMojeReci;
+
+  /// No description provided for @jedanNaJedan.
+  ///
+  /// In sr, this message translates to:
+  /// **'1v1'**
+  String get jedanNaJedan;
+
+  /// No description provided for @jedanNaJedanOpis.
+  ///
+  /// In sr, this message translates to:
+  /// **'Dva igrača, jedno objašnjava, drugo pogađa'**
+  String get jedanNaJedanOpis;
+
+  /// No description provided for @imeIgraca1.
+  ///
+  /// In sr, this message translates to:
+  /// **'Ime prvog igrača'**
+  String get imeIgraca1;
+
+  /// No description provided for @imeIgraca2.
+  ///
+  /// In sr, this message translates to:
+  /// **'Ime drugog igrača'**
+  String get imeIgraca2;
+
+  /// No description provided for @objasnjava.
+  ///
+  /// In sr, this message translates to:
+  /// **'{name} objašnjava'**
+  String objasnjava(String name);
+
+  /// No description provided for @pobednik.
+  ///
+  /// In sr, this message translates to:
+  /// **'{name} pobeđuje!'**
+  String pobednik(String name);
+
+  /// No description provided for @nereseno.
+  ///
+  /// In sr, this message translates to:
+  /// **'Nerešeno!'**
+  String get nereseno;
+
+  /// No description provided for @pobedaZaReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Pobeda za {count} reči'**
+  String pobedaZaReci(int count);
+
+  /// No description provided for @igraciPoeni.
+  ///
+  /// In sr, this message translates to:
+  /// **'{name}: {points} poena'**
+  String igraciPoeni(String name, int points);
+
+  /// No description provided for @sledeciIgrac.
+  ///
+  /// In sr, this message translates to:
+  /// **'Sledeći igrač'**
+  String get sledeciIgrac;
+
+  /// No description provided for @jedanNaJedanUput.
+  ///
+  /// In sr, this message translates to:
+  /// **'Dva igrača se takmiče jedan protiv drugog. Igrači naizmenično objašnjavaju reči dok protivnik pogađa. Pobednik je igrač koji objasni više reči.'**
+  String get jedanNaJedanUput;
+
+  /// No description provided for @igrajPonovo.
+  ///
+  /// In sr, this message translates to:
+  /// **'Igraj ponovo'**
+  String get igrajPonovo;
 }
 
 class _AppLocalizationsDelegate

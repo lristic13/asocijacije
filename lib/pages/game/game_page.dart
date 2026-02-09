@@ -40,7 +40,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
   int indexToScroll = 1;
 
   bool timerCompleted = false;
-  late Box<Team> box;
+  Box<Team>? box;
   String player1 = 'Player 1';
   String player2 = 'Player 2';
   String teamName = '';
@@ -48,6 +48,12 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
   @override
   void initState() {
     super.initState();
+
+    // Skip Hive setup for 1v1 mode
+    if (ref.read(gameAdminProvider).is1v1Mode) {
+      return;
+    }
+
     final openBox = Boxes.getTeams();
     if (openBox == null) {
       debugPrint('Teams box not available');
@@ -55,7 +61,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
     }
     box = openBox;
     final team = Boxes.getTeamById(
-      box,
+      box!,
       'tim-${ref.read(gameAdminProvider).teamPlaying}',
     );
     player1 = team?.player1 ?? 'Player 1';
@@ -65,7 +71,9 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
 
   @override
   Widget build(BuildContext context) {
-    int playerExplaining = ref.watch(gameAdminProvider).playerExplaining;
+    final gameState = ref.watch(gameAdminProvider);
+    final is1v1Mode = gameState.is1v1Mode;
+    int playerExplaining = gameState.playerExplaining;
     List<String> wordsToPlay = ref.watch(wordsProvider).wordsToPlay;
     List<String> usedWords = ref.watch(wordsProvider).usedWords;
 
@@ -100,6 +108,12 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                   ref
                       .read(customWordsListProvider.notifier)
                       .update((state) => []);
+                  // Reset 1v1 state if needed
+                  if (is1v1Mode) {
+                    ref
+                        .read(oneVsOneProvider.notifier)
+                        .update((state) => state.reset());
+                  }
                   NavigationService.goToHome();
                 },
               ),
@@ -110,84 +124,134 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           color: AppColors.englishVioletDarker,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-            child:
-                ref.read(gameAdminProvider).roundInProgress ==
-                    GameMode.finalRound
-                ? AppFinalScore(box: box)
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          AppPageHeader(title: getRoundTitle(ref, context)),
-                          const Spacer(),
-                          AppIconButton(
-                            onButtonPressed: () {
-                              _controllerTimer.pause();
-                              setState(() {});
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.topToBottom,
-                                  curve: Curves.easeIn,
-                                  duration: const Duration(milliseconds: 300),
-                                  child: const InstructionsPage(),
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                      const AppSeparator(color: AppColors.coral),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          AppTimer(
-                            controllerTimer: _controllerTimer,
-                            ref: ref,
-                            onTimerComplete: () {
-                              ref.read(blurProvider.notifier).update((state) => true);
-                              setState(() {
-                                timerCompleted = true;
-                              });
-                            },
-                          ),
-                          AppPoints(box: box, ref: ref),
-                        ],
-                      ),
-                      const SizedBox(height: 20),
-                      Center(
-                        child: Text(teamName, style: AppStyles.text25WhiteBold),
-                      ),
-                      const SizedBox(height: 5),
-                      AppExplainingRow(
-                        playerExplaining: playerExplaining,
-                        player1: player1,
-                        player2: player2,
-                      ),
-                      AppCardsBuilder(
-                        swiperController: _cardSwiperController,
-                        timerController: _controllerTimer,
-                      ),
-                      const SizedBox(height: 10),
-                      AppInGameButton(
-                        wordsToPlay: wordsToPlay,
-                        usedWords: usedWords,
-                        timerController: _controllerTimer,
-                        ref: ref,
-                        box: box,
-                        timerCompleted: timerCompleted,
-                        cardSwiper: _cardSwiperController,
-                        updateParentState: () {
-                          setState(() {});
-                        },
-                      ),
-                    ],
-                  ),
+            child: _buildGameContent(
+              context,
+              is1v1Mode,
+              playerExplaining,
+              wordsToPlay,
+              usedWords,
+            ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildGameContent(
+    BuildContext context,
+    bool is1v1Mode,
+    int playerExplaining,
+    List<String> wordsToPlay,
+    List<String> usedWords,
+  ) {
+    final roundInProgress = ref.read(gameAdminProvider).roundInProgress;
+
+    // Check for final round (team mode only)
+    if (!is1v1Mode && roundInProgress == GameMode.finalRound) {
+      return AppFinalScore(box: box!);
+    }
+
+    // For 1v1 mode, final round is handled via navigation to results page
+    // So we should never reach here with finalRound in 1v1 mode
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 20),
+        Row(
+          children: [
+            AppPageHeader(title: getRoundTitle(ref, context)),
+            const Spacer(),
+            AppIconButton(
+              onButtonPressed: () {
+                _controllerTimer.pause();
+                setState(() {});
+                Navigator.push(
+                  context,
+                  PageTransition(
+                    type: PageTransitionType.topToBottom,
+                    curve: Curves.easeIn,
+                    duration: const Duration(milliseconds: 300),
+                    child: const InstructionsPage(),
+                  ),
+                );
+              },
+            ),
+          ],
+        ),
+        const AppSeparator(color: AppColors.coral),
+        const SizedBox(height: 20),
+        Row(
+          children: [
+            AppTimer(
+              controllerTimer: _controllerTimer,
+              ref: ref,
+              onTimerComplete: () {
+                ref.read(blurProvider.notifier).update((state) => true);
+                setState(() {
+                  timerCompleted = true;
+                });
+              },
+            ),
+            AppPoints(box: box, ref: ref),
+          ],
+        ),
+        const SizedBox(height: 20),
+        _buildPlayerInfo(context, is1v1Mode, playerExplaining),
+        AppCardsBuilder(
+          swiperController: _cardSwiperController,
+          timerController: _controllerTimer,
+        ),
+        const SizedBox(height: 10),
+        AppInGameButton(
+          wordsToPlay: wordsToPlay,
+          usedWords: usedWords,
+          timerController: _controllerTimer,
+          ref: ref,
+          box: box,
+          timerCompleted: timerCompleted,
+          cardSwiper: _cardSwiperController,
+          updateParentState: () {
+            setState(() {});
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPlayerInfo(
+    BuildContext context,
+    bool is1v1Mode,
+    int playerExplaining,
+  ) {
+    if (is1v1Mode) {
+      final oneVsOne = ref.watch(oneVsOneProvider);
+      return Column(
+        children: [
+          Center(
+            child: Text(
+              AppLocalizations.of(context)!.objasnjava(oneVsOne.currentPlayerName),
+              style: AppStyles.text25WhiteBold,
+            ),
+          ),
+          const SizedBox(height: 5),
+        ],
+      );
+    }
+
+    // Team mode
+    return Column(
+      children: [
+        Center(
+          child: Text(teamName, style: AppStyles.text25WhiteBold),
+        ),
+        const SizedBox(height: 5),
+        AppExplainingRow(
+          playerExplaining: playerExplaining,
+          player1: player1,
+          player2: player2,
+        ),
+      ],
     );
   }
 }

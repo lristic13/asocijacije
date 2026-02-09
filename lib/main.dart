@@ -7,6 +7,7 @@ import 'package:asocijacije_nove/pages/home/home_page.dart';
 import 'package:asocijacije_nove/pages/instructions/instructions_page.dart';
 import 'package:asocijacije_nove/pages/scoreboard/scoreboard_page.dart';
 import 'package:asocijacije_nove/pages/start_game/start_game_page.dart';
+import 'package:asocijacije_nove/pages/one_vs_one/one_vs_one_results_page.dart';
 import 'package:asocijacije_nove/pages/word_collection/word_collection_page.dart';
 import 'package:asocijacije_nove/pages/word_source/word_source_page.dart';
 import 'package:asocijacije_nove/providers/all_providers.dart';
@@ -69,6 +70,7 @@ class _MyAppConsumerState extends ConsumerState<MyApp> {
         AppRoutes.instructionsPage: (context) => const InstructionsPage(),
         AppRoutes.wordCollectionPage: (context) => const WordCollectionPage(),
         AppRoutes.wordSourcePage: (context) => const WordSourcePage(),
+        AppRoutes.oneVsOneResultsPage: (context) => const OneVsOneResultsPage(),
       },
     );
   }

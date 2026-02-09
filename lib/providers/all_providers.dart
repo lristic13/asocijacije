@@ -1,4 +1,5 @@
 import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/models/one_vs_one_state.dart';
 import 'package:asocijacije_nove/models/words_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -8,6 +9,9 @@ import '../models/game_state.dart';
 final playerNumberProvider = StateProvider<int>((ref) => 4);
 
 final gameAdminProvider = StateProvider<GameState>((ref) => const GameState());
+
+final oneVsOneProvider =
+    StateProvider<OneVsOneState>((ref) => const OneVsOneState());
 
 final wordsProvider = ChangeNotifierProvider<WordsState>(
   (ref) => WordsState(usedWords: [], wordsToPlay: []),

@@ -3,6 +3,8 @@ import 'package:asocijacije_nove/constants/app_styles.dart';
 import 'package:asocijacije_nove/l10n/app_localizations.dart';
 import 'package:asocijacije_nove/mixins/forms_mixin.dart';
 import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/models/one_vs_one_state.dart';
+import 'package:asocijacije_nove/services/words_loader.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_player_number_container.dart';
 import 'package:asocijacije_nove/widgets/app_round_row.dart';
@@ -13,10 +15,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../../models/team.dart';
 import '../../providers/all_providers.dart';
 import '../../widgets/cards/team_card.dart';
+import '../game/game_page.dart';
 
 class StartGamePage extends ConsumerStatefulWidget {
   const StartGamePage({super.key});
@@ -33,6 +37,12 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
     2,
     (i) => GlobalKey<FormBuilderState>(),
   );
+
+  // 1v1 mode form key
+  final _oneVsOneFormKey = GlobalKey<FormBuilderState>();
+
+  bool get _is1v1Mode => ref.watch(playerNumberProvider) == 2;
+
   @override
   void initState() {
     super.initState();
@@ -74,6 +84,14 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            _OneVsOneButton(
+                              isSelected: _is1v1Mode,
+                              onTap: () {
+                                ref
+                                    .read(playerNumberProvider.notifier)
+                                    .update((state) => 2);
+                              },
+                            ),
                             AppPlayerNumberContainer(
                               value: 4,
                               ref: ref,
@@ -370,14 +388,17 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                             : GameMode.quickRound3Duration,
                       ),
                       const Divider(),
-                      ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemCount: ref.watch(playerNumberProvider) ~/ 2,
-                        itemBuilder: (context, index) =>
-                            TeamCard(formKeys[index], index, 5),
-                      ),
+                      if (_is1v1Mode)
+                        _OneVsOneForm(formKey: _oneVsOneFormKey)
+                      else
+                        ListView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: EdgeInsets.zero,
+                          itemCount: ref.watch(playerNumberProvider) ~/ 2,
+                          itemBuilder: (context, index) =>
+                              TeamCard(formKeys[index], index, 5),
+                        ),
                       const SizedBox(height: 20),
                     ],
                   ),
@@ -392,9 +413,177 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                     Navigator.pop(context);
                   },
                   rightButtonCb: () {
-                    validateForms(context, ref, formKeys, box, teamId);
+                    if (_is1v1Mode) {
+                      _start1v1Game();
+                    } else {
+                      validateForms(context, ref, formKeys, box, teamId);
+                    }
                   },
                 ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<void> _start1v1Game() async {
+    if (_oneVsOneFormKey.currentState?.saveAndValidate() != true) {
+      return;
+    }
+
+    final formData = _oneVsOneFormKey.currentState!.value;
+    final player1Name = formData['player1'] as String;
+    final player2Name = formData['player2'] as String;
+
+    // Initialize 1v1 state
+    ref.read(oneVsOneProvider.notifier).update(
+          (state) => OneVsOneState(
+            player1Name: player1Name,
+            player2Name: player2Name,
+            player1Score: 0,
+            player2Score: 0,
+            currentPlayer: 1,
+          ),
+        );
+
+    // Set game admin to 1v1 mode
+    ref.read(gameAdminProvider.notifier).update(
+          (state) => state.copyWith(
+            is1v1Mode: true,
+            roundInProgress: 1,
+            playerExplaining: 1,
+            teamPlaying: 1,
+            allWordsGuessed: false,
+          ),
+        );
+
+    // Reset blur
+    ref.read(blurProvider.notifier).update((state) => true);
+
+    // Load words (15 per player = 30 total)
+    final localeCode =
+        ref.read(localeProvider) == const Locale('sr') ? 'sr' : 'en';
+    final words = await WordsLoader.loadWords(localeCode);
+    words.shuffle();
+
+    if (!mounted) return;
+
+    const wordsNeeded = OneVsOneState.wordsPerPlayer * 2; // 30 words
+    ref.read(wordsProvider).wordsToPlay = words.sublist(0, wordsNeeded);
+
+    Navigator.push(
+      context,
+      PageTransition(
+        child: const GamePage(),
+        type: PageTransitionType.leftToRight,
+      ),
+    );
+  }
+}
+
+class _OneVsOneButton extends StatelessWidget {
+  const _OneVsOneButton({
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+          border: Border.all(color: AppColors.englishVioletLighter, width: 1.5),
+          color: isSelected ? AppColors.englishVioletLighter : Colors.transparent,
+          borderRadius: BorderRadius.circular(13),
+        ),
+        child: Center(
+          child: AnimatedDefaultTextStyle(
+            duration: const Duration(milliseconds: 300),
+            style: TextStyle(
+              fontFamily: 'Geologica',
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: isSelected
+                  ? AppColors.englishVioletDarker
+                  : AppColors.white,
+            ),
+            child: Text(AppLocalizations.of(context)!.jedanNaJedan),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _OneVsOneForm extends StatelessWidget {
+  const _OneVsOneForm({required this.formKey});
+
+  final GlobalKey<FormBuilderState> formKey;
+
+  @override
+  Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
+    return FormBuilder(
+      key: formKey,
+      child: Card(
+        elevation: 5,
+        child: Container(
+          decoration: AppStyles.containerGradientViolet.copyWith(
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: AppColors.englishVioletMoreLighter,
+              width: 3,
+            ),
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              FormBuilderTextField(
+                name: 'player1',
+                style: AppStyles.text25WhiteBold,
+                decoration: AppStyles.errorInputDecoration.copyWith(
+                  label: Text(
+                    localizations.imeIgraca1,
+                    style: const TextStyle(
+                      color: AppColors.englishVioletLighter,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return localizations.unesiteImeIgraca;
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
+              FormBuilderTextField(
+                name: 'player2',
+                style: AppStyles.text25WhiteBold,
+                decoration: AppStyles.errorInputDecoration.copyWith(
+                  label: Text(
+                    localizations.imeIgraca2,
+                    style: const TextStyle(
+                      color: AppColors.englishVioletLighter,
+                    ),
+                  ),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return localizations.unesiteImeIgraca;
+                  }
+                  return null;
+                },
               ),
             ],
           ),

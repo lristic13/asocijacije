@@ -1,4 +1,9 @@
+import 'package:asocijacije_nove/models/game_mode.dart';
+import 'package:asocijacije_nove/pages/one_vs_one/one_vs_one_scoreboard_page.dart';
+import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:page_transition/page_transition.dart';
 import '../constants/app_routes.dart';
 
 class NavigationService {
@@ -66,5 +71,32 @@ class NavigationService {
   
   static Future<void> goToInstructions() {
     return pushNamed(AppRoutes.instructionsPage);
+  }
+
+  static Future<void> goToOneVsOneResults() {
+    return pushNamedAndRemoveUntil(AppRoutes.oneVsOneResultsPage, (route) => false);
+  }
+
+  static void goTo1v1Scoreboard(WidgetRef ref) {
+    final currentRound = ref.read(gameAdminProvider).roundInProgress;
+
+    // Check if game is over (going to round 4 which is final)
+    if (currentRound >= GameMode.finalRound) {
+      goToOneVsOneResults();
+      return;
+    }
+
+    final navigator = navigatorKey.currentState;
+    if (navigator == null) {
+      debugPrint('NavigationService: Navigator is null');
+      return;
+    }
+    navigator.pushAndRemoveUntil(
+      PageTransition(
+        child: const OneVsOneScoreboardPage(),
+        type: PageTransitionType.fade,
+      ),
+      (route) => false,
+    );
   }
 }
