@@ -179,7 +179,7 @@ abstract class AppLocalizations {
   /// No description provided for @normalnaRundaUput.
   ///
   /// In sr, this message translates to:
-  /// **'Treba objasniti zadatu reč bez korišćenja iste, ili korena iste. Traje 45 sekundi.'**
+  /// **'Treba objasniti zadatu reč bez korišćenja iste, ili korena iste. Traje 60 sekundi.'**
   String get normalnaRundaUput;
 
   /// No description provided for @jednaRecRunda.
@@ -191,7 +191,7 @@ abstract class AppLocalizations {
   /// No description provided for @jednaRecRundaUput.
   ///
   /// In sr, this message translates to:
-  /// **'Treba objasniti zadatu reč korišćenjem samo jedne reči koja je slična zadatoj, ili će asocirati na zadatu reč. Traje 45 sekundi.'**
+  /// **'Treba objasniti zadatu reč korišćenjem samo jedne reči koja je slična zadatoj, ili će asocirati na zadatu reč. Traje 60 sekundi.'**
   String get jednaRecRundaUput;
 
   /// No description provided for @pantomimaRunda.
@@ -203,7 +203,7 @@ abstract class AppLocalizations {
   /// No description provided for @pantomimaRundaUput.
   ///
   /// In sr, this message translates to:
-  /// **'Treba objasniti zadatu reč pantomimom. Traje 60 sekundi.'**
+  /// **'Treba objasniti zadatu reč pantomimom. Traje 75 sekundi.'**
   String get pantomimaRundaUput;
 
   /// No description provided for @rezultatUput.
@@ -398,11 +398,11 @@ abstract class AppLocalizations {
   /// **'Kod sesije'**
   String get kodSesije;
 
-  /// No description provided for @napredak.
+  /// No description provided for @dodatoReci.
   ///
   /// In sr, this message translates to:
-  /// **'Napredak'**
-  String get napredak;
+  /// **'Dodato reči'**
+  String get dodatoReci;
 
   /// No description provided for @igracaSpremo.
   ///

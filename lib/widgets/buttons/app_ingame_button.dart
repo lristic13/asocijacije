@@ -3,6 +3,7 @@ import 'package:asocijacije_nove/mixins/game_mixin.dart';
 import 'package:asocijacije_nove/widgets/buttons/app_cancel_button.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
@@ -73,6 +74,7 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
                 textColor: AppColors.englishVioletDarker,
                 buttonText: AppLocalizations.of(context)!.sledecaRec,
                 onPressed: () async {
+                  await HapticFeedback.heavyImpact();
                   await _audio.setAsset('assets/sounds/correct-choice.mp3');
                   _audio.play();
                   final pointsToAdd =

@@ -77,18 +77,48 @@ class WordCollectionService {
 
   /// Collect all words from a session
   Future<List<String>> collectWords(String sessionId) async {
-    final snapshot = await _database.child('sessions/$sessionId/words').get();
+    // Fetch the entire session to ensure we get the right data
+    final snapshot = await _database.child('sessions/$sessionId').get();
 
-    if (!snapshot.exists) return [];
+    if (!snapshot.exists) {
+      debugPrint('Session $sessionId not found');
+      return [];
+    }
 
     final List<String> allWords = [];
-    final wordsData = Map<String, dynamic>.from(snapshot.value as Map);
 
-    wordsData.forEach((playerId, playerData) {
-      final playerMap = Map<String, dynamic>.from(playerData as Map);
-      final words = List<String>.from(playerMap['words'] as List);
-      allWords.addAll(words);
-    });
+    try {
+      final sessionData = Map<String, dynamic>.from(snapshot.value as Map);
+
+      // Get the words field from the session
+      final wordsField = sessionData['words'];
+      if (wordsField == null || wordsField is! Map) {
+        debugPrint('No words field in session or not a Map');
+        return [];
+      }
+
+      final wordsData = Map<String, dynamic>.from(wordsField);
+      debugPrint('Words data has ${wordsData.length} players');
+
+      wordsData.forEach((playerId, playerData) {
+        if (playerData is Map) {
+          final playerMap = Map<String, dynamic>.from(playerData);
+          final wordsList = playerMap['words'];
+          if (wordsList is List) {
+            for (var word in wordsList) {
+              if (word is String) {
+                allWords.add(word);
+              }
+            }
+          }
+        }
+      });
+
+      debugPrint('Total words collected: ${allWords.length}');
+    } catch (e, stack) {
+      debugPrint('Error parsing words data: $e');
+      debugPrint('Stack trace: $stack');
+    }
 
     return allWords;
   }

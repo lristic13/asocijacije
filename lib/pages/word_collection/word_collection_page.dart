@@ -64,9 +64,9 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: $e')));
       }
     }
   }
@@ -93,9 +93,7 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
     if (_isLoading) {
       return const Scaffold(
         backgroundColor: AppColors.englishVioletDarker,
-        body: Center(
-          child: CircularProgressIndicator(color: AppColors.coral),
-        ),
+        body: Center(child: CircularProgressIndicator(color: AppColors.coral)),
       );
     }
 
@@ -133,9 +131,7 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppPageHeader(
-                      title: localizations.prikupiReci,
-                    ),
+                    AppPageHeader(title: localizations.prikupiReci),
                     const AppSeparator(color: AppColors.coral),
                     const SizedBox(height: 20),
 
@@ -175,7 +171,10 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                         onPressed: () async {
                           final url = Uri.parse(_getWebUrl());
                           if (await canLaunchUrl(url)) {
-                            await launchUrl(url, mode: LaunchMode.externalApplication);
+                            await launchUrl(
+                              url,
+                              mode: LaunchMode.externalApplication,
+                            );
                           }
                         },
                         icon: const Icon(
@@ -195,7 +194,8 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                     StreamBuilder<SessionState>(
                       stream: _service.watchSession(_sessionId!),
                       builder: (context, snapshot) {
-                        final state = snapshot.data ?? SessionState.empty(_sessionId!);
+                        final state =
+                            snapshot.data ?? SessionState.empty(_sessionId!);
                         final progress = state.targetWords > 0
                             ? state.totalWords / state.targetWords
                             : 0.0;
@@ -208,7 +208,7 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  localizations.napredak,
+                                  localizations.dodatoReci,
                                   style: AppStyles.text20WhiteBold,
                                 ),
                                 Text(
@@ -256,10 +256,12 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                             const SizedBox(height: 12),
 
                             ...List.generate(state.playerCount, (index) {
-                              final submissions = state.submissions.values.toList();
+                              final submissions = state.submissions.values
+                                  .toList();
                               final hasSubmission = index < submissions.length;
-                              final submission =
-                                  hasSubmission ? submissions[index] : null;
+                              final submission = hasSubmission
+                                  ? submissions[index]
+                                  : null;
                               final wordCount = submission?.words.length ?? 0;
                               final isComplete = wordCount == 8;
 
@@ -323,11 +325,13 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                               width: double.infinity,
                               height: 56,
                               child: ElevatedButton(
-                                onPressed:
-                                    state.isReady ? () => _startGame(state) : null,
+                                onPressed: state.isReady
+                                    ? () => _startGame(state)
+                                    : null,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      state.isReady ? Colors.green : Colors.grey,
+                                  backgroundColor: state.isReady
+                                      ? Colors.green
+                                      : Colors.grey,
                                   disabledBackgroundColor: Colors.grey.shade700,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),

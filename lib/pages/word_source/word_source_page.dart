@@ -107,20 +107,25 @@ class WordSourcePage extends ConsumerWidget {
   }
 
   Future<void> _startWithCustomWords(BuildContext context, WidgetRef ref) async {
-    final words = await Navigator.pushNamed(
+    final result = await Navigator.pushNamed(
       context,
       AppRoutes.wordCollectionPage,
     );
 
-    if (words != null && words is List<String> && context.mounted) {
+    if (result != null && result is List<String> && result.isNotEmpty && context.mounted) {
+      final words = List<String>.from(result);
       ref.read(customWordsListProvider.notifier).update((state) => words);
       ref.read(customWordsProvider.notifier).update((state) => true);
 
       words.shuffle();
-      ref.read(wordsProvider.notifier).wordsToPlay = words.sublist(
-        0,
-        ref.read(playerNumberProvider) * GameMode.wordsPerPlayer,
-      );
+
+      // Use all available words (don't try to get more than we have)
+      final wordsNeeded = ref.read(playerNumberProvider) * GameMode.wordsPerPlayer;
+      final wordsToUse = words.length >= wordsNeeded
+          ? words.sublist(0, wordsNeeded)
+          : words;
+
+      ref.read(wordsProvider.notifier).wordsToPlay = wordsToUse;
 
       Navigator.push(
         context,
