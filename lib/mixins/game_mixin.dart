@@ -10,6 +10,12 @@ mixin GameMixin {
   void roundEnd(BuildContext context, WidgetRef ref) {
     final currentState = ref.read(gameAdminProvider);
 
+    // Handle 1v1 mode differently
+    if (currentState.is1v1Mode) {
+      _roundEnd1v1(context, ref);
+      return;
+    }
+
     if (currentState.teamPlaying == ref.read(playerNumberProvider) / 2) {
       if (currentState.playerExplaining == 2) {
         final newState = currentState.copyWith(
@@ -40,18 +46,88 @@ mixin GameMixin {
     NavigationService.goToScoreboard();
   }
 
+  void _roundEnd1v1(BuildContext context, WidgetRef ref) {
+    // Switch to the other player
+    ref.read(oneVsOneProvider.notifier).update(
+          (state) => state.switchPlayer(),
+        );
+
+    ref.read(wordsProvider).wordsToPlay.shuffle();
+    ref.read(blurProvider.notifier).update((state) => true);
+
+    // Navigate to 1v1 scoreboard
+    NavigationService.goTo1v1Scoreboard(ref);
+  }
+
   void allWordsGuessed(BuildContext context, WidgetRef ref) {
     final currentState = ref.read(gameAdminProvider);
+
+    // Handle 1v1 mode differently
+    if (currentState.is1v1Mode) {
+      _allWordsGuessed1v1(context, ref);
+      return;
+    }
+
+    final totalTeams = ref.read(playerNumberProvider) ~/ 2;
+
+    // Calculate next team/player in rotation
+    int nextTeam;
+    int nextPlayer;
+
+    if (currentState.teamPlaying == totalTeams) {
+      // Last team played, go to first team
+      nextTeam = 1;
+      if (currentState.playerExplaining == 2) {
+        // P2 was explaining, go back to P1
+        nextPlayer = 1;
+      } else {
+        // P1 was explaining, go to P2
+        nextPlayer = 2;
+      }
+    } else {
+      // Not the last team, go to next team, same player
+      nextTeam = currentState.teamPlaying + 1;
+      nextPlayer = currentState.playerExplaining;
+    }
+
+    // Advance round AND move to next team/player in rotation
     final newState = currentState.copyWith(
-      playerExplaining: 1,
-      teamPlaying: 1,
       roundInProgress: currentState.roundInProgress + 1,
+      teamPlaying: nextTeam,
+      playerExplaining: nextPlayer,
     );
     ref.read(gameAdminProvider.notifier).update((state) => newState);
 
     ref.read(wordsProvider).refreshWords();
 
     NavigationService.goToScoreboard();
+  }
+
+  void _allWordsGuessed1v1(BuildContext context, WidgetRef ref) {
+    final currentState = ref.read(gameAdminProvider);
+    final newRound = currentState.roundInProgress + 1;
+
+    // Check if game is over (round 4 = final)
+    if (newRound >= GameMode.finalRound) {
+      // Game over - navigate to results
+      NavigationService.goToOneVsOneResults();
+      return;
+    }
+
+    // Switch to the other player (next in rotation)
+    ref.read(oneVsOneProvider.notifier).update(
+          (state) => state.switchPlayer(),
+        );
+
+    // Advance to next round
+    final newState = currentState.copyWith(
+      roundInProgress: newRound,
+    );
+    ref.read(gameAdminProvider.notifier).update((state) => newState);
+
+    ref.read(wordsProvider).refreshWords();
+
+    NavigationService.goTo1v1Scoreboard(ref);
   }
 
   String getRoundTitle(WidgetRef ref, BuildContext context) {

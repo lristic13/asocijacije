@@ -48,6 +48,11 @@ class InstructionsPage extends StatelessWidget {
                 bodyText: AppLocalizations.of(context)!.pantomimaRundaUput,
               ),
               const SizedBox(height: 30),
+              InstructionItem(
+                titleText: AppLocalizations.of(context)!.jedanNaJedan,
+                bodyText: AppLocalizations.of(context)!.jedanNaJedanUput,
+              ),
+              const SizedBox(height: 30),
               Text(
                 AppLocalizations.of(context)!.rezultatUput,
                 style: const TextStyle(color: AppColors.white),
