@@ -4,6 +4,7 @@ import 'package:asocijacije_nove/l10n/app_localizations.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'instruction_item.dart';
 
@@ -70,14 +71,31 @@ class InstructionsPage extends StatelessWidget {
                 ],
               ),
               const Spacer(flex: 3),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: AppButtonFull(
-                  buttonText: AppLocalizations.of(context)!.nazad,
-                  fillColor: AppColors.coral,
-                  textColor: AppColors.englishViolet,
-                  onPressed: () => Navigator.pop(context),
-                ),
+              AppButtonFull(
+                buttonText: AppLocalizations.of(context)!.nazad,
+                fillColor: AppColors.coral,
+                textColor: AppColors.englishViolet,
+                onPressed: () => Navigator.pop(context),
+              ),
+              FutureBuilder<PackageInfo>(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final info = snapshot.data!;
+                    return Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
+                        child: Text(
+                          'v${info.version}+${info.buildNumber}',
+                          style: AppStyles.text15WhiteNormal.copyWith(
+                            color: AppColors.englishVioletMoreLighter,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
             ],
           ),

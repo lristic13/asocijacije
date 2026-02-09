@@ -38,11 +38,13 @@ class SessionState {
 
     // Parse submissions
     final Map<String, PlayerSubmission> submissions = {};
-    if (data.containsKey('words') && data['words'] != null) {
+    if (data.containsKey('words') && data['words'] != null && data['words'] is Map) {
       final wordsData = Map<String, dynamic>.from(data['words'] as Map);
       wordsData.forEach((playerId, playerData) {
-        final playerMap = Map<String, dynamic>.from(playerData as Map);
-        submissions[playerId] = PlayerSubmission.fromMap(playerId, playerMap);
+        if (playerData is Map) {
+          final playerMap = Map<String, dynamic>.from(playerData);
+          submissions[playerId] = PlayerSubmission.fromMap(playerId, playerMap);
+        }
       });
     }
 

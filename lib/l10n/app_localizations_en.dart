@@ -49,21 +49,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get normalnaRundaUput =>
-      'The word should be explained without using the target word. Round duration: 45 seconds.';
+      'The word should be explained without using the target word. Round duration: 60 seconds.';
 
   @override
   String get jednaRecRunda => 'One word Round';
 
   @override
   String get jednaRecRundaUput =>
-      'The word should be explained using only one word, which will be similar to the target one, or will remind you of the target one. Round duration: 45 seconds.';
+      'The word should be explained using only one word, which will be similar to the target one, or will remind you of the target one. Round duration: 60 seconds.';
 
   @override
   String get pantomimaRunda => 'Mime Round';
 
   @override
   String get pantomimaRundaUput =>
-      'The word should be explained using only mime. Round duration: 60 seconds.';
+      'The word should be explained using only mime. Round duration: 75 seconds.';
 
   @override
   String get rezultatUput =>
@@ -169,7 +169,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get kodSesije => 'Session code';
 
   @override
-  String get napredak => 'Progress';
+  String get dodatoReci => 'Words added';
 
   @override
   String igracaSpremo(Object ready, Object total) {

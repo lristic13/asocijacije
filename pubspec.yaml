@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 4.1.0+2
+version: 4.1.0+25
 
 environment:
   sdk: ^3.8.1
@@ -35,6 +35,7 @@ dependencies:
   in_app_update: ^4.1.4
   just_audio: ^0.9.45
   lottie: ^3.1.0
+  package_info_plus: ^8.0.0
   page_transition: ^2.0.9
   qr_flutter: ^4.1.0
   riverpod: ^2.3.6
@@ -55,7 +56,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.4.5
-  device_preview: ^1.1.0
   flutter_launcher_icons: ^0.13.1
   flutter_lints: ^2.0.0
   hive_generator: ^2.0.0
@@ -69,6 +69,7 @@ flutter:
 
   assets:
     - assets/sounds/correct-choice.mp3
+    - assets/sounds/beep.m4a
     - assets/images/
     - assets/words/
     - assets/animations/

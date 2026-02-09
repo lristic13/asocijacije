@@ -147,6 +147,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
                             controllerTimer: _controllerTimer,
                             ref: ref,
                             onTimerComplete: () {
+                              ref.read(blurProvider.notifier).update((state) => true);
                               setState(() {
                                 timerCompleted = true;
                               });
