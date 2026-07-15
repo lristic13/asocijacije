@@ -6,6 +6,7 @@ import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
 import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
@@ -28,24 +29,22 @@ class _OneVsOneScoreboardPageState extends ConsumerState<OneVsOneScoreboardPage>
     final oneVsOne = ref.watch(oneVsOneProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.englishViolet,
-      body: PopScope(
-        canPop: false,
-        child: Container(
-          color: AppColors.englishVioletDarker,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: 20,
-              left: 20,
-              right: 20,
-              top: 40,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 20),
-                AppPageHeader(title: localizations.rezultat),
-                const AppSeparator(color: AppColors.coral),
+      body: NeonBackground(
+        child: SafeArea(
+          child: PopScope(
+            canPop: false,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 18,
+                left: 24,
+                right: 24,
+                top: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppPageHeader(title: localizations.rezultat),
+                  const AppSeparator(color: AppColors.orange),
                 const Spacer(),
 
                 // Player 1 score card
@@ -66,39 +65,40 @@ class _OneVsOneScoreboardPageState extends ConsumerState<OneVsOneScoreboardPage>
                 const Spacer(),
 
                 // Next player indicator
-                Center(
-                  child: Text(
-                    localizations.objasnjava(oneVsOne.currentPlayerName),
-                    style: AppStyles.text25WhiteBold,
+                  Center(
+                    child: Text(
+                      localizations.objasnjava(oneVsOne.currentPlayerName),
+                      style: NeonText.display(size: 19, color: AppColors.ink),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 10),
+                  const SizedBox(height: 10),
 
-                // Continue button
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: AppButtonFull(
-                    buttonText: localizations.dalje,
-                    fillColor: AppColors.coral,
-                    textColor: AppColors.englishVioletDarker,
-                    onPressed: () {
-                      if (context.mounted) {
-                        if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
-                          allWordsGuessed(context, ref);
-                        } else {
-                          Navigator.push(
-                            context,
-                            PageTransition(
-                              child: const GamePage(),
-                              type: PageTransitionType.leftToRight,
-                            ),
-                          );
+                  // Continue button
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: AppButtonFull(
+                      buttonText: localizations.dalje,
+                      fillColor: AppColors.orange,
+                      textColor: AppColors.inkOnFill,
+                      onPressed: () {
+                        if (context.mounted) {
+                          if (ref.read(wordsProvider).wordsToPlay.isEmpty) {
+                            allWordsGuessed(context, ref);
+                          } else {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                child: const GamePage(),
+                                type: PageTransitionType.leftToRight,
+                              ),
+                            );
+                          }
                         }
-                      }
-                    },
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -120,54 +120,51 @@ class _PlayerScoreCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      color: AppColors.white,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: isCurrentPlayer ? AppColors.coral : AppColors.englishVioletLighter,
-            width: 3,
-          ),
-          borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.englishVioletDarker,
-              AppColors.englishViolet,
-            ],
-          ),
+    final color = isCurrentPlayer ? AppColors.cyan : AppColors.violet;
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isCurrentPlayer ? color : Colors.white.withValues(alpha: 0.1),
+          width: 1.5,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30.0,
-            vertical: 16,
-          ),
-          child: Row(
-            children: [
-              if (isCurrentPlayer)
-                const Padding(
-                  padding: EdgeInsets.only(right: 8.0),
-                  child: Icon(
-                    Icons.arrow_forward,
-                    color: AppColors.coral,
-                    size: 24,
-                  ),
-                ),
-              Expanded(
-                child: Text(
-                  playerName,
-                  style: AppStyles.text30WhiteBold,
-                  overflow: TextOverflow.ellipsis,
+        boxShadow: isCurrentPlayer
+            ? [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 26)]
+            : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
+        child: Row(
+          children: [
+            if (isCurrentPlayer)
+              const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(
+                  Icons.arrow_forward,
+                  color: AppColors.cyan,
+                  size: 22,
                 ),
               ),
-              Text(
-                '$score',
-                style: AppStyles.text45WhiteBold,
+            Expanded(
+              child: Text(
+                playerName,
+                style: NeonText.display(size: 22, color: AppColors.ink),
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
+            ),
+            Text(
+              '$score',
+              style: NeonText.display(
+                size: 44,
+                height: 1,
+                color: isCurrentPlayer ? AppColors.cyan : AppColors.ink,
+                shadows: isCurrentPlayer
+                    ? NeonText.glow(AppColors.cyan, blur: 20, opacity: 0.5)
+                    : null,
+              ),
+            ),
+          ],
         ),
       ),
     );

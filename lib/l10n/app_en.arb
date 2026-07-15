@@ -43,6 +43,7 @@
     "brzi": "Quick",
     "dupliPoeni": "Double points",
     "dvaPoena": "2 points",
+    "objasni": "Explain this",
     "dupliPoeniObjasnjenje": "Words guessed in the final seconds of the round earn 2 points instead of 1!\n\nNormal mode:\n• Normal and One-word rounds: last 10 seconds\n• Mime round: last 15 seconds\n\nQuick mode:\n• Normal and One-word rounds: last 7 seconds\n• Mime round: last 10 seconds",
     "imeTima": "Team name",
     "unesiteImeTima": "Enter team name!",
@@ -106,5 +107,24 @@
     },
     "sledeciIgrac": "Next player",
     "jedanNaJedanUput": "Two players compete against each other. Players take turns explaining words while the opponent guesses. The winner is the player who explains more words.",
-    "igrajPonovo": "Play again"
+    "igrajPonovo": "Play again",
+    "proNaslov": "Asocijacije Pro",
+    "proPodnaslov": "One-time purchase — yours forever",
+    "proPogodnostSvojeReci": "Play with your own words",
+    "proPogodnostQr": "Everyone adds words from their phone via QR code",
+    "proPogodnostBuduce": "All future Pro features included",
+    "otkljucajZa": "Unlock for {price}",
+    "@otkljucajZa": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
+    "otkljucaj": "Unlock",
+    "vratiKupovinu": "Restore purchase",
+    "kupovinaVracena": "Purchase restored!",
+    "kupovinaNijeNadjena": "No previous purchase found.",
+    "kupovinaNeuspesna": "Purchase failed. Please try again.",
+    "prodavnicaNijeDostupna": "Store is not available right now. Please try again later."
 }

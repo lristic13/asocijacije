@@ -9,8 +9,9 @@ import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_player_number_container.dart';
 import 'package:asocijacije_nove/widgets/app_round_row.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
-import 'package:asocijacije_nove/widgets/buttons/app_button_row.dart';
 import 'package:asocijacije_nove/widgets/buttons/app_mode_button.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
+import 'package:asocijacije_nove/widgets/buttons/neon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -59,13 +60,13 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: AppColors.englishVioletDarker,
-      body: Container(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        color: AppColors.englishVioletDarker,
-        child: GestureDetector(
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-          child: Column(
+      body: NeonBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(22, 6, 22, 18),
+            child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
@@ -79,12 +80,10 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                       AppPageHeader(title: localizations.pocniIgru),
                       const AppSeparator(color: AppColors.coral),
                       const SizedBox(height: 10),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _OneVsOneButton(
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _OneVsOneButton(
                               isSelected: _is1v1Mode,
                               onTap: () {
                                 ref
@@ -92,51 +91,29 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                                     .update((state) => 2);
                               },
                             ),
-                            AppPlayerNumberContainer(
-                              value: 4,
-                              ref: ref,
-                              cbOnTap: () {
-                                ref
-                                    .read(playerNumberProvider.notifier)
-                                    .update((state) => 4);
-                                formKeys = generateKeys(ref);
-                              },
-                            ),
-                            AppPlayerNumberContainer(
-                              value: 6,
-                              ref: ref,
-                              cbOnTap: () {
-                                ref
-                                    .read(playerNumberProvider.notifier)
-                                    .update((state) => 6);
-                                formKeys = generateKeys(ref);
-                              },
-                            ),
-                            AppPlayerNumberContainer(
-                              value: 8,
-                              ref: ref,
-                              cbOnTap: () {
-                                ref
-                                    .read(playerNumberProvider.notifier)
-                                    .update((state) => 8);
-                                formKeys = generateKeys(ref);
-                              },
-                            ),
-                            AppPlayerNumberContainer(
-                              value: 10,
-                              ref: ref,
-                              cbOnTap: () {
-                                ref
-                                    .read(playerNumberProvider.notifier)
-                                    .update((state) => 10);
-                                formKeys = generateKeys(ref);
-                              },
+                          ),
+                          for (final n in const [4, 6, 8, 10]) ...[
+                            const SizedBox(width: 9),
+                            Expanded(
+                              child: AppPlayerNumberContainer(
+                                value: n,
+                                ref: ref,
+                                cbOnTap: () {
+                                  ref
+                                      .read(playerNumberProvider.notifier)
+                                      .update((state) => n);
+                                  formKeys = generateKeys(ref);
+                                },
+                              ),
                             ),
                           ],
-                        ),
+                        ],
                       ),
                       const SizedBox(height: 10),
-                      const Divider(),
+                      Divider(
+                        color: Colors.white.withValues(alpha: 0.08),
+                        height: 26,
+                      ),
                       Row(
                         children: [
                           Text(
@@ -170,18 +147,30 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                           ),
                         ],
                       ),
-                      Row(
-                        children: [
-                          Text(
-                            localizations.dupliPoeni,
-                            style: AppStyles.text20WhiteBold,
-                          ),
-                          const SizedBox(width: 5),
-                          InkWell(
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 5,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.04),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: Row(
+                          children: [
+                            Text(
+                              localizations.dupliPoeni,
+                              style: NeonText.display(
+                                size: 15.5,
+                                color: AppColors.ink,
+                              ),
+                            ),
+                            const SizedBox(width: 5),
+                            InkWell(
                             onTap: () {
                               showModalBottomSheet(
                                 context: context,
-                                backgroundColor: AppColors.englishVioletDarker,
+                                backgroundColor: AppColors.bg,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.vertical(
                                     top: Radius.circular(20),
@@ -191,26 +180,23 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                                   padding: const EdgeInsets.all(24.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Row(
-                                        children: [
-                                          Text(
-                                            localizations.dupliPoeni,
-                                            style: AppStyles.text25WhiteBold,
-                                          ),
-                                          const Text(
-                                            '.',
-                                            style: AppStyles.text25CoralBold,
-                                          ),
-                                        ],
+                                      AppPageHeader(
+                                        title: localizations.dupliPoeni,
+                                      ),
+                                      const AppSeparator(
+                                        color: AppColors.orange,
                                       ),
                                       const SizedBox(height: 16),
                                       RichText(
                                         text: TextSpan(
-                                          style: AppStyles.text15WhiteNormal
-                                              .copyWith(
-                                                fontFamily: 'Geologica',
-                                              ),
+                                          style: NeonText.body(
+                                            size: 14,
+                                            weight: FontWeight.w500,
+                                            color: AppColors.sub,
+                                          ),
                                           children: [
                                             TextSpan(
                                               text:
@@ -327,75 +313,90 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                             },
                             child: Container(
                               decoration: BoxDecoration(
-                                color: AppColors.englishVioletDarker,
+                                color: AppColors.bg,
                                 border: Border.all(
-                                  color: Colors.grey.shade400,
-                                  width: 2,
+                                  color: AppColors.sub,
+                                  width: 1.5,
                                 ),
                                 borderRadius: BorderRadius.circular(50),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(2.0),
+                              child: const Padding(
+                                padding: EdgeInsets.all(2.0),
                                 child: Icon(
                                   Icons.question_mark,
-                                  color: Colors.grey.shade400,
+                                  color: AppColors.sub,
                                   size: 15,
                                 ),
                               ),
                             ),
                           ),
-                          const Spacer(),
-                          Switch.adaptive(
-                            value: ref.watch(doublePointsProvider),
-                            thumbColor: WidgetStateProperty.resolveWith<Color>(
-                              (states) => states.contains(WidgetState.selected)
-                                  ? AppColors.englishVioletDarker
-                                  : AppColors.englishVioletMoreLighter,
+                            const Spacer(),
+                            Switch.adaptive(
+                              value: ref.watch(doublePointsProvider),
+                              activeThumbColor: AppColors.ink,
+                              activeTrackColor: AppColors.orange,
+                              inactiveThumbColor: AppColors.sub,
+                              inactiveTrackColor: Colors.white.withValues(
+                                alpha: 0.08,
+                              ),
+                              trackOutlineColor:
+                                  WidgetStateProperty.resolveWith<Color>(
+                                (states) =>
+                                    states.contains(WidgetState.selected)
+                                        ? AppColors.orange
+                                        : Colors.white.withValues(alpha: 0.2),
+                              ),
+                              onChanged: (value) {
+                                ref
+                                    .read(doublePointsProvider.notifier)
+                                    .update((state) => value);
+                              },
                             ),
-                            trackColor: WidgetStateProperty.resolveWith<Color>(
-                              (states) => states.contains(WidgetState.selected)
-                                  ? AppColors.englishVioletMoreLighter
-                                  : AppColors.englishVioletDarker,
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 13),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: AppRoundRow(
+                              roundName: localizations.normalnaRunda,
+                              roundLength: selectedGameMode == GameMode.normal
+                                  ? GameMode.normalRound1And2Duration
+                                  : GameMode.quickRound1And2Duration,
                             ),
-                            trackOutlineColor: WidgetStateProperty.all<Color>(
-                              AppColors.englishVioletMoreLighter,
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: AppRoundRow(
+                              roundName: localizations.jednaRecRunda,
+                              roundLength: selectedGameMode == GameMode.normal
+                                  ? GameMode.normalRound1And2Duration
+                                  : GameMode.quickRound1And2Duration,
                             ),
-                            onChanged: (value) {
-                              ref
-                                  .read(doublePointsProvider.notifier)
-                                  .update((state) => value);
-                            },
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: AppRoundRow(
+                              roundName: localizations.pantomimaRunda,
+                              roundLength: selectedGameMode == GameMode.normal
+                                  ? GameMode.normalRound3Duration
+                                  : GameMode.quickRound3Duration,
+                            ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 5),
-                      AppRoundRow(
-                        roundName: localizations.normalnaRunda,
-                        roundLength: selectedGameMode == GameMode.normal
-                            ? GameMode.normalRound1And2Duration
-                            : GameMode.quickRound1And2Duration,
-                      ),
-                      AppRoundRow(
-                        roundName: localizations.jednaRecRunda,
-                        roundLength: selectedGameMode == GameMode.normal
-                            ? GameMode.normalRound1And2Duration
-                            : GameMode.quickRound1And2Duration,
-                      ),
-                      AppRoundRow(
-                        roundName: localizations.pantomimaRunda,
-                        roundLength: selectedGameMode == GameMode.normal
-                            ? GameMode.normalRound3Duration
-                            : GameMode.quickRound3Duration,
-                      ),
-                      const Divider(),
+                      const SizedBox(height: 13),
                       if (_is1v1Mode)
                         _OneVsOneForm(formKey: _oneVsOneFormKey)
                       else
-                        ListView.builder(
+                        ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           padding: EdgeInsets.zero,
                           itemCount: ref.watch(playerNumberProvider) ~/ 2,
+                          separatorBuilder: (_, __) =>
+                              const SizedBox(height: 13),
                           itemBuilder: (context, index) =>
                               TeamCard(formKeys[index], index, 5),
                         ),
@@ -405,23 +406,36 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(bottom: 35.0),
-                child: AppButtonRow(
-                  leftButtonText: AppLocalizations.of(context)!.nazad,
-                  rightButtonText: AppLocalizations.of(context)!.dalje,
-                  leftButtonCb: () {
-                    Navigator.pop(context);
-                  },
-                  rightButtonCb: () {
-                    if (_is1v1Mode) {
-                      _start1v1Game();
-                    } else {
-                      validateForms(context, ref, formKeys, box, teamId);
-                    }
-                  },
+                padding: const EdgeInsets.only(top: 11),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 10,
+                      child: NaGhostButton(
+                        label: AppLocalizations.of(context)!.nazad,
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    ),
+                    const SizedBox(width: 11),
+                    Expanded(
+                      flex: 14,
+                      child: NaButton(
+                        label: AppLocalizations.of(context)!.dalje,
+                        onPressed: () {
+                          if (_is1v1Mode) {
+                            _start1v1Game();
+                          } else {
+                            validateForms(context, ref, formKeys, box, teamId);
+                          }
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -497,27 +511,49 @@ class _OneVsOneButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        height: 60,
-        width: 60,
+        duration: const Duration(milliseconds: 250),
+        padding: const EdgeInsets.symmetric(vertical: 11),
         decoration: BoxDecoration(
-          border: Border.all(color: AppColors.englishVioletLighter, width: 1.5),
-          color: isSelected ? AppColors.englishVioletLighter : Colors.transparent,
-          borderRadius: BorderRadius.circular(13),
+          color: isSelected
+              ? AppColors.orange
+              : Colors.white.withValues(alpha: 0.05),
+          borderRadius: BorderRadius.circular(16),
+          border: isSelected
+              ? null
+              : Border.all(
+                  color: Colors.white.withValues(alpha: 0.1),
+                  width: 1.5,
+                ),
+          boxShadow: isSelected
+              ? [
+                  BoxShadow(
+                    color: AppColors.orange.withValues(alpha: 0.5),
+                    blurRadius: 22,
+                  ),
+                ]
+              : null,
         ),
-        child: Center(
-          child: AnimatedDefaultTextStyle(
-            duration: const Duration(milliseconds: 300),
-            style: TextStyle(
-              fontFamily: 'Geologica',
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: isSelected
-                  ? AppColors.englishVioletDarker
-                  : AppColors.white,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              AppLocalizations.of(context)!.jedanNaJedan,
+              style: NeonText.display(
+                size: 22,
+                height: 1,
+                color: isSelected ? AppColors.inkOnFill : AppColors.ink,
+              ),
             ),
-            child: Text(AppLocalizations.of(context)!.jedanNaJedan),
-          ),
+            const SizedBox(height: 2),
+            Text(
+              AppLocalizations.of(context)!.igraca,
+              style: NeonText.body(
+                size: 10,
+                weight: FontWeight.w700,
+                color: isSelected ? AppColors.inkOnFill : AppColors.sub,
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -535,60 +571,73 @@ class _OneVsOneForm extends StatelessWidget {
 
     return FormBuilder(
       key: formKey,
-      child: Card(
-        elevation: 5,
-        child: Container(
-          decoration: AppStyles.containerGradientViolet.copyWith(
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: AppColors.englishVioletMoreLighter,
-              width: 3,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: 0.04),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: AppColors.violet.withValues(alpha: 0.33),
+            width: 1.5,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.violet.withValues(alpha: 0.13),
+              blurRadius: 18,
             ),
-          ),
-          padding: const EdgeInsets.all(20),
-          child: Column(
-            children: [
-              FormBuilderTextField(
-                name: 'player1',
-                style: AppStyles.text25WhiteBold,
-                decoration: AppStyles.errorInputDecoration.copyWith(
-                  label: Text(
-                    localizations.imeIgraca1,
-                    style: const TextStyle(
-                      color: AppColors.englishVioletLighter,
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return localizations.unesiteImeIgraca;
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              FormBuilderTextField(
-                name: 'player2',
-                style: AppStyles.text25WhiteBold,
-                decoration: AppStyles.errorInputDecoration.copyWith(
-                  label: Text(
-                    localizations.imeIgraca2,
-                    style: const TextStyle(
-                      color: AppColors.englishVioletLighter,
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return localizations.unesiteImeIgraca;
-                  }
-                  return null;
-                },
-              ),
-            ],
-          ),
+          ],
+        ),
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            _oneVsOneField(
+              'player1',
+              localizations.imeIgraca1,
+              localizations.unesiteImeIgraca,
+            ),
+            const SizedBox(height: 12),
+            _oneVsOneField(
+              'player2',
+              localizations.imeIgraca2,
+              localizations.unesiteImeIgraca,
+            ),
+          ],
         ),
       ),
+    );
+  }
+
+  Widget _oneVsOneField(String name, String label, String errorText) {
+    return FormBuilderTextField(
+      name: name,
+      style: NeonText.display(size: 18, color: AppColors.ink),
+      cursorColor: AppColors.violet,
+      decoration: InputDecoration(
+        isDense: true,
+        filled: true,
+        fillColor: Colors.black.withValues(alpha: 0.25),
+        hintText: label,
+        hintStyle: NeonText.body(
+          size: 13,
+          weight: FontWeight.w600,
+          color: AppColors.sub,
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+        errorStyle: NeonText.body(size: 10, color: AppColors.magenta),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: AppColors.violet, width: 1.5),
+        ),
+      ),
+      validator: (value) =>
+          (value == null || value.isEmpty) ? errorText : null,
     );
   }
 }

@@ -1,44 +1,63 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_colors.dart';
+import '../../../constants/app_styles.dart';
 
-class AppButtonEmpty extends StatelessWidget {
-  const AppButtonEmpty(
-      {required this.borderColor,
-      required this.textColor,
-      required this.buttonText,
-      required this.onPressed,
-      this.textSize,
-      super.key});
+/// Ghost button (legacy API kept) — outlined accent label on a faint fill.
+/// Brightens its background on press.
+class AppButtonEmpty extends StatefulWidget {
+  const AppButtonEmpty({
+    required this.borderColor,
+    required this.textColor,
+    required this.buttonText,
+    required this.onPressed,
+    this.textSize = 16,
+    super.key,
+  });
 
   final Color? borderColor;
-
   final Color? textColor;
   final void Function()? onPressed;
   final String? buttonText;
-  final double? textSize;
+  final double textSize;
+
+  @override
+  State<AppButtonEmpty> createState() => _AppButtonEmptyState();
+}
+
+class _AppButtonEmptyState extends State<AppButtonEmpty> {
+  bool _pressed = false;
+
+  void _setPressed(bool v) {
+    if (_pressed != v) setState(() => _pressed = v);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.06,
-      child: TextButton(
-        style: ButtonStyle(
-          shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              side: BorderSide(color: borderColor ?? AppColors.white, width: 3),
-              borderRadius: BorderRadius.circular(13),
-            ),
-          ),
+    final accent = widget.borderColor ?? AppColors.ink;
+    return GestureDetector(
+      onTapDown: (_) => _setPressed(true),
+      onTapUp: (_) => _setPressed(false),
+      onTapCancel: () => _setPressed(false),
+      onTap: widget.onPressed,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 80),
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
+        decoration: BoxDecoration(
+          color: Colors.white.withValues(alpha: _pressed ? 0.08 : 0.04),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(color: accent.withValues(alpha: 0.33), width: 1.5),
         ),
-        onPressed: onPressed,
         child: Text(
-          buttonText ?? '',
-          style: TextStyle(
-              color: textColor ?? AppColors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: textSize ?? 22),
+          widget.buttonText ?? '',
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          softWrap: false,
+          style: NeonText.display(
+            size: widget.textSize,
+            color: widget.textColor ?? accent,
+          ),
         ),
       ),
     );

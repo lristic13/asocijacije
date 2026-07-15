@@ -8,4 +8,5 @@ class AppRoutes {
   static const String wordCollectionPage = '/wordCollection';
   static const String wordSourcePage = '/wordSource';
   static const String oneVsOneResultsPage = '/oneVsOneResults';
+  static const String paywallPage = '/paywall';
 }

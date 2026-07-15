@@ -1,5 +1,6 @@
 import 'package:asocijacije_nove/constants/app_colors.dart';
 import 'package:asocijacije_nove/constants/app_routes.dart';
+import 'package:asocijacije_nove/constants/feature_flags.dart';
 import 'package:asocijacije_nove/constants/app_styles.dart';
 import 'package:asocijacije_nove/l10n/app_localizations.dart';
 import 'package:asocijacije_nove/models/game_mode.dart';
@@ -7,6 +8,8 @@ import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:asocijacije_nove/services/words_loader.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
@@ -21,21 +24,22 @@ class WordSourcePage extends ConsumerWidget {
     final localizations = AppLocalizations.of(context)!;
 
     return Scaffold(
-      backgroundColor: AppColors.englishVioletDarker,
-      body: Container(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            AppPageHeader(
-              title: localizations.izaberiReci,
-            ),
-            const AppSeparator(color: AppColors.coral),
+      body: NeonBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AppPageHeader(
+                  title: localizations.izaberiReci,
+                ),
+                const AppSeparator(color: AppColors.orange),
             const SizedBox(height: 30),
 
             Text(
               localizations.kakoZeliteDaIgrate,
-              style: AppStyles.text20WhiteBold,
+              style: NeonText.display(size: 20, color: AppColors.ink),
             ),
             const SizedBox(height: 20),
 
@@ -49,11 +53,12 @@ class WordSourcePage extends ConsumerWidget {
 
             const SizedBox(height: 16),
 
-            // Option 2: Custom Words
+            // Option 2: Custom Words (pro unlock)
             _WordSourceOption(
               icon: Icons.qr_code,
               title: localizations.koristiSvojeReci,
               subtitle: localizations.svakiIgracDodaje,
+              locked: FeatureFlags.paywallEnabled && !ref.watch(proProvider),
               onTap: () => _startWithCustomWords(context, ref),
             ),
 
@@ -62,25 +67,16 @@ class WordSourcePage extends ConsumerWidget {
             // Back button
             Padding(
               padding: const EdgeInsets.only(bottom: 35.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () => Navigator.pop(context),
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColors.white, width: 2),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    localizations.nazad,
-                    style: AppStyles.text20WhiteBold,
-                  ),
-                ),
+              child: AppButtonEmpty(
+                buttonText: localizations.nazad,
+                borderColor: AppColors.ink,
+                textColor: AppColors.ink,
+                onPressed: () => Navigator.pop(context),
               ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -107,6 +103,14 @@ class WordSourcePage extends ConsumerWidget {
   }
 
   Future<void> _startWithCustomWords(BuildContext context, WidgetRef ref) async {
+    if (FeatureFlags.paywallEnabled && !ref.read(proProvider)) {
+      final unlocked = await Navigator.pushNamed(
+        context,
+        AppRoutes.paywallPage,
+      );
+      if (unlocked != true || !context.mounted) return;
+    }
+
     final result = await Navigator.pushNamed(
       context,
       AppRoutes.wordCollectionPage,
@@ -143,41 +147,49 @@ class _WordSourceOption extends StatelessWidget {
   final String title;
   final String subtitle;
   final VoidCallback onTap;
+  final bool locked;
 
   const _WordSourceOption({
     required this.icon,
     required this.title,
     required this.subtitle,
     required this.onTap,
+    this.locked = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(16),
+      borderRadius: BorderRadius.circular(18),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: AppColors.englishVioletLighter.withValues(alpha: 0.3),
-          borderRadius: BorderRadius.circular(16),
+          color: Colors.white.withValues(alpha: 0.04),
+          borderRadius: BorderRadius.circular(18),
           border: Border.all(
-            color: AppColors.englishVioletMoreLighter,
-            width: 2,
+            color: AppColors.violet.withValues(alpha: 0.33),
+            width: 1.5,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.violet.withValues(alpha: 0.13),
+              blurRadius: 18,
+            ),
+          ],
         ),
         child: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                color: AppColors.coral.withValues(alpha: 0.2),
+                color: AppColors.orange.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(
                 icon,
-                color: AppColors.coral,
+                color: AppColors.orange,
                 size: 32,
               ),
             ),
@@ -186,15 +198,47 @@ class _WordSourceOption extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    title,
-                    style: AppStyles.text20WhiteBold,
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(
+                          title,
+                          style:
+                              NeonText.display(size: 17, color: AppColors.ink),
+                        ),
+                      ),
+                      if (locked) ...[
+                        const SizedBox(width: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 7,
+                            vertical: 2,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.orange.withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: AppColors.orange),
+                          ),
+                          child: Text(
+                            'PRO',
+                            style: NeonText.body(
+                              size: 10,
+                              weight: FontWeight.w800,
+                              color: AppColors.orange,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
                   ),
                   const SizedBox(height: 4),
                   Text(
                     subtitle,
-                    style: AppStyles.text15WhiteNormal.copyWith(
-                      color: AppColors.englishVioletMoreLighter,
+                    style: NeonText.body(
+                      size: 13,
+                      weight: FontWeight.w600,
+                      color: AppColors.sub,
                     ),
                   ),
                 ],
@@ -202,7 +246,7 @@ class _WordSourceOption extends StatelessWidget {
             ),
             const Icon(
               Icons.arrow_forward_ios,
-              color: AppColors.englishVioletMoreLighter,
+              color: AppColors.sub,
               size: 20,
             ),
           ],

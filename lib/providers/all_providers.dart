@@ -29,3 +29,7 @@ final doublePointsProvider = StateProvider<bool>((ref) => false);
 final customWordsProvider = StateProvider<bool>((ref) => false);
 
 final customWordsListProvider = StateProvider<List<String>>((ref) => []);
+
+/// Whether the lifetime "pro" unlock (custom words) is owned.
+/// Seeded from the Hive cache in main(), kept in sync by PurchaseService.
+final proProvider = StateProvider<bool>((ref) => false);

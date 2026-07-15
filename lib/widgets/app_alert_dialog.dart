@@ -23,45 +23,64 @@ class AppAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
-        color: AppColors.englishVioletDarker,
+        color: AppColors.bg,
+        border: Border(
+          top: BorderSide(
+            color: AppColors.orange.withValues(alpha: 0.4),
+            width: 1.5,
+          ),
+        ),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(title, style: AppStyles.text25WhiteBold),
-            const SizedBox(height: 5),
-            Text(content, style: const TextStyle(color: AppColors.white)),
-            const SizedBox(height: 15),
-            Row(
-              children: [
-                Expanded(
-                  child: AppButtonEmpty(
-                    borderColor: AppColors.white,
-                    textColor: AppColors.white,
-                    buttonText: AppLocalizations.of(context)!.ne,
-                    onPressed: onPressedNo,
-                  ),
+      child: SafeArea(
+        top: false,
+        child: Padding(
+          padding: const EdgeInsets.all(25.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: NeonText.display(size: 24, color: AppColors.ink),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                content,
+                style: NeonText.body(
+                  size: 14,
+                  weight: FontWeight.w500,
+                  color: AppColors.sub,
                 ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: AppButtonFull(
-                    fillColor: AppColors.coral,
-                    textColor: AppColors.englishVioletDarker,
-                    buttonText: AppLocalizations.of(context)!.da,
-                    onPressed: onPressedYes,
+              ),
+              const SizedBox(height: 18),
+              Row(
+                children: [
+                  Expanded(
+                    child: AppButtonEmpty(
+                      borderColor: AppColors.ink,
+                      textColor: AppColors.ink,
+                      buttonText: AppLocalizations.of(context)!.ne,
+                      onPressed: onPressedNo,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: AppButtonFull(
+                      fillColor: AppColors.orange,
+                      textColor: AppColors.inkOnFill,
+                      buttonText: AppLocalizations.of(context)!.da,
+                      onPressed: onPressedYes,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

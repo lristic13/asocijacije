@@ -18,6 +18,9 @@ class WordsState extends ChangeNotifier {
   void refreshWords() {
     usedWords.shuffle();
     wordsToPlay.addAll(usedWords);
+    // Recycle the same pool each round — clear the guessed list so words don't
+    // accumulate and double the pool size every round.
+    usedWords.clear();
     notifyListeners();
   }
 

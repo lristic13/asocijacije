@@ -22,22 +22,36 @@ class AppFinalScore extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              AppLocalizations.of(context)!.krajIgre,
-              style: AppStyles.text50WhiteBold,
+        const Text('🏆', style: TextStyle(fontSize: 56)),
+        const SizedBox(height: 14),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            text: AppLocalizations.of(context)!.krajIgre,
+            style: NeonText.display(
+              size: 44,
+              color: AppColors.ink,
+              shadows: NeonText.glow(AppColors.orange, blur: 28, opacity: 0.55),
             ),
-            const Text('.', style: AppStyles.text50CoralBold),
-          ],
+            children: [
+              TextSpan(
+                text: '.',
+                style: NeonText.display(size: 44, color: AppColors.orange),
+              ),
+            ],
+          ),
         ),
         Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
             child: Text(
               '${AppLocalizations.of(context)!.pobednikJeTim} ${Boxes.getWinnerTeam(box)?.teamName ?? '?'}!',
-              style: AppStyles.text25CoralBold,
+              textAlign: TextAlign.center,
+              style: NeonText.display(
+                size: 22,
+                color: AppColors.cyan,
+                shadows: NeonText.glow(AppColors.cyan, blur: 22, opacity: 0.5),
+              ),
             ),
           ),
         ),
@@ -46,8 +60,8 @@ class AppFinalScore extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.only(bottom: 25.0),
           child: AppButtonFull(
-            fillColor: AppColors.coral,
-            textColor: AppColors.englishViolet,
+            fillColor: AppColors.orange,
+            textColor: AppColors.inkOnFill,
             buttonText: AppLocalizations.of(context)!.novaIgra,
             onPressed: () {
               ref

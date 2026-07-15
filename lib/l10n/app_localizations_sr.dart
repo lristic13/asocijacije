@@ -150,6 +150,9 @@ class AppLocalizationsSr extends AppLocalizations {
   String get dvaPoena => '2 poena';
 
   @override
+  String get objasni => 'Objasni';
+
+  @override
   String get dupliPoeniObjasnjenje =>
       'Reči pogođene u poslednjih nekoliko sekundi runde donose 2 poena umesto 1!\n\nNormalan mod:\n• Normalna i Jedna reč runda: poslednjih 10 sekundi\n• Pantomima runda: poslednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna reč runda: poslednjih 7 sekundi\n• Pantomima runda: poslednjih 10 sekundi';
 
@@ -262,4 +265,44 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get igrajPonovo => 'Igraj ponovo';
+
+  @override
+  String get proNaslov => 'Asocijacije Pro';
+
+  @override
+  String get proPodnaslov => 'Jednokratna kupovina — tvoje zauvek';
+
+  @override
+  String get proPogodnostSvojeReci => 'Igraj sa svojim rečima';
+
+  @override
+  String get proPogodnostQr =>
+      'Svako dodaje reči sa svog telefona preko QR koda';
+
+  @override
+  String get proPogodnostBuduce => 'Sve buduće Pro opcije uključene';
+
+  @override
+  String otkljucajZa(String price) {
+    return 'Otključaj za $price';
+  }
+
+  @override
+  String get otkljucaj => 'Otključaj';
+
+  @override
+  String get vratiKupovinu => 'Vrati kupovinu';
+
+  @override
+  String get kupovinaVracena => 'Kupovina je vraćena!';
+
+  @override
+  String get kupovinaNijeNadjena => 'Prethodna kupovina nije pronađena.';
+
+  @override
+  String get kupovinaNeuspesna => 'Kupovina nije uspela. Pokušaj ponovo.';
+
+  @override
+  String get prodavnicaNijeDostupna =>
+      'Prodavnica trenutno nije dostupna. Pokušaj kasnije.';
 }

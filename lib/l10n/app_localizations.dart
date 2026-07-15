@@ -362,6 +362,12 @@ abstract class AppLocalizations {
   /// **'2 poena'**
   String get dvaPoena;
 
+  /// No description provided for @objasni.
+  ///
+  /// In sr, this message translates to:
+  /// **'Objasni'**
+  String get objasni;
+
   /// No description provided for @dupliPoeniObjasnjenje.
   ///
   /// In sr, this message translates to:
@@ -559,6 +565,78 @@ abstract class AppLocalizations {
   /// In sr, this message translates to:
   /// **'Igraj ponovo'**
   String get igrajPonovo;
+
+  /// No description provided for @proNaslov.
+  ///
+  /// In sr, this message translates to:
+  /// **'Asocijacije Pro'**
+  String get proNaslov;
+
+  /// No description provided for @proPodnaslov.
+  ///
+  /// In sr, this message translates to:
+  /// **'Jednokratna kupovina — tvoje zauvek'**
+  String get proPodnaslov;
+
+  /// No description provided for @proPogodnostSvojeReci.
+  ///
+  /// In sr, this message translates to:
+  /// **'Igraj sa svojim rečima'**
+  String get proPogodnostSvojeReci;
+
+  /// No description provided for @proPogodnostQr.
+  ///
+  /// In sr, this message translates to:
+  /// **'Svako dodaje reči sa svog telefona preko QR koda'**
+  String get proPogodnostQr;
+
+  /// No description provided for @proPogodnostBuduce.
+  ///
+  /// In sr, this message translates to:
+  /// **'Sve buduće Pro opcije uključene'**
+  String get proPogodnostBuduce;
+
+  /// No description provided for @otkljucajZa.
+  ///
+  /// In sr, this message translates to:
+  /// **'Otključaj za {price}'**
+  String otkljucajZa(String price);
+
+  /// No description provided for @otkljucaj.
+  ///
+  /// In sr, this message translates to:
+  /// **'Otključaj'**
+  String get otkljucaj;
+
+  /// No description provided for @vratiKupovinu.
+  ///
+  /// In sr, this message translates to:
+  /// **'Vrati kupovinu'**
+  String get vratiKupovinu;
+
+  /// No description provided for @kupovinaVracena.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kupovina je vraćena!'**
+  String get kupovinaVracena;
+
+  /// No description provided for @kupovinaNijeNadjena.
+  ///
+  /// In sr, this message translates to:
+  /// **'Prethodna kupovina nije pronađena.'**
+  String get kupovinaNijeNadjena;
+
+  /// No description provided for @kupovinaNeuspesna.
+  ///
+  /// In sr, this message translates to:
+  /// **'Kupovina nije uspela. Pokušaj ponovo.'**
+  String get kupovinaNeuspesna;
+
+  /// No description provided for @prodavnicaNijeDostupna.
+  ///
+  /// In sr, this message translates to:
+  /// **'Prodavnica trenutno nije dostupna. Pokušaj kasnije.'**
+  String get prodavnicaNijeDostupna;
 }
 
 class _AppLocalizationsDelegate

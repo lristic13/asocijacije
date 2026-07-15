@@ -6,6 +6,9 @@ import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:asocijacije_nove/services/word_collection_service.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
@@ -92,47 +95,57 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
 
     if (_isLoading) {
       return const Scaffold(
-        backgroundColor: AppColors.englishVioletDarker,
-        body: Center(child: CircularProgressIndicator(color: AppColors.coral)),
+        body: NeonBackground(
+          child: Center(
+            child: CircularProgressIndicator(color: AppColors.orange),
+          ),
+        ),
       );
     }
 
     if (_error != null) {
       return Scaffold(
-        backgroundColor: AppColors.englishVioletDarker,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                localizations.greskaKreiranjaSesije,
-                style: AppStyles.text20WhiteBold,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(localizations.nazad),
-              ),
-            ],
+        body: NeonBackground(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  localizations.greskaKreiranjaSesije,
+                  style: NeonText.display(size: 20, color: AppColors.ink),
+                ),
+                const SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: AppButtonEmpty(
+                    buttonText: localizations.nazad,
+                    borderColor: AppColors.ink,
+                    textColor: AppColors.ink,
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
     }
 
     return Scaffold(
-      backgroundColor: AppColors.englishVioletDarker,
-      body: Container(
-        padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AppPageHeader(title: localizations.prikupiReci),
-                    const AppSeparator(color: AppColors.coral),
+      body: NeonBackground(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8, left: 24, right: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AppPageHeader(title: localizations.prikupiReci),
+                        const AppSeparator(color: AppColors.orange),
                     const SizedBox(height: 20),
 
                     // QR Code Card
@@ -154,8 +167,10 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                             const SizedBox(height: 16),
                             Text(
                               localizations.skenirajDaDodas,
-                              style: AppStyles.text15WhiteNormal.copyWith(
-                                color: AppColors.englishVioletDarker,
+                              style: NeonText.body(
+                                size: 13,
+                                weight: FontWeight.w600,
+                                color: AppColors.bg,
                               ),
                             ),
                           ],
@@ -179,11 +194,14 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                         },
                         icon: const Icon(
                           Icons.open_in_new,
-                          color: AppColors.coral,
+                          color: AppColors.orange,
                         ),
                         label: Text(
                           localizations.dodajMojeReci,
-                          style: AppStyles.text15CoralBold,
+                          style: NeonText.display(
+                            size: 15,
+                            color: AppColors.orange,
+                          ),
                         ),
                       ),
                     ),
@@ -209,15 +227,19 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                               children: [
                                 Text(
                                   localizations.dodatoReci,
-                                  style: AppStyles.text20WhiteBold,
+                                  style: NeonText.display(
+                                    size: 20,
+                                    color: AppColors.ink,
+                                  ),
                                 ),
                                 Text(
                                   '${state.totalWords} / ${state.targetWords}',
-                                  style: state.isReady
-                                      ? AppStyles.text20CoralBold.copyWith(
-                                          color: Colors.green,
-                                        )
-                                      : AppStyles.text20CoralBold,
+                                  style: NeonText.display(
+                                    size: 20,
+                                    color: state.isReady
+                                        ? AppColors.cyan
+                                        : AppColors.orange,
+                                  ),
                                 ),
                               ],
                             ),
@@ -230,10 +252,10 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                 value: progress,
                                 minHeight: 12,
                                 backgroundColor:
-                                    AppColors.englishVioletMoreLighter,
+                                    Colors.white.withValues(alpha: 0.08),
                                 color: state.isReady
-                                    ? Colors.green
-                                    : AppColors.coral,
+                                    ? AppColors.cyan
+                                    : AppColors.orange,
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -243,7 +265,11 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                               localizations.language == 'Srpski'
                                   ? '${state.playersReady} od ${state.playerCount} igrača spremno'
                                   : '${state.playersReady} of ${state.playerCount} players ready',
-                              style: AppStyles.text15WhiteNormal,
+                              style: NeonText.body(
+                                size: 13,
+                                weight: FontWeight.w600,
+                                color: AppColors.sub,
+                              ),
                             ),
 
                             const SizedBox(height: 24),
@@ -251,7 +277,10 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                             // Player List
                             Text(
                               localizations.igraci,
-                              style: AppStyles.text20WhiteBold,
+                              style: NeonText.display(
+                                size: 20,
+                                color: AppColors.ink,
+                              ),
                             ),
                             const SizedBox(height: 12),
 
@@ -272,14 +301,13 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                   vertical: 12,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.englishVioletLighter
-                                      .withValues(alpha: 0.3),
+                                  color: Colors.white.withValues(alpha: 0.04),
                                   borderRadius: BorderRadius.circular(12),
                                   border: Border.all(
                                     color: isComplete
-                                        ? Colors.green
-                                        : AppColors.englishVioletMoreLighter,
-                                    width: 2,
+                                        ? AppColors.cyan.withValues(alpha: 0.5)
+                                        : Colors.white.withValues(alpha: 0.1),
+                                    width: 1.5,
                                   ),
                                 ),
                                 child: Row(
@@ -287,7 +315,7 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                     if (isComplete)
                                       const Icon(
                                         Icons.check_circle,
-                                        color: Colors.green,
+                                        color: AppColors.cyan,
                                       )
                                     else
                                       Lottie.asset(
@@ -300,18 +328,23 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                       child: Text(
                                         submission?.playerName ??
                                             '${localizations.igrac} ${index + 1}',
-                                        style: isComplete
-                                            ? AppStyles.text15WhiteBold
-                                            : AppStyles.text15WhiteNormal,
+                                        style: NeonText.body(
+                                          size: 15,
+                                          weight: isComplete
+                                              ? FontWeight.w700
+                                              : FontWeight.w600,
+                                          color: AppColors.ink,
+                                        ),
                                       ),
                                     ),
                                     Text(
                                       '$wordCount / 8',
-                                      style: isComplete
-                                          ? AppStyles.text15WhiteBold.copyWith(
-                                              color: Colors.green,
-                                            )
-                                          : AppStyles.text15CoralBold,
+                                      style: NeonText.display(
+                                        size: 15,
+                                        color: isComplete
+                                            ? AppColors.cyan
+                                            : AppColors.orange,
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -321,30 +354,36 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                             const SizedBox(height: 16),
 
                             // Start Game Button
-                            SizedBox(
-                              width: double.infinity,
-                              height: 56,
-                              child: ElevatedButton(
-                                onPressed: state.isReady
-                                    ? () => _startGame(state)
-                                    : null,
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: state.isReady
-                                      ? Colors.green
-                                      : Colors.grey,
-                                  disabledBackgroundColor: Colors.grey.shade700,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
+                            if (state.isReady)
+                              AppButtonFull(
+                                buttonText: localizations.pocniIgruBtn,
+                                fillColor: AppColors.cyan,
+                                textColor: AppColors.inkOnFill,
+                                onPressed: () => _startGame(state),
+                              )
+                            else
+                              Container(
+                                width: double.infinity,
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 16,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.white.withValues(alpha: 0.04),
+                                  borderRadius: BorderRadius.circular(20),
+                                  border: Border.all(
+                                    color: Colors.white.withValues(alpha: 0.1),
+                                    width: 1.5,
                                   ),
                                 ),
                                 child: Text(
-                                  state.isReady
-                                      ? localizations.pocniIgruBtn
-                                      : localizations.cekanjeNaReci,
-                                  style: AppStyles.text20WhiteBold,
+                                  localizations.cekanjeNaReci,
+                                  textAlign: TextAlign.center,
+                                  style: NeonText.display(
+                                    size: 20,
+                                    color: AppColors.sub,
+                                  ),
                                 ),
                               ),
-                            ),
 
                             if (!state.isReady) ...[
                               const SizedBox(height: 8),
@@ -353,8 +392,10 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
                                   localizations.language == 'Srpski'
                                       ? 'Potrebno još ${state.targetWords - state.totalWords} reči'
                                       : 'Need ${state.targetWords - state.totalWords} more words',
-                                  style: AppStyles.text15WhiteNormal.copyWith(
-                                    color: AppColors.englishVioletMoreLighter,
+                                  style: NeonText.body(
+                                    size: 13,
+                                    weight: FontWeight.w600,
+                                    color: AppColors.sub,
                                   ),
                                 ),
                               ),
@@ -371,25 +412,16 @@ class _WordCollectionPageState extends ConsumerState<WordCollectionPage> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 35.0),
-              child: SizedBox(
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: _cancelSession,
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: AppColors.white, width: 2),
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: Text(
-                    localizations.nazad,
-                    style: AppStyles.text20WhiteBold,
-                  ),
-                ),
+              child: AppButtonEmpty(
+                buttonText: localizations.nazad,
+                borderColor: AppColors.ink,
+                textColor: AppColors.ink,
+                onPressed: _cancelSession,
               ),
             ),
-          ],
+              ],
+            ),
+          ),
         ),
       ),
     );

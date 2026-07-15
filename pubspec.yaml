@@ -4,7 +4,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 4.1.0+25
+version: 5.0.0+27
 
 environment:
   sdk: ^3.8.1
@@ -32,7 +32,7 @@ dependencies:
   flutter_svg: ^2.0.9
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  in_app_update: ^4.1.4
+  upgrader: ^11.3.0
   just_audio: ^0.9.45
   lottie: ^3.1.0
   package_info_plus: ^8.0.0
@@ -41,6 +41,8 @@ dependencies:
   riverpod: ^2.3.6
   url_launcher: ^6.2.1
   uuid: ^4.0.0
+  google_fonts: ^8.1.0
+  purchases_flutter: ^10.4.1
 
 flutter_native_splash:
   color: "#17113D"

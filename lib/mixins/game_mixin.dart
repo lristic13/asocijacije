@@ -18,11 +18,12 @@ mixin GameMixin {
 
     if (currentState.teamPlaying == ref.read(playerNumberProvider) / 2) {
       if (currentState.playerExplaining == 2) {
+        // Only rotate here — the round advance is owned solely by
+        // [allWordsGuessed] (triggered from the scoreboard when the pool is
+        // empty). Incrementing here too double-counted the round whenever the
+        // pool happened to empty on the last team's Player 2, skipping a round.
         final newState = currentState.copyWith(
           playerExplaining: 1,
-          roundInProgress: ref.read(wordsProvider).wordsToPlay.isEmpty
-              ? currentState.roundInProgress + 1
-              : currentState.roundInProgress,
           teamPlaying: 1,
         );
         ref.read(gameAdminProvider.notifier).update((state) => newState);

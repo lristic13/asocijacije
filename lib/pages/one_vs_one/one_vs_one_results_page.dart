@@ -5,7 +5,9 @@ import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:asocijacije_nove/services/navigation_service.dart';
 import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_separator.dart';
+import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
 import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
@@ -21,22 +23,22 @@ class OneVsOneResultsPage extends ConsumerWidget {
     final oneVsOne = ref.watch(oneVsOneProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.englishVioletDarker,
-      body: PopScope(
-        canPop: false,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            bottom: 20,
-            left: 20,
-            right: 20,
-            top: 40,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 20),
-              AppPageHeader(title: localizations.krajIgre),
-              const AppSeparator(color: AppColors.coral),
+      body: NeonBackground(
+        child: SafeArea(
+          child: PopScope(
+            canPop: false,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                bottom: 18,
+                left: 24,
+                right: 24,
+                top: 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  AppPageHeader(title: localizations.krajIgre),
+                  const AppSeparator(color: AppColors.orange),
               const Spacer(),
 
               // Winner announcement
@@ -45,7 +47,7 @@ class OneVsOneResultsPage extends ConsumerWidget {
                   children: [
                     Icon(
                       oneVsOne.isTie ? Icons.handshake : Icons.emoji_events,
-                      color: AppColors.coral,
+                      color: AppColors.orange,
                       size: 80,
                     ),
                     const SizedBox(height: 16),
@@ -53,7 +55,15 @@ class OneVsOneResultsPage extends ConsumerWidget {
                       oneVsOne.isTie
                           ? localizations.nereseno
                           : localizations.pobednik(oneVsOne.winnerName),
-                      style: AppStyles.text35WhiteBold,
+                      style: NeonText.display(
+                        size: 32,
+                        color: AppColors.ink,
+                        shadows: NeonText.glow(
+                          AppColors.orange,
+                          blur: 24,
+                          opacity: 0.5,
+                        ),
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ],
@@ -83,24 +93,23 @@ class OneVsOneResultsPage extends ConsumerWidget {
 
               // Action buttons
               Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
+                padding: const EdgeInsets.only(bottom: 12.0),
                 child: AppButtonFull(
                   buttonText: localizations.igrajPonovo,
-                  fillColor: AppColors.coral,
-                  textColor: AppColors.englishVioletDarker,
+                  fillColor: AppColors.orange,
+                  textColor: AppColors.inkOnFill,
                   onPressed: () => _playAgain(context, ref),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 25.0),
-                child: AppButtonFull(
-                  buttonText: localizations.novaIgra,
-                  fillColor: AppColors.englishVioletLighter,
-                  textColor: AppColors.white,
-                  onPressed: () => _goHome(ref),
-                ),
+              AppButtonEmpty(
+                buttonText: localizations.novaIgra,
+                borderColor: AppColors.cyan,
+                textColor: AppColors.cyan,
+                onPressed: () => _goHome(ref),
               ),
-            ],
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -159,45 +168,47 @@ class _PlayerResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: isWinner ? AppColors.coral : AppColors.englishVioletLighter,
-            width: isWinner ? 4 : 2,
-          ),
-          borderRadius: BorderRadius.circular(12),
-          gradient: const LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [AppColors.englishVioletDarker, AppColors.englishViolet],
-          ),
+    final color = isWinner ? AppColors.orange : AppColors.violet;
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.04),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: isWinner ? color : Colors.white.withValues(alpha: 0.1),
+          width: 1.5,
         ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20),
-          child: Row(
-            children: [
-              if (isWinner)
-                const Padding(
-                  padding: EdgeInsets.only(right: 12.0),
-                  child: Icon(Icons.star, color: AppColors.coral, size: 32),
-                ),
-              Expanded(
-                child: Text(
-                  playerName,
-                  style: AppStyles.text30WhiteBold,
-                  overflow: TextOverflow.ellipsis,
-                ),
+        boxShadow: isWinner
+            ? [BoxShadow(color: color.withValues(alpha: 0.2), blurRadius: 26)]
+            : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 18),
+        child: Row(
+          children: [
+            if (isWinner)
+              const Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Icon(Icons.star, color: AppColors.orange, size: 28),
               ),
-              Text(
-                '$score',
-                style: isWinner
-                    ? AppStyles.text50CoralBold
-                    : AppStyles.text45WhiteBold,
+            Expanded(
+              child: Text(
+                playerName,
+                style: NeonText.display(size: 22, color: AppColors.ink),
+                overflow: TextOverflow.ellipsis,
               ),
-            ],
-          ),
+            ),
+            Text(
+              '$score',
+              style: NeonText.display(
+                size: 44,
+                height: 1,
+                color: isWinner ? AppColors.orange : AppColors.ink,
+                shadows: isWinner
+                    ? NeonText.glow(AppColors.orange, blur: 20, opacity: 0.5)
+                    : null,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -44,75 +44,93 @@ class AppCardsBuilder extends ConsumerWidget with GameMixin {
                       horizontalOffsetPercentage,
                       verticalOffsetPercentage,
                     ) => Center(
-                      child: Card(
-                        color: AppColors.englishVioletLighter,
-                        elevation: 10,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(13),
-                            color: AppColors.englishVioletLighter,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          gradient: const LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [AppColors.cardLight, AppColors.card],
                           ),
-                          height: MediaQuery.of(context).size.height * 0.5,
-                          width: MediaQuery.of(context).size.width * 0.7,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Stack(
-                              children: [
-                                if (!shouldBlur &&
-                                    isInDoublePointsZone(
-                                      ref,
-                                      timerController.getTime() ?? '0',
-                                    ))
-                                  Align(
-                                    alignment: Alignment.topRight,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: AppColors.englishVioletDarker,
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 15.0,
-                                          vertical: 4,
+                          border: Border.all(
+                            color: AppColors.violet.withValues(alpha: 0.4),
+                            width: 1.5,
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.violet.withValues(alpha: 0.3),
+                              blurRadius: 36,
+                            ),
+                          ],
+                        ),
+                        height: MediaQuery.of(context).size.height * 0.5,
+                        width: MediaQuery.of(context).size.width * 0.78,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 24,
+                          ),
+                          child: Stack(
+                            children: [
+                              if (!shouldBlur &&
+                                  isInDoublePointsZone(
+                                    ref,
+                                    timerController.getTime() ?? '0',
+                                  ))
+                                Align(
+                                  alignment: Alignment.topRight,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.cyan,
+                                      borderRadius: BorderRadius.circular(8),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: AppColors.cyan
+                                              .withValues(alpha: 0.5),
+                                          blurRadius: 16,
                                         ),
-                                        child: Text(
-                                          AppLocalizations.of(
-                                            context,
-                                          )!.dvaPoena,
-                                          style: AppStyles.text15WhiteBold,
+                                      ],
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12.0,
+                                        vertical: 4,
+                                      ),
+                                      child: Text(
+                                        AppLocalizations.of(context)!.dvaPoena,
+                                        style: NeonText.body(
+                                          size: 13,
+                                          weight: FontWeight.w800,
+                                          color: AppColors.inkOnFill,
                                         ),
                                       ),
                                     ),
                                   ),
-
-                                shouldBlur
-                                    ? ImageFiltered(
-                                        imageFilter: ImageFilter.blur(
-                                          sigmaX: 6,
-                                          sigmaY: 6,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            ref
-                                                .watch(wordsProvider)
-                                                .wordsToPlay[0],
-                                            style: AppStyles.text30WhiteBold
-                                                .copyWith(fontSize: 28),
-                                          ),
-                                        ),
-                                      )
-                                    : Center(
-                                        child: Text(
-                                          textAlign: TextAlign.center,
-                                          ref
-                                              .watch(wordsProvider)
-                                              .wordsToPlay[0],
-                                          style: AppStyles.text30WhiteBold
-                                              .copyWith(fontSize: 28),
-                                        ),
+                                ),
+                              Center(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .objasni
+                                          .toUpperCase(),
+                                      style: NeonText.body(
+                                        size: 11,
+                                        weight: FontWeight.w800,
+                                        color: AppColors.violet,
+                                        letterSpacing: 2,
                                       ),
-                              ],
-                            ),
+                                    ),
+                                    const SizedBox(height: 10),
+                                    _word(
+                                      ref.watch(wordsProvider).wordsToPlay[0],
+                                      shouldBlur,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
@@ -122,10 +140,27 @@ class AppCardsBuilder extends ConsumerWidget with GameMixin {
                 child: Text(
                   AppLocalizations.of(context)!.pogodjeneSveReci,
                   textAlign: TextAlign.center,
-                  style: AppStyles.text25CoralBold,
+                  style: NeonText.display(size: 25, color: AppColors.orange),
                 ),
               ),
       ),
+    );
+  }
+
+  Widget _word(String word, bool shouldBlur) {
+    final text = Text(
+      word,
+      textAlign: TextAlign.center,
+      style: NeonText.display(
+        size: 38,
+        color: AppColors.ink,
+        shadows: NeonText.glow(AppColors.ink, blur: 24, opacity: 0.25),
+      ),
+    );
+    if (!shouldBlur) return text;
+    return ImageFiltered(
+      imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      child: text,
     );
   }
 }

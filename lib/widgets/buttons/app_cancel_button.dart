@@ -35,10 +35,9 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
           widget.wordsToPlay.isNotEmpty,
       child: SizedBox(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height * 0.06,
         child: AppButtonEmpty(
-          borderColor: AppColors.white,
-          textColor: AppColors.white,
+          borderColor: AppColors.magenta,
+          textColor: AppColors.magenta,
           buttonText: AppLocalizations.of(context)!.odustani,
           onPressed: () {
             widget.timerController.pause();
@@ -46,6 +45,7 @@ class _AppCancelButtonState extends State<AppCancelButton> with GameMixin {
             showModalBottomSheet(
               isDismissible: false,
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (context) => AppAlertDialog(
                 title: AppLocalizations.of(context)!.odustajete,
                 content: AppLocalizations.of(context)!.odustaniAlertContent,

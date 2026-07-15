@@ -53,21 +53,34 @@ class _AppTimerState extends State<AppTimer> with GameMixin {
     return Expanded(
       flex: 2,
       child: Center(
-        child: CircularCountDownTimer(
-          controller: widget.controllerTimer,
-          autoStart: false,
-          textStyle: AppStyles.text50WhiteBold,
-          strokeWidth: 15,
-          isReverse: true,
-          isReverseAnimation: true,
-          width: 150,
-          height: MediaQuery.of(context).size.height * 0.2,
-          duration: calculateRoundTime(widget.ref),
-          ringColor: AppColors.englishVioletLighter,
-          fillColor: AppColors.coral,
-          textFormat: CountdownTextFormat.S,
-          onChange: _onTimerChanged,
-          onComplete: widget.onTimerComplete,
+        child: Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.orange.withValues(alpha: 0.35),
+                blurRadius: 22,
+              ),
+            ],
+          ),
+          child: CircularCountDownTimer(
+            controller: widget.controllerTimer,
+            autoStart: false,
+            textStyle: NeonText.display(size: 50, color: AppColors.ink),
+            strokeWidth: 11,
+            strokeCap: StrokeCap.round,
+            isReverse: true,
+            isReverseAnimation: true,
+            width: 142,
+            height: 142,
+            duration: calculateRoundTime(widget.ref),
+            ringColor: Colors.white.withValues(alpha: 0.08),
+            fillColor: AppColors.orange,
+            backgroundColor: Colors.transparent,
+            textFormat: CountdownTextFormat.S,
+            onChange: _onTimerChanged,
+            onComplete: widget.onTimerComplete,
+          ),
         ),
       ),
     );

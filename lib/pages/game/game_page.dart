@@ -13,6 +13,7 @@ import 'package:asocijacije_nove/widgets/app_page_header.dart';
 import 'package:asocijacije_nove/widgets/app_points.dart';
 import 'package:asocijacije_nove/widgets/app_timer.dart';
 import 'package:asocijacije_nove/widgets/buttons/app_icon_button.dart';
+import 'package:asocijacije_nove/widgets/neon_background.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
@@ -86,6 +87,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
             showModalBottomSheet(
               isDismissible: false,
               context: context,
+              backgroundColor: Colors.transparent,
               builder: (context) => AppAlertDialog(
                 title: AppLocalizations.of(context)!.izlaz,
                 content: AppLocalizations.of(context)!.daLiSteSigurniIzlaz,
@@ -120,16 +122,17 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
             );
           }
         },
-        child: Container(
-          color: AppColors.englishVioletDarker,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 40, 20, 10),
-            child: _buildGameContent(
-              context,
-              is1v1Mode,
-              playerExplaining,
-              wordsToPlay,
-              usedWords,
+        child: NeonBackground(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(24, 8, 24, 10),
+              child: _buildGameContent(
+                context,
+                is1v1Mode,
+                playerExplaining,
+                wordsToPlay,
+                usedWords,
+              ),
             ),
           ),
         ),
@@ -231,7 +234,7 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
           Center(
             child: Text(
               AppLocalizations.of(context)!.objasnjava(oneVsOne.currentPlayerName),
-              style: AppStyles.text25WhiteBold,
+              style: NeonText.display(size: 19, color: AppColors.ink),
             ),
           ),
           const SizedBox(height: 5),
@@ -243,7 +246,10 @@ class _GamePageConsumerState extends ConsumerState<GamePage> with GameMixin {
     return Column(
       children: [
         Center(
-          child: Text(teamName, style: AppStyles.text25WhiteBold),
+          child: Text(
+            teamName,
+            style: NeonText.display(size: 19, color: AppColors.ink),
+          ),
         ),
         const SizedBox(height: 5),
         AppExplainingRow(

@@ -72,8 +72,8 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
             const SizedBox(width: 10),
             Expanded(
               child: AppButtonFull(
-                fillColor: AppColors.coral,
-                textColor: AppColors.englishVioletDarker,
+                fillColor: AppColors.cyan,
+                textColor: AppColors.inkOnFill,
                 buttonText: AppLocalizations.of(context)!.sledecaRec,
                 onPressed: () async {
                   await HapticFeedback.heavyImpact();
@@ -126,8 +126,8 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
       return Padding(
         padding: const EdgeInsets.only(bottom: 25.0),
         child: AppButtonFull(
-          fillColor: AppColors.englishVioletLighter,
-          textColor: AppColors.white,
+          fillColor: AppColors.orange,
+          textColor: AppColors.inkOnFill,
           buttonText: buttonText,
           onPressed: () {
             widget.timerController.pause();
@@ -139,8 +139,8 @@ class _AppInGameButtonState extends State<AppInGameButton> with GameMixin {
       return Padding(
         padding: const EdgeInsets.only(bottom: 25.0),
         child: AppButtonFull(
-          fillColor: AppColors.englishVioletLighter,
-          textColor: AppColors.englishVioletDarker,
+          fillColor: AppColors.orange,
+          textColor: AppColors.inkOnFill,
           buttonText: AppLocalizations.of(context)!.start,
           onPressed: () {
             if (widget.timerController.isPaused) {

@@ -1,5 +1,50 @@
 import 'package:asocijacije_nove/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+/// Neon Arcade typography helpers.
+///
+/// Display = Fredoka (w600) — headings, numerals, button labels, the word.
+/// Body = Hanken Grotesk (w600/700/800) — labels, captions, small tags.
+class NeonText {
+  static TextStyle display({
+    required double size,
+    Color color = AppColors.ink,
+    FontWeight weight = FontWeight.w600,
+    double? letterSpacing,
+    double? height,
+    List<Shadow>? shadows,
+  }) {
+    return GoogleFonts.fredoka(
+      fontSize: size,
+      fontWeight: weight,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      shadows: shadows,
+    );
+  }
+
+  static TextStyle body({
+    required double size,
+    Color color = AppColors.ink,
+    FontWeight weight = FontWeight.w700,
+    double? letterSpacing,
+    double? height,
+  }) {
+    return GoogleFonts.hankenGrotesk(
+      fontSize: size,
+      fontWeight: weight,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+    );
+  }
+
+  /// Soft colored bloom used on glowing numerals / labels.
+  static List<Shadow> glow(Color color, {double blur = 22, double opacity = 0.5}) =>
+      [Shadow(color: color.withValues(alpha: opacity), blurRadius: blur)];
+}
 
 class AppStyles {
   // Text styles

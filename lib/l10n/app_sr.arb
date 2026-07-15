@@ -43,6 +43,7 @@
     "brzi": "Brzi",
     "dupliPoeni": "Dupli poeni",
     "dvaPoena": "2 poena",
+    "objasni": "Objasni",
     "dupliPoeniObjasnjenje": "Reči pogođene u poslednjih nekoliko sekundi runde donose 2 poena umesto 1!\n\nNormalan mod:\n• Normalna i Jedna reč runda: poslednjih 10 sekundi\n• Pantomima runda: poslednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna reč runda: poslednjih 7 sekundi\n• Pantomima runda: poslednjih 10 sekundi",
     "imeTima": "Ime tima",
     "unesiteImeTima": "Unesite ime tima!",
@@ -106,5 +107,24 @@
     },
     "sledeciIgrac": "Sledeći igrač",
     "jedanNaJedanUput": "Dva igrača se takmiče jedan protiv drugog. Igrači naizmenično objašnjavaju reči dok protivnik pogađa. Pobednik je igrač koji objasni više reči.",
-    "igrajPonovo": "Igraj ponovo"
+    "igrajPonovo": "Igraj ponovo",
+    "proNaslov": "Asocijacije Pro",
+    "proPodnaslov": "Jednokratna kupovina — tvoje zauvek",
+    "proPogodnostSvojeReci": "Igraj sa svojim rečima",
+    "proPogodnostQr": "Svako dodaje reči sa svog telefona preko QR koda",
+    "proPogodnostBuduce": "Sve buduće Pro opcije uključene",
+    "otkljucajZa": "Otključaj za {price}",
+    "@otkljucajZa": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
+    "otkljucaj": "Otključaj",
+    "vratiKupovinu": "Vrati kupovinu",
+    "kupovinaVracena": "Kupovina je vraćena!",
+    "kupovinaNijeNadjena": "Prethodna kupovina nije pronađena.",
+    "kupovinaNeuspesna": "Kupovina nije uspela. Pokušaj ponovo.",
+    "prodavnicaNijeDostupna": "Prodavnica trenutno nije dostupna. Pokušaj kasnije."
 }

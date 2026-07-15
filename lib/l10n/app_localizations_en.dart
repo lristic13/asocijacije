@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dvaPoena => '2 points';
 
   @override
+  String get objasni => 'Explain this';
+
+  @override
   String get dupliPoeniObjasnjenje =>
       'Words guessed in the final seconds of the round earn 2 points instead of 1!\n\nNormal mode:\n• Normal and One-word rounds: last 10 seconds\n• Mime round: last 15 seconds\n\nQuick mode:\n• Normal and One-word rounds: last 7 seconds\n• Mime round: last 10 seconds';
 
@@ -262,4 +265,44 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get igrajPonovo => 'Play again';
+
+  @override
+  String get proNaslov => 'Asocijacije Pro';
+
+  @override
+  String get proPodnaslov => 'One-time purchase — yours forever';
+
+  @override
+  String get proPogodnostSvojeReci => 'Play with your own words';
+
+  @override
+  String get proPogodnostQr =>
+      'Everyone adds words from their phone via QR code';
+
+  @override
+  String get proPogodnostBuduce => 'All future Pro features included';
+
+  @override
+  String otkljucajZa(String price) {
+    return 'Unlock for $price';
+  }
+
+  @override
+  String get otkljucaj => 'Unlock';
+
+  @override
+  String get vratiKupovinu => 'Restore purchase';
+
+  @override
+  String get kupovinaVracena => 'Purchase restored!';
+
+  @override
+  String get kupovinaNijeNadjena => 'No previous purchase found.';
+
+  @override
+  String get kupovinaNeuspesna => 'Purchase failed. Please try again.';
+
+  @override
+  String get prodavnicaNijeDostupna =>
+      'Store is not available right now. Please try again later.';
 }
