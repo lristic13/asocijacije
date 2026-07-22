@@ -49,3 +49,7 @@ google-services.json
 GoogleService-Info.plist
 firebase_*
 firebase*
+# Signing keys — never commit
+*.jks
+*.keystore
+upload_certificate.pem
