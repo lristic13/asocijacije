@@ -4,5 +4,5 @@ class FeatureFlags {
   /// Flip to true once the store products and RevenueCat keys are live.
   /// While false, custom words stay free and the RevenueCat SDK is never
   /// configured.
-  static const bool paywallEnabled = false;
+  static const bool paywallEnabled = true;
 }

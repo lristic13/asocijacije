@@ -4,7 +4,7 @@ import 'package:asocijacije_nove/models/team.dart';
 import 'package:asocijacije_nove/providers/all_providers.dart';
 import 'package:asocijacije_nove/services/navigation_service.dart';
 import 'package:asocijacije_nove/widgets/app_title_text.dart';
-import 'package:asocijacije_nove/widgets/app_languages_row.dart';
+import 'package:asocijacije_nove/widgets/app_language_picker.dart';
 import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_empty.dart';
 import 'package:asocijacije_nove/widgets/buttons/base-buttons/app_button_full.dart';
 import 'package:asocijacije_nove/widgets/buttons/neon_button.dart';
@@ -51,7 +51,8 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
   }
 
   void _showUpdateBottomSheet() {
-    final isSr = Localizations.localeOf(context).languageCode == 'sr';
+    // Croatian falls back to the Serbian variant of the update sheet.
+    final isSr = Localizations.localeOf(context).languageCode != 'en';
 
     showModalBottomSheet(
       context: context,
@@ -78,7 +79,10 @@ class _HomePageConsumerState extends ConsumerState<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Center(child: AppLanguagesRow()),
+                const Align(
+                  alignment: Alignment.topRight,
+                  child: AppLanguagePicker(),
+                ),
                 const Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

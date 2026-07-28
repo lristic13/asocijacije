@@ -297,6 +297,7 @@
         <h1 id="title">Add Words<span class="dot">.</span></h1>
         <div class="lang-toggle">
           <button class="lang-btn" id="btnSr" onclick="setLang('sr')">SR</button>
+          <button class="lang-btn" id="btnHr" onclick="setLang('hr')">HR</button>
           <button class="lang-btn" id="btnEn" onclick="setLang('en')">EN</button>
         </div>
       </div>
@@ -413,11 +414,29 @@
         loading: 'Učitavanje sesije...',
         duplicate: 'Već si dodao tu reč!',
         maxReached: 'Možeš dodati samo 8 reči!'
+      },
+      hr: {
+        title: 'Dodaj riječi',
+        sessionLabel: 'Sesija:',
+        instructions: 'Dodaj točno 8 riječi za igru',
+        placeholder: 'Upiši riječ...',
+        submit: 'Pošalji riječi',
+        submitting: 'Slanje...',
+        success: '✓ Riječi poslane! Možeš zatvoriti stranicu.',
+        errorInvalid: 'Nevažeći kod sesije!',
+        errorEnded: 'Ova sesija je završena.',
+        errorLoading: 'Greška pri učitavanju sesije',
+        errorSubmit: 'Greška pri slanju riječi',
+        emptyState: 'Tvoje riječi će se pojaviti ovdje',
+        loading: 'Učitavanje sesije...',
+        duplicate: 'Već si dodao tu riječ!',
+        maxReached: 'Možeš dodati samo 8 riječi!'
       }
     };
 
     function t(key) {
-      return translations[currentLang][key] || translations['en'][key];
+      const dict = translations[currentLang] || translations['en'];
+      return dict[key] || translations['en'][key];
     }
 
     // Update UI language
@@ -430,6 +449,7 @@
 
     function updateLangButtons() {
       document.getElementById('btnSr').classList.toggle('active', currentLang === 'sr');
+      document.getElementById('btnHr').classList.toggle('active', currentLang === 'hr');
       document.getElementById('btnEn').classList.toggle('active', currentLang === 'en');
     }
 

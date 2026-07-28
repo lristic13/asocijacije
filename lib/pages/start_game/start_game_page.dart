@@ -477,8 +477,7 @@ class _StartGamePageState extends ConsumerState<StartGamePage> with FormsMixin {
     ref.read(blurProvider.notifier).update((state) => true);
 
     // Load words (15 per player = 30 total)
-    final localeCode =
-        ref.read(localeProvider) == const Locale('sr') ? 'sr' : 'en';
+    final localeCode = ref.read(localeProvider).languageCode;
     final words = await WordsLoader.loadWords(localeCode);
     words.shuffle();
 

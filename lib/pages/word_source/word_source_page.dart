@@ -83,8 +83,7 @@ class WordSourcePage extends ConsumerWidget {
   }
 
   Future<void> _startWithAppWords(BuildContext context, WidgetRef ref) async {
-    final localeCode =
-        ref.read(localeProvider) == const Locale('sr') ? 'sr' : 'en';
+    final localeCode = ref.read(localeProvider).languageCode;
     final words = await WordsLoader.loadWords(localeCode);
     words.shuffle();
 

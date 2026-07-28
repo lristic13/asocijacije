@@ -12,16 +12,17 @@ class PurchaseService {
   PurchaseService._();
 
   // Public SDK keys from RevenueCat → Project settings → API keys.
-  static const String _appleApiKey = 'appl_REPLACE_ME';
-  static const String _googleApiKey = 'goog_REPLACE_ME';
+  static const String _appleApiKey = 'appl_bxqKnSXiZTjlenSMbBImQSPxNNW';
+  static const String _googleApiKey = 'goog_HxOdvpDVwlxldQAxZHNAOpmUIek';
 
-  static const String entitlementId = 'pro';
+  // Must match the RevenueCat entitlement *identifier* exactly
+  // (Product catalog → Entitlements), NOT the store product ID.
+  static const String entitlementId = 'Asocijacije. Pro';
 
   static bool _configured = false;
   static bool get isConfigured => _configured;
 
-  static String get _apiKey =>
-      Platform.isIOS ? _appleApiKey : _googleApiKey;
+  static String get _apiKey => Platform.isIOS ? _appleApiKey : _googleApiKey;
 
   /// Configures the SDK and starts listening for entitlement changes.
   /// [onProChanged] fires with the current status immediately after

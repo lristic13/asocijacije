@@ -1,0 +1,130 @@
+{
+    "language": "Hrvatski",
+    "asocijacije": "Asocijacije",
+    "saPapiricaUApp": "s papirića u aplikaciju!",
+    "pocniIgru": "Počni igru",
+    "uputstvaZaIgru": "Upute za igru",
+    "izlaz": "Izlaz",
+    "ime1Igraca": "Ime 1. igrača",
+    "ime2Igraca": "Ime 2. igrača",
+    "igraca": "igrača",
+    "dalje": "Dalje",
+    "nazad": "Natrag",
+    "tim": "Tim",
+    "normalnaRunda": "Normalna runda",
+    "normalnaRundaUput": "Zadanu riječ treba objasniti bez korištenja te riječi ili njezina korijena. Traje 60 sekundi.",
+    "jednaRecRunda": "Jedna riječ runda",
+    "jednaRecRundaUput": "Zadanu riječ treba objasniti korištenjem samo jedne riječi koja je slična zadanoj ili asocira na zadanu riječ. Traje 60 sekundi.",
+    "pantomimaRunda": "Pantomima runda",
+    "pantomimaRundaUput": "Zadanu riječ treba objasniti pantomimom. Traje 75 sekundi.",
+    "rezultatUput": "Rezultat se zbraja kroz runde, tim s najviše bodova je pobjednički.",
+    "odustajanjeUput": "Ako ne možete objasniti riječ, možete odustati od objašnjavanja i prenijeti dosad osvojene bodove.",
+    "napomena": "Napomena",
+    "napomenaTekst": "U novu rundu se ne prelazi dok se ne pogode sve riječi iz trenutne runde!",
+    "unesiteImeIgraca": "Unesite ime igrača!",
+    "daLiSteSigurniIzlaz": "Jeste li sigurni da želite izaći? Morat ćete krenuti igru ispočetka!",
+    "poeni": "Bodovi",
+    "odustani": "Odustani",
+    "odustajete": "Odustajete?",
+    "odustaniAlertContent": "Ako odustanete, prenosite bodove i na redu je sljedeći tim.",
+    "sledecaRec": "Sljedeća riječ",
+    "sledeciTim": "Sljedeći tim",
+    "start": "Start",
+    "da": "Da",
+    "ne": "Ne",
+    "rezultat": "Rezultat",
+    "sledeciIgraTim": "Sljedeći igraju",
+    "krajIgre": "Kraj igre",
+    "pobednikJeTim": "Pobjednici su",
+    "novaIgra": "Nova igra",
+    "pogodjeneSveReci": "Pogodili ste sve riječi!\n Prijeđite na sljedeću rundu",
+    "izaberiMod": "Odaberi mod igre",
+    "normalan": "Normalan",
+    "brzi": "Brzi",
+    "dupliPoeni": "Dupli bodovi",
+    "dvaPoena": "2 boda",
+    "objasni": "Objasni",
+    "dupliPoeniObjasnjenje": "Riječi pogođene u posljednjih nekoliko sekundi runde donose 2 boda umjesto 1!\n\nNormalan mod:\n• Normalna i Jedna riječ runda: posljednjih 10 sekundi\n• Pantomima runda: posljednjih 15 sekundi\n\nBrzi mod:\n• Normalna i Jedna riječ runda: posljednjih 7 sekundi\n• Pantomima runda: posljednjih 10 sekundi",
+    "imeTima": "Ime tima",
+    "unesiteImeTima": "Unesite ime tima!",
+    "prikupiReci": "Prikupi riječi",
+    "skenirajDaDodas": "Skeniraj da dodaš riječi",
+    "kodSesije": "Kod sesije",
+    "dodatoReci": "Dodano riječi",
+    "igracaSpremo": "{ready} od {total} igrača spremno",
+    "igraci": "Igrači",
+    "igrac": "Igrač",
+    "pocniIgruBtn": "POČNI IGRU ✓",
+    "cekanjeNaReci": "ČEKANJE NA RIJEČI...",
+    "potrebnoJosReci": "Potrebno još {count} riječi",
+    "greskaKreiranjaSesije": "Greška pri kreiranju sesije",
+    "koristiSvojeReci": "Koristi svoje riječi",
+    "izaberiReci": "Odaberi riječi",
+    "kakoZeliteDaIgrate": "Kako želiš igrati?",
+    "koristiReciIzAplikacije": "Koristi riječi iz aplikacije",
+    "viseOdReciSpremno": "Više od 1500 unaprijed pripremljenih riječi",
+    "svakiIgracDodaje": "Svaki igrač dodaje 8 riječi skeniranjem QR koda",
+    "dodajMojeReci": "Dodaj moje riječi",
+    "jedanNaJedan": "1v1",
+    "jedanNaJedanOpis": "Dva igrača, jedan objašnjava, drugi pogađa",
+    "imeIgraca1": "Ime prvog igrača",
+    "imeIgraca2": "Ime drugog igrača",
+    "objasnjava": "{name} objašnjava",
+    "@objasnjava": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "pobednik": "{name} pobjeđuje!",
+    "@pobednik": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "nereseno": "Neriješeno!",
+    "pobedaZaReci": "Pobjeda za {count} riječi",
+    "@pobedaZaReci": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "igraciPoeni": "{name}: {points} bodova",
+    "@igraciPoeni": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            },
+            "points": {
+                "type": "int"
+            }
+        }
+    },
+    "sledeciIgrac": "Sljedeći igrač",
+    "jedanNaJedanUput": "Dva igrača natječu se jedan protiv drugoga. Igrači naizmjence objašnjavaju riječi dok protivnik pogađa. Pobjednik je igrač koji objasni više riječi.",
+    "igrajPonovo": "Igraj ponovno",
+    "proNaslov": "Asocijacije Pro",
+    "proPodnaslov": "Jednokratna kupnja - tvoje zauvijek",
+    "proPogodnostSvojeReci": "Igraj sa svojim riječima",
+    "proPogodnostQr": "Svatko dodaje riječi sa svog telefona preko QR koda",
+    "proPogodnostBuduce": "Sve buduće Pro opcije uključene",
+    "otkljucajZa": "Otključaj za {price}",
+    "@otkljucajZa": {
+        "placeholders": {
+            "price": {
+                "type": "String"
+            }
+        }
+    },
+    "otkljucaj": "Otključaj",
+    "vratiKupovinu": "Vrati kupnju",
+    "kupovinaVracena": "Kupnja je vraćena!",
+    "kupovinaNijeNadjena": "Prethodna kupnja nije pronađena.",
+    "kupovinaNeuspesna": "Kupnja nije uspjela. Pokušaj ponovno.",
+    "prodavnicaNijeDostupna": "Trgovina trenutno nije dostupna. Pokušaj kasnije."
+}

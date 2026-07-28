@@ -99,7 +99,7 @@ class _PaywallPageState extends ConsumerState<PaywallPage> {
                       child: CircularProgressIndicator(color: AppColors.orange),
                     ),
                   )
-                else ...[
+                else
                   AppButtonFull(
                     fillColor: AppColors.orange,
                     textColor: AppColors.inkOnFill,
@@ -108,10 +108,18 @@ class _PaywallPageState extends ConsumerState<PaywallPage> {
                         : localizations.otkljucaj,
                     onPressed: _purchase,
                   ),
-                  const SizedBox(height: 14),
-                  Center(
+                const SizedBox(height: 12),
+                AppButtonEmpty(
+                  buttonText: localizations.nazad,
+                  borderColor: AppColors.ink,
+                  textColor: AppColors.ink,
+                  onPressed: () => Navigator.pop(context),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 6, bottom: 22),
+                  child: Center(
                     child: TextButton(
-                      onPressed: _restore,
+                      onPressed: _busy ? null : _restore,
                       child: Text(
                         localizations.vratiKupovinu,
                         style: NeonText.body(
@@ -123,16 +131,6 @@ class _PaywallPageState extends ConsumerState<PaywallPage> {
                         ),
                       ),
                     ),
-                  ),
-                ],
-                const SizedBox(height: 8),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 35.0),
-                  child: AppButtonEmpty(
-                    buttonText: localizations.nazad,
-                    borderColor: AppColors.ink,
-                    textColor: AppColors.ink,
-                    onPressed: () => Navigator.pop(context),
                   ),
                 ),
               ],
